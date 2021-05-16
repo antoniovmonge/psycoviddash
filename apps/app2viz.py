@@ -6,6 +6,7 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
 import dash_table
+import numpy as np
 
 
 from app import app
@@ -50,160 +51,206 @@ df_employment = df[['Dem_employment']].copy()
 df_employment = pd.DataFrame(
     (df['Dem_employment'].value_counts(normalize=True).round(2))).reset_index()
 df_employment.columns = ['Empl. Status', '%']
+
+# AGE CHART
+# counts, bins = np.histogram(df.Dem_age, bins=range(18, 115))
+# bins = (0.5 * bins[:-1] + bins[1:])
+data_age = df.Dem_age.value_counts()
+fig3 = px.bar(data_age, labels={'index': 'Age', 'value': 'Count'}, template="simple_white")
+fig3.update_traces(marker=dict(color=color_palette_list[1]))
+fig3.update_layout(height=350, showlegend=False)
+fig3.update_yaxes(showgrid=True)
+
+# AGE TABLE
+d = {'Summary':['Mean','Median','Mode','Min','Max'],'Value':[df[['Dem_age']].mean()[0].round(2), df[['Dem_age']].median()[0], df['Dem_age'].mode()[0], df[['Dem_age']].min()[0], df[['Dem_age']].max()[0]]}
+df_age_summary = pd.DataFrame(data=d)
+
+# LAYOUT
 layout = html.Div(
     [
     dbc.Container(
         [
         html.Div(
-        [
-            dbc.Row(dbc.Col(html.Div(
-                dcc.Markdown('''
-                            ##### SURVEY - Characteristics of the respondants
-                            ''', className='text-center'
-                            )
-                ))),
-            dbc.Row(
-                dbc.Col(
-                    [
-                        html.Div(
-                            dcc.Markdown(
-                                '''
-                                ###### Gender of respondents percentage distribution
+
+            [
+                dbc.Row(dbc.Col(html.Div(
+                    dcc.Markdown('''
+                                #### SURVEY - Characteristics of the respondants
                                 ''', className='text-center'
-                                )),
-                        
-                        ], width=12)
-            ),
-            dbc.Row(
-                [
+                                )
+                    ))),
+                # SECTION 1 (GENDER)
+                dbc.Row(
                     dbc.Col(
                         [
                             html.Div(
-                            dcc.Graph(id='pie-chart', figure=fig1)
-                            ),
-                        ], width=4),
-                    dbc.Col([
-                        html.Div([
-                            dash_table.DataTable(
-                                id='table',
-                                columns=[{"name": i, "id": i} for i in df_gender.columns],
-                                data=df_gender.to_dict('records'),
-                                style_as_list_view=True,
-                                style_cell={'padding': '5px'},
-                                style_header={
-                                    'backgroundColor': 'white',
-                                    'fontWeight': 'bold'
-                                },
-                                style_cell_conditional=[
-                                    {
-                                        'if': {'column_id': c},
-                                        'textAlign': 'left'
-                                    } for c in ['Date', 'Region']
-                                ],),
+                                dcc.Markdown(
+                                    '''
+                                    ##### Gender of respondents percentage distribution
+                                    ''', className='text-center'
+                                    )),
                             
-                        ], style={'marginTop': 150}),
-                             ], width=2),
-                    dbc.Col(
-                        [
-                            html.Div(
-                            dcc.Markdown('''
-                            Resopondents were 72.08 % female, 26.89 % Male. The remaining respondents answered 'other' or did not provide an answer.
-                            ''', style={'marginTop': 150})
-                            )
-                            
-                        ], width={'size':5, 'offset':1}, ),
-                            
-                    # dbc.Col(html.Div("One of three columns"), width=4)
-                ]
-            ),dbc.Row(
-                                ##############
-                                # EMPLOYMENT #
-                                ##############
-                dbc.Col(
+                            ], width=12)
+                ),
+                dbc.Row(
                     [
-                        html.Div(
-                            dcc.Markdown(
-                                '''
-                                ###### Employment Status of respondents perctage distribution
-                                ''', className='text-center'
-                                )),
-                        
-                        ], width=12)
-            ),
-            dbc.Row(
-                [
-                    dbc.Col(
-                        [
-                            html.Div(
-                            dcc.Graph(id='pie-chart-2', figure=fig2)
+                        dbc.Col(
+                            [
+                                html.Div(
+                                dcc.Graph(id='pie-chart', figure=fig1)
+                                ),
+                            ], width=4),
+                        dbc.Col([
+                            html.Div([
+                                dash_table.DataTable(
+                                    id='table',
+                                    columns=[{"name": i, "id": i} for i in df_gender.columns],
+                                    data=df_gender.to_dict('records'),
+                                    style_as_list_view=True,
+                                    style_cell={'padding': '5px'},
+                                    style_header={
+                                        'backgroundColor': 'white',
+                                        'fontWeight': 'bold'
+                                    },
+                                ),
+                                
+                            ],
+                            style={'marginTop': 150}
                             ),
-                        ], width=4),
-                    dbc.Col([
-                        html.Div([
-                            dash_table.DataTable(
-                                id='table-2',
-                                columns=[{"name": i, "id": i} for i in df_employment.columns],
-                                data=df_employment.to_dict('records'),
-                                style_as_list_view=True,
-                                style_cell={'padding': '5px'},
-                                style_header={
-                                    'backgroundColor': 'white',
-                                    'fontWeight': 'bold'
-                                },
-                                style_cell_conditional=[
-                                    {
-                                        'if': {'column_id': c},
-                                        'textAlign': 'left'
-                                    } for c in ['Date', 'Region']
-                                ],),
-                            # dcc.Markdown('''
-                            # Resopondents were 72.08 % female, 26.89 % Male.
-                            # The remaining respondents answered 'other' or did not provide an answer.
-                            # ''', style={'marginTop': 150})
-                            
-                        ], style={'marginTop': 150}),
-                             ], width=2),
+                        ], width=2
+                        ),
+                        dbc.Col(
+                            [
+                                html.Div(
+                                dcc.Markdown('''
+                                Resopondents were 72.08 % female, 26.89 % Male. The remaining respondents answered 'other' or did not provide an answer.
+                                ''', style={'marginTop': 150})
+                                )
+                                
+                            ], width={'size':5, 'offset':1}, ),
+                                
+                        # dbc.Col(html.Div("One of three columns"), width=4)
+                    ]
+                ),
+                        
+                # SECTION 2 (EMPLOYMENT)
+                # Title
+                dbc.Row(             
                     dbc.Col(
                         [
                             html.Div(
-                            dcc.Markdown('''
-                            Resopondents were 72.08 % female, 26.89 % Male.
-                            The remaining respondents answered 'other' or did not provide an answer.
-                            ''', style={'marginTop': 150})
-                            )
+                                dcc.Markdown(
+                                    '''
+                                    ##### Employment Status of respondents percentage distribution
+                                    ''', className='text-center'
+                                    )),
                             
-                        ], width={'size':4, 'offset':1}, ),
+                            ], width=12)
+                ),
+                # Chart, Table and Text (3 Columns)
+                dbc.Row(
+                    [
+                        # COL LEFT
+                        dbc.Col(
+                            [
+                                html.Div(
+                                dcc.Graph(id='pie-chart-2', figure=fig2)
+                                ),
+                            ], 
+                            width=4),
+                        # COL CENTER
+                        dbc.Col([
+                            html.Div([
+                                dash_table.DataTable(
+                                    id='table-2',
+                                    columns=[{"name": i, "id": i} for i in df_employment.columns],
+                                    data=df_employment.to_dict('records'),
+                                    style_as_list_view=True,
+                                    style_cell={'padding': '5px'},
+                                    style_header={
+                                        'backgroundColor': 'white',
+                                        'fontWeight': 'bold'
+                                    },
+                                ),
+                                # dcc.Markdown('''
+                                # Resopondents were 72.08 % female, 26.89 % Male.
+                                # The remaining respondents answered 'other' or did not provide an answer.
+                                # ''', style={'marginTop': 150})
+                                
+                            ],
+                            style={'marginTop': 150}
+                            ),
+                        ], width=2
+                        ),
+                        # COL RIGHT
+                        dbc.Col(
+                            [
+                                html.Div(
+                                    [
+                                        dcc.Markdown('''
+                                        Resopondents were 72.08 % female, 26.89 % Male. The remaining respondents answered 'other' or did not provide an answer.
+                                        ''', style={'marginTop': 150})
+                                    ]
+                                )
+                                
+                            ], width={'size':5, 'offset':1}),
+                                
+                        # dbc.Col(html.Div("One of three columns"), width=4)
+                    ]
+                ),
+                #######
+                # AGE #
+                #######
+
+                # SECTION TITLE 3
+                dbc.Row(
+                    dbc.Col(
+                        [
+                            html.Div(
+                                [
+                                    dcc.Markdown(
+                                        '''
+                                        ##### Age of respondents 
+                                        ''', className='text-center'
+                                        )
+                                ], style={'marginTop': 100}
+                            ),
                             
-                    # dbc.Col(html.Div("One of three columns"), width=4)
+                            ], width=12)
+                ),
+                # CHART
+                dbc.Row(
+                    [
+                        dbc.Col([
+                            html.Div(
+                                dcc.Graph(id='age-chart', figure=fig3)
+                                ),
+                        ], width=6,
+                        ),
+                        dbc.Col([
+                            html.Div(
+                                [
+                                    dash_table.DataTable(
+                                    id='table-3',
+                                    columns=[{"name": i, "id": i} for i in df_age_summary.columns],
+                                    data=df_age_summary.to_dict('records'),
+                                    style_as_list_view=True,
+                                    style_cell={'padding': '5px'},
+                                    style_header={
+                                        'backgroundColor': 'white',
+                                        'fontWeight': 'bold'
+                                    }
+                                    )
+                                ], style={'marginTop': 100, 'marginBottom': 200}
+                            )    
+                        ])
+                    ]
+                )
+            ])
+                    
                 ]
             )
-            
-            
         ]
     )
-    ])
-    # dbc.Container([
-    #     dcc.Markdown(
-    #         '''
-    #         ##### SURVEY - Characteristics of the respondants
-    #         ''', className='text-center'
-    #     ),
-    #     dbc.Row([
-    #         dbc.Row([dbc.Col([
-    #                 dcc.Markdown(
-    #                     '''
-    #                     ###### Gender of respondents percentage distribution
-    #                     '''),
-    #                 dcc.Markdown(
-    #                     '''
-    #                     pim pam pum
-    #                     '''
-    #                 ),
-    #                 dcc.Graph(id='pie-chart', figure=fig1)
-                    
-    #             ]),
-                
-    #         ])
-    #     ])
-    # ], fluid=True)
-])
+    
+
