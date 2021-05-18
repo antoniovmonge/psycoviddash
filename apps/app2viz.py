@@ -20,13 +20,26 @@ color_palette_list = ['#CDF1AE', '#90DACC', '#F7E9D1', '#F4D2B5',
 '#EAB7B7', '#B89ACF']
 # values = list(df['Dem_gender'].value_counts(normalize=True))
 # names = list(df['Dem_gender'].value_counts().index)
-fig1 = px.pie(df,
-              values=list(df['Dem_gender'].value_counts(normalize=True)),
-              names=list(df['Dem_gender'].value_counts().index))
-fig1.update_traces(textposition='outside',
-                   textinfo='percent+label',
-                marker=dict(colors=color_palette_list))
-fig1.update_layout(showlegend=False)
+fig1 = px.pie(
+    df,
+    values=list(df['Dem_gender'].value_counts(normalize=True)),
+    names=list(df['Dem_gender'].value_counts().index)
+)
+fig1.update_traces(
+    textposition='outside',
+    textinfo='percent+label',
+    marker=dict(colors=color_palette_list)
+)
+fig1.update_layout(
+    showlegend=False,
+    margin=dict(
+            l=0,
+            r=0,
+            b=0,
+            t=0,
+            pad=0
+        )
+)
 
 # EMPLOYMENT PIE CHART
 fig2 = px.pie(df,
@@ -35,7 +48,16 @@ fig2 = px.pie(df,
 fig2.update_traces(textposition='inside',
                    textinfo='percent+label',
                 marker=dict(colors=color_palette_list))
-fig2.update_layout(showlegend=False)
+fig2.update_layout(
+    showlegend=False,
+    margin=dict(
+            l=30,
+            r=30,
+            b=0,
+            t=0,
+            pad=4
+        )
+)
 
 # TABLE GENDER
 # df_gender = pd.DataFrame(
@@ -169,12 +191,15 @@ layout = html.Div(
                             dbc.Col(
                                 [
                                     html.Div(
+                                        [
                                         dcc.Markdown(
                                             '''
                                             ##### Employment Status of respondents percentage distribution
                                             ''', className='text-center'
-                                            )),
-                                    
+                                            )
+                                        ], style={'marginTop': 100, 'marginBottom':50}
+                                    ),
+                                        
                                 ],
                                 width=12)
                         ),
@@ -198,7 +223,7 @@ layout = html.Div(
                                                 dash_table.DataTable(
                                                     id='table-2',
                                                     columns=[
-                                                        dict(id= 'Empl. Status', name='Empl. Status'),
+                                                        dict(id= 'Empl. Status', name='Employment Status'),
                                                         dict(id='%', name='%', type='numeric', format=Format(precision=2, scheme=Scheme.fixed))
                                                     ],
                                                     data=df_employment.to_dict('records'),
@@ -218,7 +243,7 @@ layout = html.Div(
                                             style={'marginTop': 125}
                                         ),
                                     ],
-                                    width=3
+                                    width={'size':3, 'offset':1}
                                 ),
                                 # COL RIGHT (TEXT)
 
@@ -237,7 +262,7 @@ layout = html.Div(
                                             ]
                                         )
                                         
-                                    ], width={'size':4, 'offset':1}
+                                    ], width={'size':3, 'offset':1}
                                 ),
                             ]
                         ),
@@ -256,7 +281,7 @@ layout = html.Div(
                                                 ##### Age of respondents 
                                                 ''', className='text-center'
                                                 )
-                                        ], style={'marginTop': 100}
+                                        ], style={'marginTop': 200, 'marginBottom': 100}
                                     ),
                                     
                                 ], width=12
