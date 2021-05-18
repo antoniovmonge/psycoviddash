@@ -1,21 +1,48 @@
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+import dash_bootstrap_components as dbc
 
 from app import app
 
-layout = html.Div([
-    html.H3('App 3'),
-    dcc.Dropdown(
-        id='app-3-dropdown',
-        options=[
-            {'label': 'App 3 - {}'.format(i), 'value': i} for i in [
-                'NYC', 'MTL', 'LA'
+layout = html.Div(
+    [
+        dbc.Container(
+            [
+                html.Div(
+                    [
+                        dbc.Row(
+                            [
+                                html.H3('App 3'),
+                                
+                            ]
+                        ),
+                        dbc.Row(
+                            [
+                                dcc.Dropdown(
+                                    id='app-3-dropdown',
+                                    options=[
+                                        {'label': 'App 3 - {}'.format(i), 'value': i} for i in [
+                                            'NYC', 'MTL', 'LA'
+                                        ]
+                                    ]
+                                ),
+                                
+                            ]
+                        ),
+                        dbc.Row(
+                            [
+                                html.Div(id='app-3-display-value')
+
+                            ]
+                        )
+                    ]
+                )
             ]
-        ]
-    ),
-    html.Div(id='app-3-display-value')
-])
+        )
+        
+    ]
+)
 
 
 @app.callback(
