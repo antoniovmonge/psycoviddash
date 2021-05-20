@@ -14,8 +14,8 @@ from app import app
 df = pd.read_csv('raw_data/cleaned_data_040321.csv')
 
 layout = html.Div([
-    html.H3('Intro', className='text-center'),
-    html.Div(id='intro-display-value'),
+    # html.H3('Intro', className='text-center'),
+    html.H1(id='intro-display-value', className='text-padding'),
     dbc.Container([
     dbc.Row([
         dbc.Col([html.H1('PSYCOVID - Data Science Project', className='text-center'), # bg-dark text-white
