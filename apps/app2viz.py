@@ -12,7 +12,9 @@ import numpy as np
 
 from app import app
 
-df = pd.read_csv('cleaned_data_040321.csv',index_col=0)
+# url='s3://psycovid/cleaned_data_040321.csv'
+# df = pd.read_csv(url ,index_col=0)
+df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)
 df = df.replace({'Dem_gender':'Other/would rather not say'}, 'Other')
 
 # GENDER PIE CHART FIG 1

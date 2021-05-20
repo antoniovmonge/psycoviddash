@@ -12,8 +12,9 @@ import plotly.express as px
 
 from app import app
 
-
-df = pd.read_csv('cleaned_data_040321.csv')
+# url='s3://psycovid/cleaned_data_040321.csv'
+# df = pd.read_csv(url ,index_col=0)
+df = pd.read_csv('raw_data/cleaned_data_040321.csv')
 
 def edu_func(X):
         X['Dem_edu'] = X['Dem_edu'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
