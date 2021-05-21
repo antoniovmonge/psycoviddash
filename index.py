@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output
 from app import app
 from app import server
 
-from apps import app0intro, app1ml, app2viz, app3country
+from apps import app0intro, app1ml, app2viz, app3analytics
 
 
 app.layout = html.Div(
@@ -93,9 +93,9 @@ def render_content(tab):
     elif tab == 'tab-2':
         return app2viz.layout
     elif tab == 'tab-3':
-        return app3country.layout
+        return app3analytics.layout
     else:
-        return app0intro.layout
+        return app3analytics.layout # CHANGE WITH app0intro.layout !!
 
 ################
 # OLD CALLBACK #
@@ -111,7 +111,7 @@ def render_content(tab):
 #     elif pathname == '/apps/app2viz':
 #         return app2viz.layout
 #     elif pathname == '/apps/app3country':
-#         return app3country.layout
+#         return app3analytics.layout
 #     else:
 #         return app0intro.layout
 

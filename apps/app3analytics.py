@@ -4,6 +4,8 @@ from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
+from psycoviddash.textapp import *
+from psycoviddash.colors import color_palette_list
 
 from app import app
 
@@ -20,6 +22,7 @@ df_loneliness_country = df_loneliness[['SLON3_avg', 'Country']].sort_values(
     by='SLON3_avg', ascending=True)
 df_loneliness_country = df_loneliness_country.replace({'Country':'Bosnia and Herzegovina'},'B&H *')
 
+# --------------------------------------------------
 # STRESS BAR CHART
 stress_fig = px.bar(
     df_stress_country[-10:],
@@ -32,22 +35,23 @@ stress_fig = px.bar(
     
 )
 stress_fig.update_traces(
-    marker_color='rgb(158,202,225)',
+    # marker_color='rgb(158,202,225)',
+    marker_color=color_palette_list()[8],
     width=0.5,
     # marker_line_color='rgb(255, 0, 116)',
     # marker_line_width=1.5,
     # opacity=0.6,
     textposition='outside',
-    hoverlabel=dict(
-        bgcolor="white",
-        font_size=16,
-        font_family="Rockwell"
-    ),
+    # hoverlabel=dict(
+    #     bgcolor="white",
+    #     font_size=16,
+    #     font_family="Rockwell"
+    # ),
 )
 stress_fig.update_layout(
     uniformtext_minsize=1,
     uniformtext_mode='hide',
-    plot_bgcolor='rgb(244, 244, 244)',
+    plot_bgcolor='rgb(250, 250, 250)',
     title={
         # "text": "Title Text",
         "x": 0.2,
@@ -74,6 +78,7 @@ stress_fig.update_yaxes(
     # linewidth= 0.5,
     # mirror=True,
 )
+
 # ---------------------------------------------------
 # LONELINESS BAR CHART
 lonely_fig = px.bar(
@@ -93,16 +98,16 @@ lonely_fig.update_traces(
     # marker_line_width=1.5,
     # opacity=0.6,
     textposition='outside',
-    hoverlabel=dict(
-        bgcolor="white",
-        font_size=16,
-        font_family="Rockwell"
-    ),
+    # hoverlabel=dict(
+    #     bgcolor="white",
+    #     font_size=16,
+    #     font_family="Rockwell"
+    # ),
 )
 lonely_fig.update_layout(
     uniformtext_minsize=1,
     uniformtext_mode='hide',
-    plot_bgcolor='rgb(244, 244, 244)',
+    plot_bgcolor='rgb(250, 250, 250)',
     # paper_bgcolor='rgb(249, 246, 225)',
     title={
         # "text": "Title Text",
@@ -121,6 +126,9 @@ lonely_fig.update_xaxes(
     # ticks='outside',
 )
 # My personal trick to separate the y axis
+
+# ------------------------------------
+# LAYOUT
 lonely_fig.update_yaxes(
     ticklabelposition='outside left',
     ticks="outside", tickwidth=2, tickcolor='white', ticklen=5,
@@ -136,11 +144,27 @@ layout = html.Div(
             className='row',
             children=[
                 html.Div(
+                    className='div-user-controls', # Define the right element
+                    children=[
+                        dcc.Markdown('### Stress during the COVID-19 Pandemic by Countries'),
+                        dcc.Markdown(
+                            f'{paragraph1()}',
+                        ) 
+                    ]
+                ),
+            ]
+        ),
+        html.Div(
+            className='row',
+            children=[
+                html.Div(
                     className='three columns div-user-controls', # Define the left element
                     children=[
-                        html.H2('Analysis by Countries'),
-                        html.P('''Visualising countries ranked '''),
-                        html.P('''*B&H - Bosnia & Herzegovina''')
+                        dcc.Markdown('##### Analysis by Countries'),
+                        dcc.Markdown('''Visualising countries ranked
+                        with stress levels using the PSS-10 scale.
+                        '''),
+                        # html.P('''* B&H - Bosnia & Herzegovina''')
                     ],
                 ),
                 html.Div(
@@ -152,8 +176,51 @@ layout = html.Div(
                             config={"displayModeBar": False},
                             className='card div-for-bar-charts'
                         ),
-                        
+                            
                     ]
+                ),
+                html.Div(
+                    className='four columns text-padding-more',
+                    children=[
+                        html.Div(
+                            # className='text-padding-more', # Define the left element
+                                
+                                dcc.Markdown(
+                                    f'{paragraph2()}',
+                                    className='text-padding-more',
+                                )
+                        
+                                
+                        )       
+                    ]
+                ),
+            ]
+        ),
+        html.Div(
+            className='row',
+            children=[
+                html.Div(
+                    className='div-user-controls', # Define the right element
+                    children=[
+                        dcc.Markdown('### Loneliness during the COVID-19 Pandemic by Countries'),
+                        dcc.Markdown(
+                            f'{paragraph3()}',
+                        ) 
+                    ]
+                ),
+            ]
+        ),
+        html.Div(
+            className='row',
+            children=[
+                html.Div(
+                    className='three columns div-user-controls', # Define the left element
+                    children=[
+                        dcc.Markdown('##### Analysis by Countries'),
+                        html.P('''Visualising countries Loneliness ranked with the results of
+                        UCLA short loneliness scale'''),
+                        html.P('''*B&H - Bosnia & Herzegovina''')
+                    ],
                 ),
                 html.Div(
                     className='four columns', # Define the right element
@@ -163,36 +230,20 @@ layout = html.Div(
                             figure=lonely_fig,
                             config={"displayModeBar": False},
                             className='card div-for-bar-charts'
-                            ),   
-                    ]
-                )
-            ]
-        ),
-        html.Div(
-            className='row',
-            children=[
-                html.Div(
-                    className='three columns div-user-controls', # Define the left element
-                    children=[
-                        # html.H2('Analysis by Countries'),
-                        # html.P('''Visualising countries ranked '''),
-                        # html.P('''*B&H - Bosnia & Herzegovina''')
-                    ],
+                            ),
+                    ]    
                 ),
                 html.Div(
-                    className='row',
+                    className='four columns text-padding-more',
                     children=[
                         html.Div(
-                            className='eigth columns wrapper text-padding', # Define the left element
-                            children=[
-                                html.P(
-                                    # className='menu',
-                                    children='The Covid-19 pandemic sparked many changes...'
-                                )
-                            ]
-                        )
+                            dcc.Markdown(
+                                f'{paragraph4()}',
+                                className='text-padding-more',
+                            )       
+                        )   
                     ]
-                )
+                ),
             ]
         )      
     ]
