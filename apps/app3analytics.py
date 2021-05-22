@@ -9,6 +9,7 @@ from psycoviddash.colors import color_palette_list
 import numpy as np
 import plotly.graph_objects as go
 import dash_table
+from dash_table.Format import Format, Scheme, Trim
 
 from app import app
 
@@ -264,12 +265,18 @@ layout = html.Div(
         html.Div(
             className='row',
             children=[
+                # DROPDOWN COUNTRY 1
                 html.Div(
                     className='three columns div-for-user-controls', # Define the left element
                     children=[
                         html.Div(
                             children='SELECT COUNTRY 1',
-                            className='menu-title text-padding-left padding-top'
+                            className='menu-title padding-top',
+                            style={
+                                # 'padding': '5px',
+                                # 'fontSize': 18,
+                                'textAlign': 'right'
+                            }
                         ),
                         dcc.Dropdown(
                             id='country-filter-1',
@@ -280,9 +287,41 @@ layout = html.Div(
                             value='Germany',
                             clearable=False,
                             className='text-padding-left',
+                            style={
+                                'paddingLeft': '50px',
+                                # 'fontSize': 18,
+                                'textAlign': 'right'
+                            }
+                        ),
+                        # TABLE OF COUNTRY 1
+                        html.Div(
+                            className='text-padding-left',
+                            children=[
+                                dash_table.DataTable(
+                                    id='table-1',
+                                    columns=[
+                                        dict(id='Trait', name='Trait'),
+                                        dict(id='Score', name='Score', type='numeric', format=Format(precision=2, scheme=Scheme.fixed))
+                                    ],
+                                style_as_list_view=True,
+                                style_cell={
+                                    'padding': '5px',
+                                    'fontSize': 18},
+                                style_header={
+                                    'backgroundColor': 'white',
+                                    'fontWeight': 'bold'
+                                },
+
+                                )
+                            ],
+                            style={
+                                'marginTop': 60,
+                                # 'marginLeft': 60
+                            }
                         ),
                     ]
                 ),
+                
                 html.Div(
                     className='five columns',
                     children=[
@@ -293,6 +332,7 @@ layout = html.Div(
                         )
                     ]
                 ),
+    # RADAR CHART --------------------------------
                 html.Div(
                     className='three columns div-for-user-controls', # Define the left element
                     children=[
@@ -300,22 +340,57 @@ layout = html.Div(
                             children='SELECT COUNTRY 2',
                             className='menu-title padding-top'
                         ),
+    # DROPDOWN COUNTRY 2 -------------------------
                         dcc.Dropdown(
                             id='country-filter-2',
                             options=[
                                 {'label': Country, 'value': Country}
                                 for Country in np.sort(df.Country.unique())
                             ],
-                            value='Spain',
+                            value='Taiwan',
                             clearable=False,
                             # className='text-padding-left',
                         ),
+    # TABLE COUNTRY 2 ---------------------------
+                        html.Div(
+                            # className='text-padding-left',
+                            children=[
+                                dash_table.DataTable(
+                                    id='table-2',
+                                    columns=[
+                                        
+                                        dict(id='Score', name='Score', type='numeric', format=Format(precision=2, scheme=Scheme.fixed)),
+                                        dict(id='Trait', name='Trait')
+                                    ],
+                                style_as_list_view=True,
+                                style_cell={
+                                    'padding': '5px',
+                                    'fontSize': 18,
+                                    'textAlign': 'left'
+                                    },
+                                style_header={
+                                    'backgroundColor': 'white',
+                                    'fontWeight': 'bold'
+                                },
+
+                                )
+                            ],
+                            style={
+                                'marginTop': 60,
+                                # 'marginLeft': 60
+                            }
+                        ),
+
                     ]
                 ),
             ]
         ),
         
-    ]
+    ],
+    style={
+        'paddingLeft':20,
+        'paddingRight':20
+    }
 )
 
 @app.callback(
@@ -397,5 +472,25 @@ def update_chart(Country1, Country2):
     )
     return radar_chart_figure
 
+@app.callback(
+    Output('table-1', 'data'),
+    Input('country-filter-1', 'value')
+)
 
+def update_table(Country1):
+    df_print = pd.DataFrame(df[df.Country == Country1][['neu','ope','ext','agr','con']].mean()).reset_index()
+    df_print.columns = ['Trait', 'Score' ]
+    df_print.Trait = ['Neuroticism','Openness', 'Extraversion', 'Agreeableness', 'Conscientiousness']
+    return df_print.to_dict('records')
+
+@app.callback(
+    Output('table-2', 'data'),
+    Input('country-filter-2', 'value')
+)
+
+def update_table(Country2):
+    df_print = pd.DataFrame(df[df.Country == Country2][['neu','ope','ext','agr','con']].mean()).reset_index()
+    df_print.columns = ['Trait', 'Score' ]
+    df_print.Trait = ['Neuroticism','Openness', 'Extraversion', 'Agreeableness', 'Conscientiousness']
+    return df_print.to_dict('records')
         
