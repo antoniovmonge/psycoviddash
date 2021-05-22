@@ -6,6 +6,8 @@ import pandas as pd
 import plotly.express as px
 from psycoviddash.textapp import *
 from psycoviddash.colors import color_palette_list
+import numpy as np
+import plotly.graph_objects as go
 
 from app import app
 
@@ -245,7 +247,63 @@ layout = html.Div(
                     ]
                 ),
             ]
-        )      
+        ),
+        # ---------------------------------------------------
+        # TITLE NEW SECTION
+        html.Div(
+            className='row',
+            children=[
+                html.Div(
+                    className='div-user-controls',
+                    children=[
+                        dcc.Markdown('### Interactive analytics')
+                    ]
+                ),
+            ]
+        ),
+        # COLUMNS WITH CONTENT
+        html.Div(
+            className='row',
+            children=[
+                html.Div(
+                    className='four columns div-for-user-controls', # Define the left element
+                    children=[
+                        html.Div(
+                            children='SELECT COUNTRY',
+                            className='menu-title text-padding-left padding-top'
+                        ),
+                        dcc.Dropdown(
+                            id='country-filter',
+                            options=[
+                                {'label': Country, 'value': Country}
+                                for Country in np.sort(df.Country.unique())
+                            ],
+                            value='Germany',
+                            clearable=False,
+                            className='text-padding-left',
+                        ),
+                    ]
+                ),
+            ]
+        ),
+        html.Div(
+            className='row',
+            children=[
+                html.Div(
+                    className='five columns div-for-bar-charts',
+                    children=[
+                        dcc.Graph(
+                            id='radar-chart',
+                            config={"displayModeBar": False},
+                            className='div-for-bar-charts',
+                        )
+                    ]
+                ),
+                html.Div(
+                    className=''
+                )
+            ]
+        ),      
     ]
 )
 
@@ -256,3 +314,50 @@ layout = html.Div(
     Input('app-3-dropdown', 'value'))
 def display_value(value):
     return 'You have selected "{}"'.format(value)
+
+@app.callback(
+    Output('radar-chart', 'figure'),
+    Input('country-filter', 'value')
+)
+def update_chart(Country):
+    categories = ['Neuro', 'Open', 'Extro',
+                'Agree', 'Cons', 'Neuro']
+
+    radar_chart_figure = go.Figure()
+
+    radar_chart_figure.add_trace(
+        go.Scatterpolar(
+            r=[
+                df[df.Country == Country].groupby('Country')['neu'].mean()[0],
+                df[df.Country == Country].groupby('Country')['ope'].mean()[0],
+                df[df.Country == Country].groupby('Country')['ext'].mean()[0],
+                df[df.Country == Country].groupby('Country')['agr'].mean()[0],
+                df[df.Country == Country].groupby('Country')['con'].mean()[0],
+                df[df.Country == Country].groupby('Country')['neu'].mean()[0],
+            ],
+            theta0=20,
+            theta=categories,
+            fill='toself',
+            name=Country,
+        )
+    )
+
+    radar_chart_figure.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True,
+                range=[2, 5],
+            ),
+            angularaxis=dict(
+                rotation=90,
+                direction='counterclockwise'
+            )
+        ),
+        showlegend=False,
+        font=dict(
+            # family="Courier New, monospace",
+            # size=16,
+            # color="RebeccaPurple"
+        )
+    )
+    return radar_chart_figure

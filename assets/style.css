@@ -456,9 +456,15 @@ a {
   padding-left: 20px;
   padding-right: 20px;
 }
+.text-padding-left{
+  padding-left: 105px;
+}
+.padding-top{
+  padding-top: 40px;
+}
 /*Color Header-------------------------------------------------*/
 .header {
-    background-color: #87CEEB;
+    background-color: #97d9f3;
     height: 160px;
     padding: 16px 0 0 0;
 }
@@ -481,11 +487,12 @@ a {
 }
 
 .header-description {
-    color: #464646;
+    color: #ffffff;
     font-size: 18px;
     margin: 4px auto;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 8px;
+    letter-spacing: 2px;
     /* max-width: 384px; */
 }
 
@@ -505,13 +512,13 @@ a {
 }
 
 .menu {
-    height: 112px;
-    width: 912px;
-    display: flex;
-    justify-content: space-evenly;
+    height: 132px;
+    width: 340px;
+    /* display: flex; */
+    /* justify-content: space-evenly; */
     padding-top: 24px;
-    margin: -80px auto 0 auto;
-    background-color: #FFFFFF;
+    margin: -10px auto 0 auto;
+    background-color: #c5d9df;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
 }
 
@@ -572,7 +579,12 @@ a {
   color: rgb(44, 44, 44);
 
 }
-
+.menu-title {
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #4e4e4e;
+    text-align: justify;
+}
 #modelselector .Select-control{
   max-height: 82px;
   overflow-y: auto;

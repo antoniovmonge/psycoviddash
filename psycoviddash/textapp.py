@@ -24,7 +24,10 @@ def paragraph2():
 
 def paragraph3():
     text='''
-    Isolation...
+    One of the feelings millions of us are experiencing during the current coronavirus pandemic is loneliness.
+      
+    In our combined efforts to stay safe and save lives, our usual ways of seeing family, 
+    friends or just familiar faces have been put on pause.
     '''
     return text
 

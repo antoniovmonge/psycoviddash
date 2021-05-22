@@ -20,8 +20,7 @@ app.layout = html.Div(
                 ),
                 html.P(
                     className="header-description",
-                    children='Analyze the psychological impact'
-                    'during Covid-19 Outbreak',
+                    children='THE PSYCHOLOGICAL INPACT DURING COVID-19 OUTBREAK',
                 ),
             ],
         ),
