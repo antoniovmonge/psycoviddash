@@ -8,6 +8,7 @@ from psycoviddash.textapp import *
 from psycoviddash.colors import color_palette_list
 import numpy as np
 import plotly.graph_objects as go
+import dash_table
 
 from app import app
 
@@ -190,9 +191,7 @@ layout = html.Div(
                                 dcc.Markdown(
                                     f'{paragraph2()}',
                                     className='text-padding-more',
-                                )
-                        
-                                
+                                )      
                         )       
                     ]
                 ),
@@ -266,14 +265,14 @@ layout = html.Div(
             className='row',
             children=[
                 html.Div(
-                    className='four columns div-for-user-controls', # Define the left element
+                    className='three columns div-for-user-controls', # Define the left element
                     children=[
                         html.Div(
-                            children='SELECT COUNTRY',
+                            children='SELECT COUNTRY 1',
                             className='menu-title text-padding-left padding-top'
                         ),
                         dcc.Dropdown(
-                            id='country-filter',
+                            id='country-filter-1',
                             options=[
                                 {'label': Country, 'value': Country}
                                 for Country in np.sort(df.Country.unique())
@@ -284,13 +283,8 @@ layout = html.Div(
                         ),
                     ]
                 ),
-            ]
-        ),
-        html.Div(
-            className='row',
-            children=[
                 html.Div(
-                    className='five columns div-for-bar-charts',
+                    className='five columns',
                     children=[
                         dcc.Graph(
                             id='radar-chart',
@@ -300,45 +294,75 @@ layout = html.Div(
                     ]
                 ),
                 html.Div(
-                    className=''
-                )
+                    className='three columns div-for-user-controls', # Define the left element
+                    children=[
+                        html.Div(
+                            children='SELECT COUNTRY 2',
+                            className='menu-title padding-top'
+                        ),
+                        dcc.Dropdown(
+                            id='country-filter-2',
+                            options=[
+                                {'label': Country, 'value': Country}
+                                for Country in np.sort(df.Country.unique())
+                            ],
+                            value='Spain',
+                            clearable=False,
+                            # className='text-padding-left',
+                        ),
+                    ]
+                ),
             ]
-        ),      
+        ),
+        
     ]
 )
 
-
-
 @app.callback(
-    Output('app-3-display-value', 'children'),
-    Input('app-3-dropdown', 'value'))
-def display_value(value):
-    return 'You have selected "{}"'.format(value)
-
-@app.callback(
-    Output('radar-chart', 'figure'),
-    Input('country-filter', 'value')
+    
+        Output('radar-chart', 'figure'),
+    [
+        Input('country-filter-1', 'value'),
+        Input('country-filter-2', 'value'),
+    ]
 )
-def update_chart(Country):
-    categories = ['Neuro', 'Open', 'Extro',
-                'Agree', 'Cons', 'Neuro']
+def update_chart(Country1, Country2):
+    categories = ['Neuroticism', 'Openness', 'Extraversion',
+                'Agreeableness', 'Conscientiousness', 'Neuroticism']
 
     radar_chart_figure = go.Figure()
 
     radar_chart_figure.add_trace(
         go.Scatterpolar(
             r=[
-                df[df.Country == Country].groupby('Country')['neu'].mean()[0],
-                df[df.Country == Country].groupby('Country')['ope'].mean()[0],
-                df[df.Country == Country].groupby('Country')['ext'].mean()[0],
-                df[df.Country == Country].groupby('Country')['agr'].mean()[0],
-                df[df.Country == Country].groupby('Country')['con'].mean()[0],
-                df[df.Country == Country].groupby('Country')['neu'].mean()[0],
+                df[df.Country == Country1].groupby('Country')['neu'].mean()[0],
+                df[df.Country == Country1].groupby('Country')['ope'].mean()[0],
+                df[df.Country == Country1].groupby('Country')['ext'].mean()[0],
+                df[df.Country == Country1].groupby('Country')['agr'].mean()[0],
+                df[df.Country == Country1].groupby('Country')['con'].mean()[0],
+                df[df.Country == Country1].groupby('Country')['neu'].mean()[0],
             ],
-            theta0=20,
             theta=categories,
             fill='toself',
-            name=Country,
+            name=Country1,
+            # line_color='rgb(249, 153, 153)'
+        )
+    )
+
+    radar_chart_figure.add_trace(
+        go.Scatterpolar(
+            r=[
+                df[df.Country == Country2].groupby('Country')['neu'].mean()[0],
+                df[df.Country == Country2].groupby('Country')['ope'].mean()[0],
+                df[df.Country == Country2].groupby('Country')['ext'].mean()[0],
+                df[df.Country == Country2].groupby('Country')['agr'].mean()[0],
+                df[df.Country == Country2].groupby('Country')['con'].mean()[0],
+                df[df.Country == Country2].groupby('Country')['neu'].mean()[0],
+            ],
+            theta=categories,
+            fill='toself',
+            name=Country2,
+            # line_color='rgba(148, 224, 243, 0.56)'
         )
     )
 
@@ -353,11 +377,25 @@ def update_chart(Country):
                 direction='counterclockwise'
             )
         ),
-        showlegend=False,
+        showlegend=True,
+        legend=dict(
+            yanchor="top",
+            y=1.4,
+            xanchor="center",
+            x=0.5,
+            font=dict(
+                # family="Gravitas One",
+                size=18,
+                # color="RebeccaPurple"
+            )
+        ),
         font=dict(
-            # family="Courier New, monospace",
-            # size=16,
+            # family="Gravitas One",
+            # size=18,
             # color="RebeccaPurple"
         )
     )
     return radar_chart_figure
+
+
+        

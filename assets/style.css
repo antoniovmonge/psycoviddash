@@ -514,7 +514,7 @@ a {
 .menu {
     height: 132px;
     width: 340px;
-    /* display: flex; */
+    display: flex;
     /* justify-content: space-evenly; */
     padding-top: 24px;
     margin: -10px auto 0 auto;
@@ -597,9 +597,11 @@ a {
 }
 
 .has-value.Select--single>.Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single>.Select-control .Select-value .Select-value-label {
-  color: white;
+  color: #181818;
   background: #1E1E1E;
   background-color: #fdfdfd;
+  /* font-family:'Courier New', Courier, monospace; */
+  font-size: 18px;
 }
 ._dash-app-content {
   overflow-x: hidden;
@@ -607,9 +609,9 @@ a {
   position: relative;
 }
 .has-value.Select--single>.Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single>.Select-control .Select-value .Select-value-labeln {
-  color: #d8d8d8;
+  color: #181818;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .Input.DateInput_1 {
@@ -743,21 +745,22 @@ a {
 ::-webkit-scrollbar {
   width: 10px !important;
   display: block !important;
+  height: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #1e1e1e !important;
+  background: #d2f2ffa8 !important;
   border-radius: 10px !important;
   display: block !important;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: transparent;
+  background:#a0e4ff
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #d8d8d870 !important;
+  background: #46464670 !important;
 }
