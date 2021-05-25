@@ -96,7 +96,8 @@ df_age_summary = pd.DataFrame(data=d)
 
 # LAYOUT
 layout = html.Div(
-    [
+    className='main-container',
+    children=[
         dbc.Container(
             [
                 html.Div(

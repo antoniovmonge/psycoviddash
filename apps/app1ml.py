@@ -3,6 +3,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
+import base64
 
 import numpy as np
 import pandas as pd
@@ -58,85 +59,386 @@ bff15_labels = ['... is often concerned',
 
 
 
-layout = html.Div([
-    html.H3('Machine Learning', className='text-center'),
-    dbc.Container([
+layout = html.Div(
+    
+    className='container',
+    children=[
+
         html.Div(
+            className='main-container',
             children=[
                 html.Div(
+                    className='sidebar div-for-slider',
                     children=[
-                        html.Div(children=bff15_labels[1]),
-                        dcc.Slider(
-                            id='slider-1',
-                            min=1,
-                            max=6,
-                            marks={
-                                1: '1',
-                                2: '2',
-                                3: '3',
-                                4: '4',
-                                5: '5',
-                                6: '6'
-                            },
-                            value=3
+                        html.Div(
+                            children=[
+                                html.H5(bff15_labels[1]),
+                                dcc.Slider(
+                                    id='slider-1',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-1')
+                            ]
                         ),
-                        html.Div(id='slider-output-container-1')
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[2]),
+                                dcc.Slider(
+                                    id='slider-2',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-2')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                            html.H5(children=bff15_labels[1]),
+                                dcc.Slider(
+                                    id='slider-1',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-1')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[2]),
+                                dcc.Slider(
+                                    id='slider-2',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-2')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[1]),
+                                dcc.Slider(
+                                    id='slider-1',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-1')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[2]),
+                                dcc.Slider(
+                                    id='slider-2',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-2')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[1]),
+                                dcc.Slider(
+                                    id='slider-1',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-1')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[2]),
+                                dcc.Slider(
+                                    id='slider-2',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-2')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[1]),
+                                dcc.Slider(
+                                    id='slider-1',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-1')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[2]),
+                                dcc.Slider(
+                                    id='slider-2',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-2')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[1]),
+                                dcc.Slider(
+                                    id='slider-1',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-1')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[2]),
+                                dcc.Slider(
+                                    id='slider-2',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-2')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[1]),
+                                dcc.Slider(
+                                    id='slider-1',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-1')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[2]),
+                                dcc.Slider(
+                                    id='slider-2',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-2')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[1]),
+                                dcc.Slider(
+                                    id='slider-1',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-1')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[2]),
+                                dcc.Slider(
+                                    id='slider-2',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-2')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[1]),
+                                dcc.Slider(
+                                    id='slider-1',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-1')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5(children=bff15_labels[2]),
+                                dcc.Slider(
+                                    id='slider-2',
+                                    min=1,
+                                    max=6,
+                                    marks={
+                                        1: '1',
+                                        2: '2',
+                                        3: '3',
+                                        4: '4',
+                                        5: '5',
+                                        6: '6'
+                                    },
+                                    value=3
+                                ),
+                                html.Div(id='slider-output-container-2')
+                            ]        
+                        ),
                     ]
                 ),
                 html.Div(
+                    className='chart-container',
                     children=[
-                        html.Div(children=bff15_labels[2]),
-                        dcc.Slider(
-                            id='slider-2',
-                            min=1,
-                            max=6,
-                            marks={
-                                1: '1',
-                                2: '2',
-                                3: '3',
-                                4: '4',
-                                5: '5',
-                                6: '6'
-                            },
-                            value=3
-                        ),
-                        html.Div(id='slider-output-container-2')
+                        html.H1('Hi')
                     ]
                 )
-                
             ]
-        ),
-        dbc.Row([
-            dbc.Col([
-                dcc.Markdown('''
-                             #### Row 1, Col 1
-                             ''', className='text-center')
-            ]),
-            dbc.Col([
-                dcc.Markdown('''
-                             #### Row 2, Col 2
-                             ''', className='text-center')
-            ]),
-            dbc.Col([
-                dcc.Markdown('''
-                             #### Row 3, Col 3
-                             ''', className='text-center')
-            ]),
-            dbc.Col([
-                dcc.Markdown('''
-                             #### Row 3, Col 3
-                             ''', className='text-center')
-            ])
-        ]),
-    ])
-])
-
-
-
-
-# @app.callback(
-#     dash.dependencies.Output('slider-output-container', 'children'),
-#     [dash.dependencies.Input('slider-1', 'value')])
-# def update_output(value):
-#     print ('You have selected "{}"'.format(value))
-#     # return value
+        )
+    ]
+)
