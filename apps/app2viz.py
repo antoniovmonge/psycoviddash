@@ -44,12 +44,15 @@ fig1.update_layout(
 )
 
 # EMPLOYMENT PIE CHART
-fig2 = px.pie(df,
-              values=list(df['Dem_employment'].value_counts(normalize=True)),
-              names=list(df['Dem_employment'].value_counts().index))
-fig2.update_traces(textposition='inside',
-                   textinfo='percent+label',
-                marker=dict(colors=color_palette_list))
+fig2 = px.pie(
+    df,
+    values=list(df['Dem_employment'].value_counts(normalize=True)),
+    names=list(df['Dem_employment'].value_counts().index))
+fig2.update_traces(
+    textposition='inside',
+    textinfo='percent+label',
+    marker=dict(colors=color_palette_list)
+    )
 fig2.update_layout(
     showlegend=False,
     margin=dict(

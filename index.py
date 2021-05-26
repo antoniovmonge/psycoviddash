@@ -94,7 +94,7 @@ def render_content(tab):
     elif tab == 'tab-3':
         return app3analytics.layout
     else:
-        return app1ml.layout # CHANGE WITH app0intro.layout !!
+        return app3analytics.layout # CHANGE WITH app0intro.layout !!
 
 ################
 # OLD CALLBACK #

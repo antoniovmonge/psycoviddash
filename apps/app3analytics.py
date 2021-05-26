@@ -143,6 +143,9 @@ lonely_fig.update_yaxes(
 )
 
 layout = html.Div(
+    style={
+        'paddingLeft': 20,
+        'paddingRight': 10},
     children=[      
         html.Div(
             className='row',
@@ -267,13 +270,13 @@ layout = html.Div(
             children=[
                 # DROPDOWN COUNTRY 1
                 html.Div(
-                    className='three columns div-for-user-controls', # Define the left element
+                    className='four columns div-for-user-controls',
                     children=[
                         html.Div(
                             children='SELECT COUNTRY 1',
                             className='menu-title padding-top',
                             style={
-                                # 'padding': '5px',
+                                # 'paddingLeft': '5px',
                                 # 'fontSize': 18,
                                 'textAlign': 'right'
                             }
@@ -286,44 +289,30 @@ layout = html.Div(
                             ],
                             value='Germany',
                             clearable=False,
-                            className='text-padding-left',
-                            style={
-                                'paddingLeft': '50px',
-                                # 'fontSize': 18,
-                                'textAlign': 'right'
-                            }
+                            # className='text-padding-left',
+                            # style={
+                            #     'paddingLeft': '150px',
+                            #     # 'fontSize': 18,
+                            #     'textAlign': 'right'
+                            # },
+                            style=dict(
+                                # marginLeft= '50px',
+                                # paddingLeft= '100px',
+                                textAlign= 'right',
+                                # width='90%',
+                                display='inline-block',
+                                verticalAlign="right"
+                            )
                         ),
-                        # TABLE OF COUNTRY 1
-                        html.Div(
-                            className='text-padding-left',
-                            children=[
-                                dash_table.DataTable(
-                                    id='table-1',
-                                    columns=[
-                                        dict(id='Trait', name='Trait'),
-                                        dict(id='Score', name='Score', type='numeric', format=Format(precision=2, scheme=Scheme.fixed))
-                                    ],
-                                style_as_list_view=True,
-                                style_cell={
-                                    'padding': '5px',
-                                    'fontSize': 18},
-                                style_header={
-                                    'backgroundColor': 'white',
-                                    'fontWeight': 'bold'
-                                },
-
-                                )
-                            ],
-                            style={
-                                'marginTop': 60,
-                                # 'marginLeft': 60
-                            }
-                        ),
-                    ]
+                    ],
+                    style=dict(
+                        textAlign='right',
+                        paddingTop='100px',
+                    )
                 ),
-                
+                # RADAR CHART --------------------------------
                 html.Div(
-                    className='five columns',
+                    className='four columns',
                     children=[
                         dcc.Graph(
                             id='radar-chart',
@@ -332,15 +321,15 @@ layout = html.Div(
                         )
                     ]
                 ),
-    # RADAR CHART --------------------------------
+                
                 html.Div(
-                    className='three columns div-for-user-controls', # Define the left element
+                    className='four columns div-for-user-controls', # Define the left element
                     children=[
                         html.Div(
                             children='SELECT COUNTRY 2',
                             className='menu-title padding-top'
                         ),
-    # DROPDOWN COUNTRY 2 -------------------------
+                        # DROPDOWN COUNTRY 2 -------------------------
                         dcc.Dropdown(
                             id='country-filter-2',
                             options=[
@@ -349,48 +338,108 @@ layout = html.Div(
                             ],
                             value='Taiwan',
                             clearable=False,
+                            style=dict(
+                                # paddingRight= 150,
+                                width='75%',
+                                display='inline-block',
+                                verticalAlign="middle"
+                            )
                             # className='text-padding-left',
                         ),
-    # TABLE COUNTRY 2 ---------------------------
+                    ],
+                    style=dict(
+                        textAlign='left',
+                        paddingTop='100px'
+                    )
+                ),  
+            ]
+        ),
+        html.Div(
+            className='row container',
+            children=[
+                # COLUMN 1
+                html.Div(
+                    className='five columns',
+                    children=[
                         html.Div(
-                            # className='text-padding-left',
+                            className='column',
+                            children=[
+                                dash_table.DataTable(
+                                    id='table-1',
+                                    columns=[
+                                        dict(id='Trait', name='Trait'),
+                                        dict(id='Score', name='Score', type='numeric', format=Format(precision=2, scheme=Scheme.fixed))
+                                    ],
+                                    style_as_list_view=True,
+                                    style_cell={
+                                        'padding': '5px',
+                                        'fontSize': 18},
+                                    style_header={
+                                        'backgroundColor': 'white',
+                                        'fontWeight': 'bold'
+                                    },
+                                ),
+                                dcc.Graph(
+                                    id='stress-1',
+                                    
+                                )
+                            ],
+                            style=dict(
+                                marginTop= 10,
+                                # marginLeft= 200,
+                            ),
+                        ),
+                    ],
+                ),
+                # SEPARATOR
+                html.Div(
+                    className='two columns',
+                    children=[
+                        html.Div(' ')
+                    ]
+            
+                ),
+                # COLUMN 2
+                html.Div(
+                    className='five columns',
+                    children=[
+                        html.Div(
+                            className='column',
                             children=[
                                 dash_table.DataTable(
                                     id='table-2',
                                     columns=[
-                                        
+                                    
                                         dict(id='Score', name='Score', type='numeric', format=Format(precision=2, scheme=Scheme.fixed)),
                                         dict(id='Trait', name='Trait')
                                     ],
-                                style_as_list_view=True,
-                                style_cell={
-                                    'padding': '5px',
-                                    'fontSize': 18,
-                                    'textAlign': 'left'
+                                    style_as_list_view=True,
+                                    style_cell={
+                                        'padding': '5px',
+                                        'fontSize': 18,
+                                        'textAlign': 'left'
+                                        },
+                                    style_header={
+                                        'backgroundColor': 'white',
+                                        'fontWeight': 'bold'
                                     },
-                                style_header={
-                                    'backgroundColor': 'white',
-                                    'fontWeight': 'bold'
-                                },
-
+                                ),
+                                dcc.Graph(
+                                    id='stress-2',
                                 )
                             ],
-                            style={
-                                'marginTop': 60,
-                                # 'marginLeft': 60
-                            }
+                            style=dict(
+                                marginTop= 10,
+                                # marginLeft= 120,
+                            ),     
                         ),
-
                     ]
-                ),
+                )
             ]
         ),
         
+        
     ],
-    style={
-        'paddingLeft':20,
-        'paddingRight':20
-    }
 )
 
 @app.callback(
@@ -484,6 +533,34 @@ def update_table(Country1):
     return df_print.to_dict('records')
 
 @app.callback(
+    Output('stress-1', 'figure'),
+    Input('country-filter-1', 'value')
+    )
+
+def update_chart(Country1):
+    figure_stress_1 = go.Figure(go.Indicator(
+        mode = "gauge+number",
+        value = df[df.Country == Country1]['PSS10_avg'].mean(),
+        title = {'text': "Stress"},
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        gauge=dict(
+            axis= {'range': [None, 5]},
+            bar= {'color': "#4DD22B"},
+            steps= [
+                # {'range': [0, 2.4], 'color': '#DFC4AA'},
+                # {'range': [2.4, 3.7], 'color': '#F38C71'},
+                # {'range': [3.7, 5], 'color': '#EE5344'}
+                ],
+        )
+    ))
+    figure_stress_1.update_layout(
+        xaxis = {'range': [0, 5]},
+        
+    )
+    return figure_stress_1
+    
+
+@app.callback(
     Output('table-2', 'data'),
     Input('country-filter-2', 'value')
 )
@@ -493,4 +570,20 @@ def update_table(Country2):
     df_print.columns = ['Trait', 'Score' ]
     df_print.Trait = ['Neuroticism','Openness', 'Extraversion', 'Agreeableness', 'Conscientiousness']
     return df_print.to_dict('records')
-        
+
+@app.callback(
+    Output('stress-2', 'figure'),
+    Input('country-filter-2', 'value')
+)
+def update_chart(Country2):
+    figure_stress_2 = go.Figure(go.Indicator(
+        mode = "gauge+number",
+        value = df[df.Country == Country2]['PSS10_avg'].mean(),
+        title = {'text': "Stress"},
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        gauge=dict(
+            axis= {'range': [None, 5]},
+            bar= {'color': "rgb(255, 56, 116)"}
+        )
+    ))
+    return figure_stress_2
