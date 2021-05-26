@@ -144,8 +144,8 @@ lonely_fig.update_yaxes(
 
 layout = html.Div(
     style={
-        'paddingLeft': 20,
-        'paddingRight': 10},
+        'paddingLeft': 100,
+        'paddingRight': 80},
     children=[      
         html.Div(
             className='row',
@@ -215,6 +215,7 @@ layout = html.Div(
                 ),
             ]
         ),
+        # STAIC ANALYSIS LONELINESS
         html.Div(
             className='row',
             children=[
@@ -252,7 +253,7 @@ layout = html.Div(
             ]
         ),
         # ---------------------------------------------------
-        # TITLE NEW SECTION
+        # INTERACTIVE SECTION
         html.Div(
             className='row',
             children=[
@@ -270,7 +271,7 @@ layout = html.Div(
             children=[
                 # DROPDOWN COUNTRY 1
                 html.Div(
-                    className='four columns div-for-user-controls',
+                    className='four columns',
                     children=[
                         html.Div(
                             children='SELECT COUNTRY 1',
@@ -296,24 +297,56 @@ layout = html.Div(
                             #     'textAlign': 'right'
                             # },
                             style=dict(
-                                # marginLeft= '50px',
+                                marginLeft= '5px',
                                 # paddingLeft= '100px',
                                 textAlign= 'right',
                                 # width='90%',
-                                display='inline-block',
+                                # display='right',
                                 verticalAlign="right"
                             )
                         ),
+                        html.Div(
+                            className='div-for-table',
+                            children=[
+                                dash_table.DataTable(
+                                    id='table-1',
+                                    columns=[
+                                        dict(id='Trait', name='Trait'),
+                                        dict(id='Score', name='Score', type='numeric', format=Format(precision=2, scheme=Scheme.fixed))
+                                    ],
+                                    style_as_list_view=True,
+                                    style_cell={
+                                        'padding': '5px',
+                                        # 'fontSize': 18,
+                                        },
+                                    style_header={
+                                        'backgroundColor': 'white',
+                                        'fontWeight': 'bold'
+                                    },
+                                ),
+                            ],
+                            style=dict(
+                                paddingTop='50px'
+                        )
+                        )
+                        
                     ],
                     style=dict(
                         textAlign='right',
-                        paddingTop='100px',
+                        paddingTop='50px',
+                        paddingLeft='200px',
                     )
                 ),
                 # RADAR CHART --------------------------------
                 html.Div(
                     className='four columns',
                     children=[
+                        html.H3(
+                            'Personality Traits',
+                            style=dict(
+                                textAlign='center',
+                                )
+                        ),
                         dcc.Graph(
                             id='radar-chart',
                             config={"displayModeBar": False},
@@ -340,48 +373,82 @@ layout = html.Div(
                             clearable=False,
                             style=dict(
                                 # paddingRight= 150,
-                                width='75%',
+                                # width='75%',
                                 display='inline-block',
                                 verticalAlign="middle"
                             )
                             # className='text-padding-left',
                         ),
-                    ],
-                    style=dict(
-                        textAlign='left',
-                        paddingTop='100px'
-                    )
-                ),  
-            ]
-        ),
-        html.Div(
-            className='row container',
-            children=[
-                # COLUMN 1
-                html.Div(
-                    className='five columns',
-                    children=[
                         html.Div(
-                            className='column',
+                            className='div-for-table',
                             children=[
                                 dash_table.DataTable(
-                                    id='table-1',
+                                    id='table-2',
                                     columns=[
-                                        dict(id='Trait', name='Trait'),
-                                        dict(id='Score', name='Score', type='numeric', format=Format(precision=2, scheme=Scheme.fixed))
+                                    
+                                        dict(id='Score', name='Score', type='numeric', format=Format(precision=2, scheme=Scheme.fixed)),
+                                        dict(id='Trait', name='Trait')
                                     ],
                                     style_as_list_view=True,
                                     style_cell={
                                         'padding': '5px',
-                                        'fontSize': 18},
+                                        # 'fontSize': 18,
+                                        'textAlign': 'left'
+                                        },
                                     style_header={
                                         'backgroundColor': 'white',
                                         'fontWeight': 'bold'
                                     },
                                 ),
+                            ],
+                            style=dict(
+                                paddingTop='50px'
+                            )
+                        )
+                        
+                    ],
+                    style=dict(
+                        textAlign='left',
+                        paddingRight='200px',
+                        paddingTop='50px'
+                    )
+                ),  
+            ]
+        ),
+        # INDICATORS
+        html.Div(
+            className='row',
+            children=[
+                # COLUMN 1
+                html.Div(
+                    className='two columns offset-by-one column',
+                    children=[
+                        html.Div(
+                            className='column',
+                            children=[
+                                
                                 dcc.Graph(
                                     id='stress-1',
-                                    
+                                    config={"displayModeBar": False},
+                                )
+                            ],
+                            style=dict(
+                                marginTop= 10,
+                                # marginLeft= 200,
+                            ),
+                        ),
+                    ],
+                ),
+                html.Div(
+                    className='two columns',
+                    children=[
+                        html.Div(
+                            className='column',
+                            children=[
+                                
+                                dcc.Graph(
+                                    id='loneliness-1',
+                                    config={"displayModeBar": False},
                                 )
                             ],
                             style=dict(
@@ -401,31 +468,15 @@ layout = html.Div(
                 ),
                 # COLUMN 2
                 html.Div(
-                    className='five columns',
+                    className='two columns',
                     children=[
                         html.Div(
                             className='column',
                             children=[
-                                dash_table.DataTable(
-                                    id='table-2',
-                                    columns=[
-                                    
-                                        dict(id='Score', name='Score', type='numeric', format=Format(precision=2, scheme=Scheme.fixed)),
-                                        dict(id='Trait', name='Trait')
-                                    ],
-                                    style_as_list_view=True,
-                                    style_cell={
-                                        'padding': '5px',
-                                        'fontSize': 18,
-                                        'textAlign': 'left'
-                                        },
-                                    style_header={
-                                        'backgroundColor': 'white',
-                                        'fontWeight': 'bold'
-                                    },
-                                ),
+                                
                                 dcc.Graph(
                                     id='stress-2',
+                                    config={"displayModeBar": False},
                                 )
                             ],
                             style=dict(
@@ -434,8 +485,31 @@ layout = html.Div(
                             ),     
                         ),
                     ]
-                )
-            ]
+                ),
+                html.Div(
+                    className='two columns',
+                    children=[
+                        html.Div(
+                            className='column',
+                            children=[           
+                                dcc.Graph(
+                                    id='loneliness-2',
+                                    config={"displayModeBar": False},
+                                )
+                            ],
+                            style=dict(
+                                marginTop= 10,
+                                # marginLeft= 120,
+                            ),     
+                        ),
+                    ]
+                ),
+            ],
+            style=dict(
+                marginTop='-150px',
+                paddingLeft='100px',
+                paddingRight='100px',
+            )
         ),
         
         
@@ -545,7 +619,7 @@ def update_chart(Country1):
         domain = {'x': [0, 1], 'y': [0, 1]},
         gauge=dict(
             axis= {'range': [None, 5]},
-            bar= {'color': "#4DD22B"},
+            bar= {'color': "rgb(255, 56, 116)"},
             steps= [
                 # {'range': [0, 2.4], 'color': '#DFC4AA'},
                 # {'range': [2.4, 3.7], 'color': '#F38C71'},
@@ -554,11 +628,51 @@ def update_chart(Country1):
         )
     ))
     figure_stress_1.update_layout(
-        xaxis = {'range': [0, 5]},
-        
+        margin=dict(    
+            l=20,
+            r=20,
+            b=0,
+            t=0,
+            pad=0
+        ),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'  
     )
     return figure_stress_1
-    
+
+@app.callback(
+    Output('loneliness-1', 'figure'),
+    Input('country-filter-1', 'value')
+    )
+
+def update_chart(Country1):
+    figure_loneliness_1 = go.Figure(go.Indicator(
+        mode = "gauge+number",
+        value = df[df.Country == Country1]['SLON3_avg'].mean(),
+        title = {'text': "Loneliness"},
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        gauge=dict(
+            axis= {'range': [None, 5]},
+            bar= {'color': "#add8e6"},
+            steps= [
+                # {'range': [0, 2.4], 'color': '#DFC4AA'},
+                # {'range': [2.4, 3.7], 'color': '#F38C71'},
+                # {'range': [3.7, 5], 'color': '#EE5344'}
+                ],
+        )
+    ))
+    figure_loneliness_1.update_layout(
+        margin=dict(    
+            l=20,
+            r=20,
+            b=0,
+            t=0,
+            pad=0
+        ),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
+    )
+    return figure_loneliness_1
 
 @app.callback(
     Output('table-2', 'data'),
@@ -586,4 +700,49 @@ def update_chart(Country2):
             bar= {'color': "rgb(255, 56, 116)"}
         )
     ))
+    figure_stress_2.update_layout(
+        margin=dict(    
+            l=20,
+            r=20,
+            b=0,
+            t=0,
+            pad=0
+        ),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
+    )
     return figure_stress_2
+
+@app.callback(
+    Output('loneliness-2', 'figure'),
+    Input('country-filter-2', 'value')
+    )
+
+def update_chart(Country2):
+    figure_loneliness_2 = go.Figure(go.Indicator(
+        mode = "gauge+number",
+        value = df[df.Country == Country2]['SLON3_avg'].mean(),
+        title = {'text': "Loneliness"},
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        gauge=dict(
+            axis= {'range': [None, 5]},
+            bar= {'color': "#add8e6"},
+            steps= [
+                # {'range': [0, 2.4], 'color': '#DFC4AA'},
+                # {'range': [2.4, 3.7], 'color': '#F38C71'},
+                # {'range': [3.7, 5], 'color': '#EE5344'}
+                ],
+        )
+    ))
+    figure_loneliness_2.update_layout(
+        margin=dict(    
+            l=20,
+            r=20,
+            b=0,
+            t=0,
+            pad=0
+        ),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
+        )
+    return figure_loneliness_2
