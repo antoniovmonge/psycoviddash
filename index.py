@@ -82,8 +82,7 @@ app.layout = html.Div(
     
 )
 #callback to control the tab content
-@app.callback(Output('page-content', 'children'),
-              [Input('tabs', 'value')])
+@app.callback(Output('page-content', 'children'),[Input('tabs', 'value')])
 def render_content(tab):
     if tab == 'tab-0':
         return app0intro.layout
@@ -94,7 +93,7 @@ def render_content(tab):
     elif tab == 'tab-3':
         return app3analytics.layout
     else:
-        return app3analytics.layout # CHANGE WITH app0intro.layout !!
+        return app1ml.layout # CHANGE WITH app0intro.layout !!
 
 ################
 # OLD CALLBACK #

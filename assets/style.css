@@ -36,7 +36,7 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
   
 }
 .main-container {
-  display: grid;
+  display: flex;
   max-width: 1080px;
   position: relative;
   padding: 0 0px;

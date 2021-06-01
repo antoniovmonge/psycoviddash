@@ -10,6 +10,7 @@ import pandas as pd
 import joblib
 import plotly.graph_objects as go
 import plotly.express as px
+from joblib import load
 
 from app import app
 
@@ -74,7 +75,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[0]),
                                 dcc.Slider(
-                                    id='slider-0',
+                                    id='slider0',
                                     min=1,
                                     max=6,
                                     marks={
@@ -94,7 +95,7 @@ layout = html.Div(
                             children=[
                                 html.H5(bff15_labels[1]),
                                 dcc.Slider(
-                                    id='slider-1',
+                                    id='slider1',
                                     min=1,
                                     max=6,
                                     marks={
@@ -114,7 +115,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[2]),
                                 dcc.Slider(
-                                    id='slider-2',
+                                    id='slider2',
                                     min=1,
                                     max=6,
                                     marks={
@@ -134,7 +135,7 @@ layout = html.Div(
                             children=[
                             html.H5(children=bff15_labels[3]),
                                 dcc.Slider(
-                                    id='slider-3',
+                                    id='slider3',
                                     min=1,
                                     max=6,
                                     marks={
@@ -154,7 +155,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[4]),
                                 dcc.Slider(
-                                    id='slider-4',
+                                    id='slider4',
                                     min=1,
                                     max=6,
                                     marks={
@@ -174,7 +175,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[5]),
                                 dcc.Slider(
-                                    id='slider-5',
+                                    id='slider5',
                                     min=1,
                                     max=6,
                                     marks={
@@ -194,7 +195,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[6]),
                                 dcc.Slider(
-                                    id='slider-6',
+                                    id='slider6',
                                     min=1,
                                     max=6,
                                     marks={
@@ -214,7 +215,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[7]),
                                 dcc.Slider(
-                                    id='slider-7',
+                                    id='slider7',
                                     min=1,
                                     max=6,
                                     marks={
@@ -234,7 +235,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[8]),
                                 dcc.Slider(
-                                    id='slider-8',
+                                    id='slider8',
                                     min=1,
                                     max=6,
                                     marks={
@@ -254,7 +255,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[9]),
                                 dcc.Slider(
-                                    id='slider-9',
+                                    id='slider9',
                                     min=1,
                                     max=6,
                                     marks={
@@ -274,7 +275,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[10]),
                                 dcc.Slider(
-                                    id='slider-10',
+                                    id='slider10',
                                     min=1,
                                     max=6,
                                     marks={
@@ -294,7 +295,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[11]),
                                 dcc.Slider(
-                                    id='slider-11',
+                                    id='slider11',
                                     min=1,
                                     max=6,
                                     marks={
@@ -314,7 +315,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[12]),
                                 dcc.Slider(
-                                    id='slider-12',
+                                    id='slider12',
                                     min=1,
                                     max=6,
                                     marks={
@@ -334,7 +335,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[13]),
                                 dcc.Slider(
-                                    id='slider-13',
+                                    id='slider13',
                                     min=1,
                                     max=6,
                                     marks={
@@ -354,7 +355,7 @@ layout = html.Div(
                             children=[
                                 html.H5(children=bff15_labels[14]),
                                 dcc.Slider(
-                                    id='slider-14',
+                                    id='slider14',
                                     min=1,
                                     max=6,
                                     marks={
@@ -371,40 +372,135 @@ layout = html.Div(
                             ]
                         ),
                         
-                        # html.Div(
-                        #     children=[
-                        #         html.H5('Choose age:'),
-                        #         dcc.Input(
-                        #             id='age',
-                        #             placeholder='Enter a value...',
-                        #             type='number',
-                        #             min=18,
-                        #             max=70,
-                        #             step=1,
-                        #         )
-                        #         # html.Div(id='slider-output-container-1')
-                        #     ]
-                        # ),
-                        # html.Div(
-                        #     children=[
-                        #         html.H5(children=bff15_labels[2]),
-                        #         dcc.Slider(
-                        #             id='slider-2',
-                        #             min=1,
-                        #             max=6,
-                        #             marks={
-                        #                 1: '1',
-                        #                 2: '2',
-                        #                 3: '3',
-                        #                 4: '4',
-                        #                 5: '5',
-                        #                 6: '6'
-                        #             },
-                        #             value=3
-                        #         ),
-                        #         html.Div(id='slider-output-container-2')
-                        #     ]        
-                        # ),
+                        html.Div(
+                            children=[
+                                html.H5('Choose age:'),
+                                dcc.Input(
+                                    id='age',
+                                    placeholder='Enter a value...',
+                                    type='number',
+                                    min=18,
+                                    max=70,
+                                    step=1,
+                                )
+                                # html.Div(id='slider-output-container-1')
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5("Pick a gender"),
+                                dcc.Dropdown(
+                                    id='Dem_gender',
+                                    options=[
+                                        {'label': Dem_gender, 'value': Dem_gender}
+                                        for Dem_gender in np.sort(df.Dem_gender.unique())
+                                    ],
+                                    clearable=False,
+                                    style=dict(
+                                        # paddingRight= 150,
+                                        # width='75%',
+                                        display='inline-block',
+                                        verticalAlign="middle"
+                                    )
+                                ),
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5("Pick your education"),
+                                dcc.Dropdown(
+                                    id='Dem_edu',
+                                    options=[
+                                        {'label': Dem_edu, 'value': Dem_edu}
+                                        for Dem_edu in np.sort(df.Dem_edu.unique())
+                                    ],
+                                    clearable=False,
+                                    style=dict(
+                                        # paddingRight= 150,
+                                        # width='75%',
+                                        display='inline-block',
+                                        verticalAlign="middle"
+                                    )
+                                ),
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5("Pick your mother's education"),
+                                dcc.Dropdown(
+                                    id='Dem_edu_mom',
+                                    options=[
+                                        {'label': Dem_edu_mom, 'value': Dem_edu_mom}
+                                        for Dem_edu_mom in np.sort(df.Dem_edu_mom.unique())
+                                    ],
+                                    clearable=False,
+                                    style=dict(
+                                        # paddingRight= 150,
+                                        # width='75%',
+                                        display='inline-block',
+                                        verticalAlign="middle"
+                                    )
+                                ),
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5("Pick your employment status"),
+                                dcc.Dropdown(
+                                    id='Dem_employment',
+                                    options=[
+                                        {'label': Dem_employment, 'value': Dem_employment}
+                                        for Dem_employment in np.sort(df.Dem_employment.unique())
+                                    ],
+                                    clearable=False,
+                                    style=dict(
+                                        # paddingRight= 150,
+                                        # width='75%',
+                                        display='inline-block',
+                                        verticalAlign="middle"
+                                    )
+                                ),
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5("Are you living abroad?"),
+                                dcc.Dropdown(
+                                    id='Dem_Expat',
+                                    options=[
+                                        {'label': Dem_Expat, 'value': Dem_Expat}
+                                        for Dem_Expat in np.sort(df.Dem_Expat.unique())
+                                    ],
+                                    clearable=False,
+                                    style=dict(
+                                        # paddingRight= 150,
+                                        # width='75%',
+                                        display='inline-block',
+                                        verticalAlign="middle"
+                                    )
+                                ),
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5("Are you in a risk group?"),
+                                dcc.Dropdown(
+                                    id='Dem_riskgroup',
+                                    options=[
+                                        {'label': Dem_riskgroup, 'value': Dem_riskgroup}
+                                        for Dem_riskgroup in np.sort(df.Dem_riskgroup.unique())
+                                    ],
+                                    clearable=False,
+                                    style=dict(
+                                        # paddingRight= 150,
+                                        # width='75%',
+                                        display='inline-block',
+                                        verticalAlign="middle"
+                                    )
+                                ),
+                            ]
+                        ),
+                        
                     ]
                 ),
 #--------------------------------------------------------
@@ -412,11 +508,25 @@ layout = html.Div(
                 html.Div(
                     className='chart-container five columns',
                     children=[
-                        html.H1('Hi'),
+                        html.H1('Chart Section'),
                         html.H3(id='personality-values'),
                         dcc.Graph(
                             id='personality-chart',
                             config={"displayModeBar": False},
+                        ),
+                        html.Div(
+                            className='row',
+                            children=[
+                                html.Div(
+                                    className='six columns',
+                                    children=[
+                                        dcc.Graph(
+                                            id='stress',
+                                            config={"displayModeBar": False},
+                                        )
+                                    ]
+                                )
+                            ]
                         )
                     ]
                 )
@@ -426,76 +536,83 @@ layout = html.Div(
 )
 
 @app.callback(
-    
-        Output('personality-values', 'children'),
+        
+        # Output('personality-values', 'children'),
+        Output('personality-chart', 'figure'),
+      
     [
-        Input('slider-0', 'value'),
-        Input('slider-1', 'value'),
-        Input('slider-2', 'value'),
-        Input('slider-3', 'value'),
-        Input('slider-4', 'value'),
-        Input('slider-5', 'value'),
-        Input('slider-6', 'value'),
-        Input('slider-7', 'value'),
-        Input('slider-8', 'value'),
-        Input('slider-9', 'value'),
-        Input('slider-10', 'value'),
-        Input('slider-11', 'value'),
-        Input('slider-12', 'value'),
-        Input('slider-13', 'value'),
-        Input('slider-14', 'value'),
+        Input('slider0', 'value'),
+        Input('slider1', 'value'),
+        Input('slider2', 'value'),
+        Input('slider3', 'value'),
+        Input('slider4', 'value'),
+        Input('slider5', 'value'),
+        Input('slider6', 'value'),
+        Input('slider7', 'value'),
+        Input('slider8', 'value'),
+        Input('slider9', 'value'),
+        Input('slider10', 'value'),
+        Input('slider11', 'value'),
+        Input('slider12', 'value'),
+        Input('slider13', 'value'),
+        Input('slider14', 'value'),
     
     ]
 )
 
-def update_output(
-    value0, value1, value2, value3, value4, value5,
-    value6, value7, value8, value9, value10, value11,
-    value12,value13,value14):
-    return f'{value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14}'
+# def update_output(
+#     value0, value1, value2, value3, value4, value5,
+#     value6, value7, value8, value9, value10, value11,
+#     value12,value13,value14):
+#     return f'{value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14}'
 
-def update_chart(Country1, Country2):
+def update_chart(slider0, slider1, slider2, slider3, slider4, slider5,
+       slider6, slider7, value8, slider9, slider10, slider11,
+       slider12, slider13, slider14):
     
-    knn = joblib.load('models/knn.joblib')
-    # pred = knn.predict(
-    #     values.iloc[:, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]])
-    # prediction = pd.DataFrame(pred)
-    # prediction.columns = ['neu', 'ext', 'ope', 'agr', 'con']
-    
-    categories = ['Neuroticism', 'Openness', 'Extraversion',
-                'Agreeableness', 'Conscientiousness', 'Neuroticism']
-
-    radar_chart_figure = go.Figure()
-
-    radar_chart_figure.add_trace(
-        go.Scatterpolar(
-            r=[
-                df[df.Country == Country1].groupby('Country')['neu'].mean()[0],
-                df[df.Country == Country1].groupby('Country')['ope'].mean()[0],
-                df[df.Country == Country1].groupby('Country')['ext'].mean()[0],
-                df[df.Country == Country1].groupby('Country')['agr'].mean()[0],
-                df[df.Country == Country1].groupby('Country')['con'].mean()[0],
-                df[df.Country == Country1].groupby('Country')['neu'].mean()[0],
-            ],
-            theta=categories,
-            fill='toself',
-            name=Country1,
-            # line_color='rgb(249, 153, 153)'
-        )
+    df_predict = pd.DataFrame(
+        columns=['BFF_15_1','BFF_15_2', 'BFF_15_3', 'BFF_15_4', 'BFF_15_5', 'BFF_15_6',
+                 'BFF_15_7', 'BFF_15_8','BFF_15_9', 'BFF_15_10', 'BFF_15_11', 'BFF_15_12',
+                 'BFF_15_13', 'BFF_15_14', 'BFF_15_15'],
+        data=[[slider0, slider1, slider2, slider3, slider4, slider5,
+               slider6, slider7, value8, slider9, slider10, slider11,
+               slider12, slider13, slider14]]
     )
     
-    radar_chart_figure.update_layout(
+    knn = load('models/knn.joblib')
+    y_pred_log = knn.predict(
+        df_predict
+        # values.iloc[:, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]]
+        )
+    # y_pred = y_pred_log[0]
+    prediction = pd.DataFrame(y_pred_log)
+    prediction.columns = ['neu', 'ext', 'ope', 'agr', 'con']
+    
+    categories = ['Neuroticism', 'Openness', 'Extraversion',
+                'Agreeableness', 'Conscientiousness','Neuroticism']
+    
+    values = prediction.values.tolist()[0]
+    values += values[:1]
+    
+    figure = go.Figure(
+        data=go.Scatterpolar(
+            r=values,
+            theta=categories,
+            fill='toself'
+        )
+    )
+    figure.update_layout(
         polar=dict(
             radialaxis=dict(
                 visible=True,
-                range=[2, 5],
+                range=[1, 6],
             ),
             angularaxis=dict(
                 rotation=90,
                 direction='counterclockwise'
             )
         ),
-        showlegend=True,
+        showlegend=False,
         legend=dict(
             yanchor="top",
             y=1.4,
@@ -511,6 +628,55 @@ def update_chart(Country1, Country2):
             # family="Gravitas One",
             # size=18,
             # color="RebeccaPurple"
-        )
+        ),
+        margin=dict(    
+                l=20,
+                r=20,
+                b=20,
+                t=20,
+                pad=0
+            ),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'  
     )
-    return radar_chart_figure
+    
+    return figure
+
+@app.callback(
+        
+        # Output('personality-values', 'children'),
+        Output('personality-chart', 'figure'),
+    [
+        Input('slider0', 'value'),
+        Input('slider1', 'value'),
+        Input('slider2', 'value'),
+        Input('slider3', 'value'),
+        Input('slider4', 'value'),
+        Input('slider5', 'value'),
+        Input('slider6', 'value'),
+        Input('slider7', 'value'),
+        Input('slider8', 'value'),
+        Input('slider9', 'value'),
+        Input('slider10', 'value'),
+        Input('slider11', 'value'),
+        Input('slider12', 'value'),
+        Input('slider13', 'value'),
+        Input('slider14', 'value'),
+        Input('age', 'value'),
+        Input('Dem_gender', 'value'),
+        Input('Dem_edu', 'value'),
+        Input('Dem_edu_mom', 'value'),
+        Input('Dem_employment', 'value'),
+        Input('Dem_Expat', 'value'),
+        Input('Dem_riskgroup', 'value'),
+    ]
+)
+
+def update_chart(slider0, slider1, slider2, slider3, slider4, slider5,
+   slider6, slider7, value8, slider9, slider10, slider11,
+   slider12, slider13, slider14, age, Dem_gender, Dem_edu_mom,
+   Dem_employment, Dem_Expat, Dem_riskgroup):
+    
+    model_stress = load('models/model_stress.joblib')
+    
+    # HERE!!
