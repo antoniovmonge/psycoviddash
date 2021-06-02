@@ -279,7 +279,8 @@ layout = html.Div(
                             style={
                                 # 'paddingLeft': '5px',
                                 # 'fontSize': 18,
-                                'textAlign': 'right'
+                                'textAlign': 'center',
+                                'paddingBottom': '10px'
                             }
                         ),
                         dcc.Dropdown(
@@ -297,12 +298,14 @@ layout = html.Div(
                             #     'textAlign': 'right'
                             # },
                             style=dict(
-                                marginLeft= '5px',
+                                # marginLeft= '5px',
                                 # paddingLeft= '100px',
-                                textAlign= 'right',
+                                textAlign= 'center',
                                 # width='90%',
                                 # display='right',
-                                verticalAlign="right"
+                                # verticalAlign="right",
+                                # display='inline-block',
+                                verticalAlign="middle"
                             )
                         ),
                         html.Div(
@@ -360,7 +363,13 @@ layout = html.Div(
                     children=[
                         html.Div(
                             children='SELECT COUNTRY 2',
-                            className='menu-title padding-top'
+                            className='menu-title padding-top',
+                            style={
+                                # 'paddingLeft': '5px',
+                                # 'fontSize': 18,
+                                'textAlign': 'center',
+                                'paddingBottom': '10px'
+                            }
                         ),
                         # DROPDOWN COUNTRY 2 -------------------------
                         dcc.Dropdown(
@@ -373,9 +382,10 @@ layout = html.Div(
                             clearable=False,
                             style=dict(
                                 # paddingRight= 150,
+                                textAlign= 'center',
                                 # width='75%',
-                                display='inline-block',
-                                verticalAlign="middle"
+                                # display='inline-block',
+                                verticalAlign="middle",
                             )
                             # className='text-padding-left',
                         ),
