@@ -327,7 +327,7 @@ layout = html.Div(
                             ],
                             style=dict(
                                 paddingTop='50px'
-                        )
+                            )
                         )
                         
                     ],

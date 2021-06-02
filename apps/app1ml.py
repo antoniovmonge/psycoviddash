@@ -11,6 +11,7 @@ import joblib
 import plotly.graph_objects as go
 import plotly.express as px
 from joblib import load
+import mord
 
 from app import app
 
@@ -375,13 +376,20 @@ layout = html.Div(
                         html.Div(
                             children=[
                                 html.H5('Choose age:'),
-                                dcc.Input(
-                                    id='age',
-                                    placeholder='Enter a value...',
-                                    type='number',
-                                    min=18,
-                                    max=70,
-                                    step=1,
+                                dcc.Dropdown(
+                                    id='Dem_age',
+                                    options=[
+                                        {'label': Dem_age, 'value': Dem_age}
+                                        for Dem_age in range(18,110)
+                                    ],
+                                    clearable=False,
+                                    value=40,
+                                    style=dict(
+                                        # paddingRight= 150,
+                                        # width='75%',
+                                        display='inline-block',
+                                        verticalAlign="middle"
+                                    )
                                 )
                                 # html.Div(id='slider-output-container-1')
                             ]
@@ -395,6 +403,7 @@ layout = html.Div(
                                         {'label': Dem_gender, 'value': Dem_gender}
                                         for Dem_gender in np.sort(df.Dem_gender.unique())
                                     ],
+                                    value='Other/would rather not say',
                                     clearable=False,
                                     style=dict(
                                         # paddingRight= 150,
@@ -414,6 +423,7 @@ layout = html.Div(
                                         {'label': Dem_edu, 'value': Dem_edu}
                                         for Dem_edu in np.sort(df.Dem_edu.unique())
                                     ],
+                                    value='None',
                                     clearable=False,
                                     style=dict(
                                         # paddingRight= 150,
@@ -433,6 +443,7 @@ layout = html.Div(
                                         {'label': Dem_edu_mom, 'value': Dem_edu_mom}
                                         for Dem_edu_mom in np.sort(df.Dem_edu_mom.unique())
                                     ],
+                                    value='None',
                                     clearable=False,
                                     style=dict(
                                         # paddingRight= 150,
@@ -452,6 +463,7 @@ layout = html.Div(
                                         {'label': Dem_employment, 'value': Dem_employment}
                                         for Dem_employment in np.sort(df.Dem_employment.unique())
                                     ],
+                                    value='Full time employed',
                                     clearable=False,
                                     style=dict(
                                         # paddingRight= 150,
@@ -471,6 +483,27 @@ layout = html.Div(
                                         {'label': Dem_Expat, 'value': Dem_Expat}
                                         for Dem_Expat in np.sort(df.Dem_Expat.unique())
                                     ],
+                                    value='no',
+                                    clearable=False,
+                                    style=dict(
+                                        # paddingRight= 150,
+                                        # width='75%',
+                                        display='inline-block',
+                                        verticalAlign="middle"
+                                    )
+                                ),
+                            ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5("Choose your marital status"),
+                                dcc.Dropdown(
+                                    id='Dem_maritalstatus',
+                                    options=[
+                                        {'label': Dem_maritalstatus, 'value': Dem_maritalstatus}
+                                        for Dem_maritalstatus in np.sort(df.Dem_maritalstatus.unique())
+                                    ],
+                                    value='Single',
                                     clearable=False,
                                     style=dict(
                                         # paddingRight= 150,
@@ -490,6 +523,7 @@ layout = html.Div(
                                         {'label': Dem_riskgroup, 'value': Dem_riskgroup}
                                         for Dem_riskgroup in np.sort(df.Dem_riskgroup.unique())
                                     ],
+                                    value='No',
                                     clearable=False,
                                     style=dict(
                                         # paddingRight= 150,
@@ -499,6 +533,29 @@ layout = html.Div(
                                     )
                                 ),
                             ]
+                        ),
+                        html.Div(
+                            children=[
+                                html.H5("Are you currently isolated?"),
+                                dcc.Dropdown(
+                                    id='Dem_isolation',
+                                    options=[
+                                        {'label': Dem_isolation, 'value': Dem_isolation}
+                                        for Dem_isolation in np.sort(df.Dem_isolation.unique())
+                                    ],
+                                    value='1',
+                                    clearable=False,
+                                    style=dict(
+                                        # paddingRight= 150,
+                                        # width='75%',
+                                        display='inline-block',
+                                        verticalAlign="middle"
+                                    )
+                                ),
+                            ],
+                            style=dict(
+                                paddingBottom='300px'
+                            )
                         ),
                         
                     ]
@@ -525,6 +582,15 @@ layout = html.Div(
                                             config={"displayModeBar": False},
                                         )
                                     ]
+                                ),
+                                html.Div(
+                                    className='six columns',
+                                    children=[
+                                        dcc.Graph(
+                                            id='loneliness',
+                                            config={"displayModeBar": False},
+                                        )
+                                    ]
                                 )
                             ]
                         )
@@ -539,7 +605,6 @@ layout = html.Div(
         
         # Output('personality-values', 'children'),
         Output('personality-chart', 'figure'),
-      
     [
         Input('slider0', 'value'),
         Input('slider1', 'value'),
@@ -571,12 +636,16 @@ def update_chart(slider0, slider1, slider2, slider3, slider4, slider5,
        slider12, slider13, slider14):
     
     df_predict = pd.DataFrame(
-        columns=['BFF_15_1','BFF_15_2', 'BFF_15_3', 'BFF_15_4', 'BFF_15_5', 'BFF_15_6',
-                 'BFF_15_7', 'BFF_15_8','BFF_15_9', 'BFF_15_10', 'BFF_15_11', 'BFF_15_12',
-                 'BFF_15_13', 'BFF_15_14', 'BFF_15_15'],
-        data=[[slider0, slider1, slider2, slider3, slider4, slider5,
-               slider6, slider7, value8, slider9, slider10, slider11,
-               slider12, slider13, slider14]]
+        columns=[
+            'BFF_15_1','BFF_15_2', 'BFF_15_3', 'BFF_15_4', 'BFF_15_5', 'BFF_15_6',
+            'BFF_15_7', 'BFF_15_8','BFF_15_9', 'BFF_15_10', 'BFF_15_11', 'BFF_15_12',
+            'BFF_15_13', 'BFF_15_14', 'BFF_15_15'
+        ],
+        data=[[
+            slider0, slider1, slider2, slider3, slider4, slider5,
+            slider6, slider7, value8, slider9, slider10, slider11,
+            slider12, slider13, slider14
+        ]]
     )
     
     knn = load('models/knn.joblib')
@@ -642,10 +711,11 @@ def update_chart(slider0, slider1, slider2, slider3, slider4, slider5,
     
     return figure
 
-@app.callback(
-        
-        # Output('personality-values', 'children'),
-        Output('personality-chart', 'figure'),
+@app.callback(    
+    [
+        Output('stress', 'figure'),
+        Output('loneliness', 'figure')
+    ],
     [
         Input('slider0', 'value'),
         Input('slider1', 'value'),
@@ -662,21 +732,90 @@ def update_chart(slider0, slider1, slider2, slider3, slider4, slider5,
         Input('slider12', 'value'),
         Input('slider13', 'value'),
         Input('slider14', 'value'),
-        Input('age', 'value'),
+        Input('Dem_age', 'value'),
         Input('Dem_gender', 'value'),
         Input('Dem_edu', 'value'),
         Input('Dem_edu_mom', 'value'),
         Input('Dem_employment', 'value'),
         Input('Dem_Expat', 'value'),
+        Input('Dem_maritalstatus', 'value'),
         Input('Dem_riskgroup', 'value'),
+        Input('Dem_isolation', 'value'),
     ]
 )
 
-def update_chart(slider0, slider1, slider2, slider3, slider4, slider5,
-   slider6, slider7, value8, slider9, slider10, slider11,
-   slider12, slider13, slider14, age, Dem_gender, Dem_edu_mom,
-   Dem_employment, Dem_Expat, Dem_riskgroup):
+def update_chart(
+    slider0, slider1, slider2, slider3, slider4, slider5,
+    slider6, slider7, value8, slider9, slider10, slider11,
+    slider12, slider13, slider14, Dem_age, Dem_gender, Dem_edu, Dem_edu_mom,
+    Dem_employment, Dem_Expat, Dem_maritalstatus, Dem_riskgroup, Dem_isolation
+    ):
+    
+    df_predict = pd.DataFrame(
+        columns=[
+            'BFF_15_1', 'BFF_15_2', 'BFF_15_3', 'BFF_15_4', 'BFF_15_5', 'BFF_15_6',
+            'BFF_15_7', 'BFF_15_8', 'BFF_15_9', 'BFF_15_10', 'BFF_15_11',
+            'BFF_15_12', 'BFF_15_13', 'BFF_15_14', 'BFF_15_15',
+            'Dem_age', 'Dem_gender', 'Dem_edu', 'Dem_edu_mom', 'Dem_employment',
+            'Dem_Expat', 'Dem_maritalstatus', 'Dem_riskgroup', 'Dem_isolation'
+        ],
+        data=[
+            [
+            slider0, slider1, slider2, slider3, slider4, slider5,
+            slider6, slider7, value8, slider9, slider10, slider11,
+            slider12, slider13, slider14,
+            Dem_age, Dem_gender, Dem_edu, Dem_edu_mom, Dem_employment, Dem_Expat,
+            Dem_maritalstatus, Dem_riskgroup, Dem_isolation
+            ]
+        ]
+    )
     
     model_stress = load('models/model_stress.joblib')
+    stress_y_pred_log = model_stress.predict(df_predict)
+    stress_y_pred = stress_y_pred_log[0]
     
-    # HERE!!
+    fig_stress = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value=stress_y_pred,
+        title={'text': "Stress Level"},
+        domain={'x': [0, 1], 'y': [0, 1]},
+        gauge={'axis': {'range': [None, 5]},
+            'bar': {'color': "rgba(255, 56, 116, 1)"}}
+    ))
+    fig_stress.update_layout(
+        margin=dict(
+            l=40,
+            r=40,
+            b=20,
+            t=0,
+            pad=0
+        ),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)' 
+    )
+    
+    model_loneliness = load('models/model_loneliness.joblib')
+    loneliness_y_pred_log = model_loneliness.predict(df_predict)
+    loneliness_y_pred = loneliness_y_pred_log[0]
+    
+    fig_loneliness = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value=loneliness_y_pred,
+        title={'text': "Loneliness Level"},
+        domain={'x': [0, 1], 'y': [0, 1]},
+        gauge={'axis': {'range': [None, 5]},
+            'bar': {'color': "#97D9F3"}}
+    ))
+    fig_loneliness.update_layout(
+        margin=dict(
+            l=40,
+            r=40,
+            b=20,
+            t=0,
+            pad=0
+        ),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)' 
+    )
+    
+    return fig_stress, fig_loneliness
