@@ -55,7 +55,7 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
   padding-right: 20px;
 }
 .chart-container {
-  flex: 1 0 850px;
+  flex: 0 0 850px;
   height: 100vh;
   position: sticky !important;
   top: 0 !important;

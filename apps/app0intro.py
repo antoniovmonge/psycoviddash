@@ -3,9 +3,6 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 import pandas as pd
-# from flask_caching import Cache
-
-# from data import get_cached_data
 
 from app import app
 
