@@ -60,7 +60,7 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
   height: 100vh;
   position: sticky !important;
   top: 0 !important;
-  background-color: silver;
+  background-color: white;
 }
 .column, .columns {
   width: 100%;
@@ -263,7 +263,7 @@ a:hover {
 }
 
 .rc-slider-rail{
-  background-color: #90DACC
+  background-color: #e2e2e2
 }
 
 

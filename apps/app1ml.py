@@ -64,7 +64,10 @@ bff15_labels = ['... is often concerned',
 
 layout = html.Div(
     
-    className='container',
+    style=dict(
+        paddingLeft=100,
+        paddingRight=100,
+    ),
     children=[
         html.Div(
             className='main-container',
@@ -87,7 +90,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 html.Div(id='slider-output-container-0')
                             ]
@@ -107,7 +110,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 html.Div(id='slider-output-container-1')
                             ]
@@ -127,7 +130,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 html.Div(id='slider-output-container-2')
                             ]
@@ -147,7 +150,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 html.Div(id='slider-output-container-3')
                             ]
@@ -167,7 +170,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 html.Div(id='slider-output-container-4')
                             ]
@@ -187,7 +190,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 html.Div(id='slider-output-container-5')
                             ]
@@ -207,7 +210,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 # html.Div(id='slider-output-container-6')
                             ]
@@ -227,7 +230,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 # html.Div(id='slider-output-container-7')
                             ]
@@ -247,7 +250,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 # html.Div(id='slider-output-container-8')
                             ]
@@ -267,7 +270,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 # html.Div(id='slider-output-container-9')
                             ]
@@ -287,7 +290,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 # html.Div(id='slider-output-container-10')
                             ]
@@ -307,7 +310,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 # html.Div(id='slider-output-container-11')
                             ]
@@ -327,7 +330,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 # html.Div(id='slider-output-container-12')
                             ]
@@ -347,7 +350,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 # html.Div(id='slider-output-container-13')
                             ]
@@ -367,7 +370,7 @@ layout = html.Div(
                                         5: '5',
                                         6: '6'
                                     },
-                                    value=3
+                                    value=1
                                 ),
                                 # html.Div(id='slider-output-container-14')
                             ]
@@ -564,8 +567,7 @@ layout = html.Div(
 # CHART SECTION
                 html.Div(
                     className='chart-container five columns',
-                    children=[
-                        html.H1('Chart Section'),
+                    children=[ # CHART SECTION
                         html.Div(
                             className='row',
                             children=[
@@ -579,7 +581,7 @@ layout = html.Div(
                                     ],
                                 ),
                                 html.Div(
-                                    className='five columns',
+                                    className='three columns',
                                     children=[
                                         dash_table.DataTable( # TABLE PERSONALITY VALUES
                                             id='table',
@@ -605,15 +607,21 @@ layout = html.Div(
                                                 'fontWeight': 'bold'
                                             },
                                         ),
-                                    ]
+                                    ],
+                                    style=dict(
+                                        paddingTop=120
+                                    )
                                 )
                             ]
                         ),
                         html.Div(
                             className='row',
+                            style=dict(
+                                marginTop=-100
+                            ),
                             children=[ 
                                 html.Div(
-                                    className='six columns',
+                                    className='five columns',
                                     children=[
                                         dcc.Graph( # STRESS INDICATOR
                                             id='stress',
@@ -622,7 +630,7 @@ layout = html.Div(
                                     ]
                                 ),
                                 html.Div(
-                                    className='six columns',
+                                    className='five columns',
                                     children=[
                                         dcc.Graph( # LONELINESS INDICATOR
                                             id='loneliness',
@@ -825,7 +833,7 @@ def update_chart(
         margin=dict(
             l=40,
             r=40,
-            b=20,
+            b=0,
             t=0,
             pad=0
         ),
@@ -849,7 +857,7 @@ def update_chart(
         margin=dict(
             l=40,
             r=40,
-            b=20,
+            b=0,
             t=0,
             pad=0
         ),
