@@ -63,7 +63,9 @@ fig2.update_layout(
             b=0,
             t=0,
             pad=4
-        )
+        ),
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)' 
 )
 
 # TABLE GENDER
@@ -107,25 +109,30 @@ layout = html.Div(
         paddingRight=100,
     ),
     children=[
-        dbc.Container(
-            [
-                html.Div(
-
-                    [
-                        dbc.Row(
-                            dbc.Col(
-                                html.Div(
-
-                                    dcc.Markdown('''
-                                                ### SURVEY - Characteristics of the respondants
-                                                ''', className='text-center'
-                                                )
-                                )
-                            )
-                        ), 
-                        # SECTION 1 (GENDER)
-                        html.Div(
+        html.Div(
+            children=[
+                html.Div( # TITLE TAB
+                    className='row',
+                    children=[
+                        dcc.Markdown('''
+                        ### SURVEY - Characteristics of the respondants
+                        ''',
+                        className='text-center'
+                        )
+                    ],
+                    style=dict(
+                        textAlign='center',
+                        marginTop=25
+                    )
+                ),
+                html.Div( # 1ST ROW
+                    className='row',
+                    children=[
+                        html.Div( # LEFT COLUMN
                             className='six columns',
+                            style=dict(
+                                paddingRight=100
+                            ),
                             children=[
                                 dbc.Row(
                                     dbc.Col(
@@ -135,26 +142,27 @@ layout = html.Div(
                                                     dcc.Markdown(
                                                         '''
                                                         ##### Gender of respondents percentage distribution
-                                                        ''', className='text-center'
+                                                        ''',
+                                                        # className='text-center'
                                                     )
                                                 ],
                                                 style={'marginTop': 50}
                                             ),
-                                    
                                         ],
                                         width=12
                                     )
                                 ),
                                 dbc.Row(
                                     [
-                                        # SECTION 1 (GENDER) CHART
+                                        # SECTION 1 CHART
                                         html.Div(
-                                            className='six columns',
+                                            className='five columns',
                                             children=[
                                                 html.Div(
                                                     style= dict(
                                                         marginTop=-100,
-                                                        marginBottom=-75
+                                                        marginBottom=-75,
+                                                        marginLeft=20,
                                                     ),
                                                     children=[
                                                         dcc.Graph(
@@ -166,7 +174,7 @@ layout = html.Div(
                                                 ),
                                             ],
                                         ),
-                                        # SECTION 1 (GENDER) TABLE
+                                        # TABLE (LEFT COLUMN)
                                         html.Div(
                                             className='four columns offset-by-one column',
                                             children=[
@@ -191,12 +199,9 @@ layout = html.Div(
                                                 ),
                                             ],
                                         ),
-                                        
-                                        
-                                        # dbc.Col(html.Div("One of three columns"), width=4)
                                     ]
                                 ),
-                                html.Div(
+                                html.Div( # TEXT (LEFT COLUMN)
                                     className='row',
                                     children=[
                                             dcc.Markdown(f'''
@@ -208,48 +213,42 @@ layout = html.Div(
                                 ),
                             ]
                         ),
-                        
-                        # SECTION 1 (GENDER) COLUMNS
-                        
-                        # SECTION 2 (EMPLOYMENT)
-                        # Title
-                        dbc.Row(             
-                            dbc.Col(
-                                [
-                                    html.Div(
-                                        [
+                        html.Div( # RIGHT COLUMN
+                            className='six columns',
+                            children=[
+                                html.Div( # Section Title
+                                    [
                                         dcc.Markdown(
                                             '''
                                             ##### Employment Status of respondents percentage distribution
-                                            ''', className='text-center'
+                                            ''',
+                                            # className='text-center'
                                             )
-                                        ], style={'marginTop': 50, 'marginBottom':50}
-                                    ),
-                                        
-                                ],
-                                width=12)
-                        ),
-                        # SECTION 2 (EMPLOYMENT) Chart, Table and Text (3 Columns)
-                        dbc.Row(
-                            [
-                                # COL LEFT (cHART)
-                                dbc.Col(
-                                    [
+                                    ],
+                                    style={'marginTop': 50, 'marginBottom':50}
+                                ),
+                                html.Div(
+                                    className='row',
+                                    children=[
                                         html.Div(
-                                            dcc.Graph(
-                                                id='pie-chart-2',
-                                                figure=fig2,
-                                                config={"displayModeBar": False},
-                                            )
+                                            className='four columns',
+                                            style= dict(
+                                                marginTop=-125,
+                                                marginBottom=-75
+                                            ),
+                                            children=[
+                                                html.Div(
+                                                    dcc.Graph(
+                                                        id='pie-chart-2',
+                                                        figure=fig2,
+                                                        config={"displayModeBar": False},
+                                                    )
+                                                ),
+                                            ]
                                         ),
-                                    ], 
-                                    width=4),
-                                # COL CENTER (TABLE)
-                                dbc.Col(
-                                    [
-
                                         html.Div(
-                                            [
+                                            className='four columns offset-by-one column',
+                                            children=[
                                                 dash_table.DataTable(
                                                     id='table-2',
                                                     columns=[
@@ -264,119 +263,106 @@ layout = html.Div(
                                                         'fontWeight': 'bold'
                                                     },
                                                 ),
-                                        # dcc.Markdown('''
-                                        # Resopondents were 72.08 % female, 26.89 % Male.
-                                        # The remaining respondents answered 'other' or did not provide an answer.
-                                        # ''', style={'marginTop': 150})
-                                        
-                                            ],
-                                            style={'marginTop': 125}
-                                        ),
-                                    ],
-                                    width={'size':3, 'offset':1}
-                                ),
-                                # COL RIGHT (TEXT)
-
-                                dbc.Col(
-                                    [
-                                        html.Div(
-                                            [
-                                                dcc.Markdown(
-                                                    f'''
-                                                    The majority of the respondents ({(float(df_employment.iloc[0]['%']) + float(df_employment.iloc[2]['%']) + 
-                                                    float(df_employment.iloc[3]['%'])) }%) 
-                                                    were in full-time, part-time or self-employed, ({(float(df_employment.iloc[4]['%']) + float(df_employment.iloc[5]['%']))}%) 
-                                                    were either unemployed or retired, {float(df_employment.iloc[1]['%'])}% were students.
-                                                    ''', style={'marginTop': 125}
-                                                )
                                             ]
-                                        )
-                                        
-                                    ], width={'size':3, 'offset':1}
-                                ),
-                            ]
-                        ),
-                        #######
-                        # AGE #
-                        #######
-
-                        # SECTION TITLE 3
-                        dbc.Row(
-                            dbc.Col(
-                                [
-                                    html.Div(
-                                        [
-                                            dcc.Markdown(
-                                                '''
-                                                ##### Age of respondents 
-                                                ''', className='text-center'
-                                                )
-                                        ], style={'marginTop': 200, 'marginBottom': 100}
-                                    ),
-                                    
-                                ], width=12
-                            )
-                        ),
-                        # CHART
-                        dbc.Row(
-                            [
-                                dbc.Col(
-                                    [
-                                        html.Div(
-                                            dcc.Graph(
-                                                id='age-chart',
-                                                figure=fig3,
-                                                config={"displayModeBar": False},
-                                            )
                                         ),
-                                    ], width=5,
-                                ),
-
-                                dbc.Col(
-                                    [
-                                        html.Div(
-                                            [
-                                                dash_table.DataTable(
-                                                id='table-3',
-                                                columns=[
-                                                    dict(id= 'Summary', name='Summary'),
-                                                    dict(id='Value', name='Value', type='numeric', format=Format(precision=2, scheme=Scheme.fixed, trim=Trim.yes))
-                                                ],
-                                                data=df_age_summary.to_dict('records'),
-                                                style_as_list_view=True,
-                                                style_cell={'padding': '5px'},
-                                                style_header={
-                                                    'backgroundColor': 'white',
-                                                    'fontWeight': 'bold'
-                                                }
-                                                )
-                                            ], style={'marginTop': 75, 'marginBottom': 200}
-                                        )    
                                     ]
                                 ),
-
-                                dbc.Col(
-                                    [
+                                
+                                html.Div(
+                                    dcc.Markdown(
+                                        f'''
+                                        The majority of the respondents ({(float(df_employment.iloc[0]['%']) + float(df_employment.iloc[2]['%']) + 
+                                        float(df_employment.iloc[3]['%'])) }%) 
+                                        were in full-time, part-time or self-employed, ({(float(df_employment.iloc[4]['%']) + float(df_employment.iloc[5]['%']))}%) 
+                                        were either unemployed or retired, {float(df_employment.iloc[1]['%'])}% were students.
+                                        ''',
+                                        # style={'marginTop': 125}
+                                    )
+                                )
+                            ]
+                        ),
+                    ]
+                ),
+                html.Div(
+                    className='row',
+                    children=[
+                        html.Div(
+                            className='twelve columns',
+                            children=[
+                                dcc.Markdown(
+                                        '''
+                                        ##### Age of respondents 
+                                        ''',
+                                        className='text-center',
+                                        style=dict(
+                                            marginTop=100
+                                        )
+                                ),
+                                html.Div(
+                                    className='row',
+                                    children=[
                                         html.Div(
-                                            [
+                                            className='five columns',
+                                            children=[
+                                                dcc.Graph(
+                                                    id='age-chart',
+                                                    figure=fig3,
+                                                    config={"displayModeBar": False},
+                                                )
+                                            ]
+                                        ),
+                                        html.Div(
+                                            className='two columns',
+                                            style=dict(
+                                                marginTop=100
+                                            ),
+                                            children=[
+                                                html.Div(
+                                                    [
+                                                        dash_table.DataTable(
+                                                        id='table-3',
+                                                        columns=[
+                                                            dict(id= 'Summary', name='Summary'),
+                                                            dict(id='Value', name='Value', type='numeric', format=Format(precision=2, scheme=Scheme.fixed, trim=Trim.yes))
+                                                        ],
+                                                        data=df_age_summary.to_dict('records'),
+                                                        style_as_list_view=True,
+                                                        style_cell={'padding': '5px'},
+                                                        style_header={
+                                                            'backgroundColor': 'white',
+                                                            'fontWeight': 'bold'
+                                                        }
+                                                        )
+                                                    ],
+                                                    # style={'marginTop': 75, 'marginBottom': 200}
+                                                )    
+                                            ]
+                                        ),
+                                        html.Div(
+                                            className='five columns',
+                                            children=[
                                                 dcc.Markdown(
                                                     f'''
                                                     The age of the respondents ranged from {df[['Dem_age']].min()[0]} to {df[['Dem_age']].max()[0]}, with a median age of {int(df[['Dem_age']].median()[0])}.
                                                     The age that appears more offen is {df['Dem_age'].mode()[0]}.
                                                     ''',
-                                                    style={'marginTop': 75}
+                                                    style={'marginTop': 150}
                                                 )
                                             ]
                                         )
-                                    ], width={'size':4, 'offset':1}
-                                )
+                                        
+                                    ]
+                                ),
                             ]
                         )
                     ]
-                )     
+                )
             ]
         )
     ]
 )
+
+    
+
     
 
