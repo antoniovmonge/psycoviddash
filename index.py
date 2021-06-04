@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output
 from app import app
 from app import server
 
-from apps import app0intro, app1ml, app2viz, app3analytics
+from apps import app0intro, app1ml, app2viz, app3analytics, app4compare
 
 def edu_func(X):
         X['Dem_edu'] = X['Dem_edu'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
@@ -57,7 +57,7 @@ app.layout = html.Div(
                             selected_className='custom-tab--selected'
                         ),
                         dcc.Tab(
-                            label='Machine Learning',
+                            label='Preidctions / Simulation',
                             value='tab-1',
                             className='custom-tab',
                             selected_className='custom-tab--selected'
@@ -71,6 +71,12 @@ app.layout = html.Div(
                         dcc.Tab(
                             label='Analytics',
                             value='tab-3',
+                            className='custom-tab',
+                            selected_className='custom-tab--selected'
+                        ),
+                        dcc.Tab(
+                            label='Compare Countries',
+                            value='tab-4',
                             className='custom-tab',
                             selected_className='custom-tab--selected'
                         ),
@@ -110,6 +116,8 @@ def render_content(tab):
         return app2viz.layout
     elif tab == 'tab-3':
         return app3analytics.layout
+    elif tab == 'tab-4':
+        return app4compare.layout
     else:
         return app2viz.layout # CHANGE WITH app0intro.layout !!
 

@@ -19,30 +19,31 @@ layout = html.Div([
     dbc.Container([
     dbc.Row([
         dbc.Col([html.H1('PSYCOVID - Data Science Project', className='text-center'), # bg-dark text-white
-                dcc.Markdown('''
-                             ##### Study based on on psychological impact and behavioural consequences of the COVID-19 outbreak
-                             ''')],
+                dcc.Markdown(
+                    '''
+                    ##### Study based on on psychological impact and behavioural consequences of the COVID-19 outbreak
+                    ''')],
                 width=12
                 )
     ]),
-    dbc.Row([
-        dbc.Col([
-            dcc.Dropdown(
-            id='dropdown-1', multi=False, value='NYC',
-            options=[
-                {'label': 'Intro - {}'.format(i), 'value': i} for i in ['NYC', 'MTL', 'LA']
-                ]
-            ),
-            dcc.Graph(id='line-fig', figure={})
-            ],
-                width={'size':6,'offset':0, 'order':1}),
-        dbc.Col([
-            dcc.Dropdown(id='dropdown-2', multi=False, options=[{'label': x, 'value': x}
-                                                                for x in sorted(df['Country'].unique())]),
-            dcc.Graph(id='line-fig2', figure={})
-            ],
-                width={'size':6, 'offset':0, 'order':2})
-        ]),
+    # dbc.Row([
+    #     dbc.Col([
+    #         dcc.Dropdown(
+    #         id='dropdown-1', multi=False, value='NYC',
+    #         options=[
+    #             {'label': 'Intro - {}'.format(i), 'value': i} for i in ['NYC', 'MTL', 'LA']
+    #             ]
+    #         ),
+    #         dcc.Graph(id='line-fig', figure={})
+    #         ],
+    #             width={'size':6,'offset':0, 'order':1}),
+    #     dbc.Col([
+    #         dcc.Dropdown(id='dropdown-2', multi=False, options=[{'label': x, 'value': x}
+    #                                                             for x in sorted(df['Country'].unique())]),
+    #         dcc.Graph(id='line-fig2', figure={})
+    #         ],
+    #             width={'size':6, 'offset':0, 'order':2})
+    #     ]),
     dbc.Row([
         dbc.Col([
             dcc.Markdown('''        

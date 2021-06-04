@@ -65,7 +65,7 @@ bff15_labels = ['... is often concerned',
 layout = html.Div(
     
     style=dict(
-        paddingLeft=100,
+        paddingLeft=50,
         paddingRight=100,
     ),
     children=[
@@ -73,11 +73,11 @@ layout = html.Div(
             className='main-container',
             children=[
                 html.Div(
-                    className='sidebar div-for-slider five columns',
+                    className='sidebar div-for-slider',
                     children=[ # SLIDERS AND DROPDOWNS
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[0]),
+                                html.H6(bff15_labels[0]),
                                 dcc.Slider(
                                     id='slider0',
                                     min=1,
@@ -92,12 +92,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                html.Div(id='slider-output-container-0')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(bff15_labels[1]),
+                                html.H6(bff15_labels[1]),
                                 dcc.Slider(
                                     id='slider1',
                                     min=1,
@@ -112,12 +111,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                html.Div(id='slider-output-container-1')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[2]),
+                                html.H6(children=bff15_labels[2]),
                                 dcc.Slider(
                                     id='slider2',
                                     min=1,
@@ -132,12 +130,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                html.Div(id='slider-output-container-2')
                             ]
                         ),
                         html.Div(
                             children=[
-                            html.H5(children=bff15_labels[3]),
+                            html.H6(children=bff15_labels[3]),
                                 dcc.Slider(
                                     id='slider3',
                                     min=1,
@@ -152,12 +149,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                html.Div(id='slider-output-container-3')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[4]),
+                                html.H6(children=bff15_labels[4]),
                                 dcc.Slider(
                                     id='slider4',
                                     min=1,
@@ -172,12 +168,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                html.Div(id='slider-output-container-4')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[5]),
+                                html.H6(children=bff15_labels[5]),
                                 dcc.Slider(
                                     id='slider5',
                                     min=1,
@@ -192,12 +187,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                html.Div(id='slider-output-container-5')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[6]),
+                                html.H6(children=bff15_labels[6]),
                                 dcc.Slider(
                                     id='slider6',
                                     min=1,
@@ -212,12 +206,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                # html.Div(id='slider-output-container-6')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[7]),
+                                html.H6(children=bff15_labels[7]),
                                 dcc.Slider(
                                     id='slider7',
                                     min=1,
@@ -232,12 +225,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                # html.Div(id='slider-output-container-7')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[8]),
+                                html.H6(children=bff15_labels[8]),
                                 dcc.Slider(
                                     id='slider8',
                                     min=1,
@@ -252,12 +244,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                # html.Div(id='slider-output-container-8')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[9]),
+                                html.H6(children=bff15_labels[9]),
                                 dcc.Slider(
                                     id='slider9',
                                     min=1,
@@ -272,12 +263,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                # html.Div(id='slider-output-container-9')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[10]),
+                                html.H6(children=bff15_labels[10]),
                                 dcc.Slider(
                                     id='slider10',
                                     min=1,
@@ -292,12 +282,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                # html.Div(id='slider-output-container-10')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[11]),
+                                html.H6(children=bff15_labels[11]),
                                 dcc.Slider(
                                     id='slider11',
                                     min=1,
@@ -312,12 +301,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                # html.Div(id='slider-output-container-11')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[12]),
+                                html.H6(children=bff15_labels[12]),
                                 dcc.Slider(
                                     id='slider12',
                                     min=1,
@@ -332,12 +320,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                # html.Div(id='slider-output-container-12')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[13]),
+                                html.H6(children=bff15_labels[13]),
                                 dcc.Slider(
                                     id='slider13',
                                     min=1,
@@ -352,12 +339,11 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                # html.Div(id='slider-output-container-13')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5(children=bff15_labels[14]),
+                                html.H6(children=bff15_labels[14]),
                                 dcc.Slider(
                                     id='slider14',
                                     min=1,
@@ -372,13 +358,12 @@ layout = html.Div(
                                     },
                                     value=1
                                 ),
-                                # html.Div(id='slider-output-container-14')
                             ]
                         ),
                         
                         html.Div(
                             children=[
-                                html.H5('Choose age:'),
+                                html.H6('Choose age:'),
                                 dcc.Dropdown(
                                     id='Dem_age',
                                     options=[
@@ -394,12 +379,11 @@ layout = html.Div(
                                         verticalAlign="middle"
                                     )
                                 )
-                                # html.Div(id='slider-output-container-1')
                             ]
                         ),
                         html.Div(
                             children=[
-                                html.H5("Pick a gender"),
+                                html.H6("Pick a gender"),
                                 dcc.Dropdown(
                                     id='Dem_gender',
                                     options=[
@@ -419,7 +403,7 @@ layout = html.Div(
                         ),
                         html.Div(
                             children=[
-                                html.H5("Pick your education"),
+                                html.H6("Pick your education"),
                                 dcc.Dropdown(
                                     id='Dem_edu',
                                     options=[
@@ -439,7 +423,7 @@ layout = html.Div(
                         ),
                         html.Div(
                             children=[
-                                html.H5("Pick your mother's education"),
+                                html.H6("Pick your mother's education"),
                                 dcc.Dropdown(
                                     id='Dem_edu_mom',
                                     options=[
@@ -459,7 +443,7 @@ layout = html.Div(
                         ),
                         html.Div(
                             children=[
-                                html.H5("Pick your employment status"),
+                                html.H6("Pick your employment status"),
                                 dcc.Dropdown(
                                     id='Dem_employment',
                                     options=[
@@ -479,7 +463,7 @@ layout = html.Div(
                         ),
                         html.Div(
                             children=[
-                                html.H5("Are you living abroad?"),
+                                html.H6("Are you living abroad?"),
                                 dcc.Dropdown(
                                     id='Dem_Expat',
                                     options=[
@@ -499,7 +483,7 @@ layout = html.Div(
                         ),
                         html.Div(
                             children=[
-                                html.H5("Choose your marital status"),
+                                html.H6("Choose your marital status"),
                                 dcc.Dropdown(
                                     id='Dem_maritalstatus',
                                     options=[
@@ -519,7 +503,7 @@ layout = html.Div(
                         ),
                         html.Div(
                             children=[
-                                html.H5("Are you in a risk group?"),
+                                html.H6("Are you in a risk group?"),
                                 dcc.Dropdown(
                                     id='Dem_riskgroup',
                                     options=[
@@ -539,7 +523,7 @@ layout = html.Div(
                         ),
                         html.Div(
                             children=[
-                                html.H5("Are you currently isolated?"),
+                                html.H6("Are you currently isolated?"),
                                 dcc.Dropdown(
                                     id='Dem_isolation',
                                     options=[
@@ -566,80 +550,86 @@ layout = html.Div(
 #--------------------------------------------------------
 # CHART SECTION
                 html.Div(
-                    className='chart-container five columns',
+                    className='chart-container',
                     children=[ # CHART SECTION
                         html.Div(
-                            className='row',
+                            # className='container',
                             children=[
                                 html.Div(
-                                    className='six columns',
+                                    className='row',
                                     children=[
-                                        dcc.Graph( # PERSONALITY RADAR CHART
-                                            id='personality-chart',
-                                            config={"displayModeBar": False},
+                                        html.Div(
+                                            className='six columns offset-by-three columns',
+                                            children=[
+                                                dcc.Graph( # PERSONALITY RADAR CHART
+                                                    id='personality-chart',
+                                                    config={"displayModeBar": False},
+                                                ),
+                                            ],
                                         ),
+                                        html.Div(
+                                            className='three columns',
+                                            children=[
+                                                dash_table.DataTable( # TABLE PERSONALITY VALUES
+                                                    id='table',
+                                                    columns=[
+                                                        dict(id='Trait', name='Trait'),
+                                                        dict(
+                                                            id='Score',
+                                                            name='Score',
+                                                            type='numeric',
+                                                            format=Format(
+                                                                precision=2,
+                                                                scheme=Scheme.fixed
+                                                                )
+                                                            )
+                                                    ],
+                                                    style_as_list_view=True,
+                                                    style_cell={
+                                                        'padding': '5px',
+                                                        # 'fontSize': 18,
+                                                        },
+                                                    style_header={
+                                                        'backgroundColor': 'white',
+                                                        'fontWeight': 'bold'
+                                                    },
+                                                ),
+                                            ],
+                                            style=dict(
+                                                paddingTop=120
+                                            )
+                                        )
                                     ],
                                 ),
                                 html.Div(
-                                    className='three columns',
-                                    children=[
-                                        dash_table.DataTable( # TABLE PERSONALITY VALUES
-                                            id='table',
-                                            columns=[
-                                                dict(id='Trait', name='Trait'),
-                                                dict(
-                                                    id='Score',
-                                                    name='Score',
-                                                    type='numeric',
-                                                    format=Format(
-                                                        precision=2,
-                                                        scheme=Scheme.fixed
-                                                        )
-                                                    )
-                                            ],
-                                            style_as_list_view=True,
-                                            style_cell={
-                                                'padding': '5px',
-                                                # 'fontSize': 18,
-                                                },
-                                            style_header={
-                                                'backgroundColor': 'white',
-                                                'fontWeight': 'bold'
-                                            },
-                                        ),
-                                    ],
+                                    className='row',
                                     style=dict(
-                                        paddingTop=120
-                                    )
+                                        marginTop=-100
+                                    ),
+                                    children=[ 
+                                        html.Div(
+                                            className='five columns offset-by-two columns',
+                                            children=[
+                                                dcc.Graph( # STRESS INDICATOR
+                                                    id='stress',
+                                                    config={"displayModeBar": False},
+                                                )
+                                            ]
+                                        ),
+                                        html.Div(
+                                            className='five columns',
+                                            children=[
+                                                dcc.Graph( # LONELINESS INDICATOR
+                                                    id='loneliness',
+                                                    config={"displayModeBar": False},
+                                                )
+                                            ]
+                                        )
+                                    ]
                                 )
                             ]
                         ),
-                        html.Div(
-                            className='row',
-                            style=dict(
-                                marginTop=-100
-                            ),
-                            children=[ 
-                                html.Div(
-                                    className='five columns',
-                                    children=[
-                                        dcc.Graph( # STRESS INDICATOR
-                                            id='stress',
-                                            config={"displayModeBar": False},
-                                        )
-                                    ]
-                                ),
-                                html.Div(
-                                    className='five columns',
-                                    children=[
-                                        dcc.Graph( # LONELINESS INDICATOR
-                                            id='loneliness',
-                                            config={"displayModeBar": False},
-                                        )
-                                    ]
-                                )
-                            ]
-                        )
+                        
                     ]
                 )
             ]

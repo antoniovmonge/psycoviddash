@@ -103,10 +103,11 @@ df_age_summary = pd.DataFrame(data=d)
 
 # LAYOUT
 layout = html.Div(
-    # className='main-container',
+    # className='container',
     style=dict(
-        paddingLeft=100,
-        paddingRight=100,
+        marginLeft=200,
+        marginRight=200,
+        paddingBottom= 200,
     ),
     children=[
         html.Div(

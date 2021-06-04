@@ -37,9 +37,9 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
 }
 .main-container {
   display: flex;
-  max-width: 1080px;
+  /* max-width: 1080px; */
   position: relative;
-  padding: 0 0px;
+  padding: 0 100px;
 }
 .container {
   position: center;
@@ -50,13 +50,12 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
 }
 .sidebar {
   /* height: 100vh; */
-  flex:0 0 500px;
+  flex: 1 0 500px;
   padding-top: 60px;
   padding-right: 20px;
 }
 .chart-container {
-  flex-grow: 1;
-  flex: 0 0 850px;
+  flex: 1 0 850px;
   height: 100vh;
   position: sticky !important;
   top: 0 !important;
@@ -73,12 +72,18 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
   .container {
       width: 90%;
       padding: 0;
- }
+  }
+  .main-container {
+        width: 90%
+  }
 }
 /* For devices larger than 550px */
  @media (min-width: 550px) {
   .container {
       width: 90%;
+ }
+  .main-container {
+      width: 90%
  }
   .column, .columns {
       margin-left: 4%;
@@ -235,7 +240,8 @@ h6 {
   line-height: 1.6;
   letter-spacing: 0;
   margin-bottom: 0.75rem;
-  margin-top: 0.75rem;
+  margin-top: 40px;
+  padding-bottom: 20px;
 }
 p {
   margin-top: 0;
@@ -438,18 +444,53 @@ hr {
 /* Note: The best way to structure the use of media queries is to create the queries near the relevant code. For example, if you wanted to change the styles for buttons on small devices, paste the mobile query code up in the buttons section and style it there. */
 /* Larger than mobile */
 @media (min-width: 400px) {
+  .container {
+      width: 90%;
+      padding: 0;
+  }
+  .main-container {
+        width: 90%
+  }
 }
 /* Larger than phablet (also point when grid becomes active) */
 @media (min-width: 550px) {
+  .container {
+      width: 90%;
+      padding: 0;
+  }
+  .main-container {
+        width: 90%
+  }
 }
 /* Larger than tablet */
 @media (min-width: 750px) {
+  .container {
+      width: 90%;
+      padding: 0;
+  }
+  .main-container {
+        width: 90%
+  }
 }
 /* Larger than desktop */
 @media (min-width: 1000px) {
+  .container {
+      width: 90%;
+      padding: 0;
+  }
+  .main-container {
+        width: 90%
+  }
 }
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {
+  .container {
+      width: 90%;
+      padding: 0;
+  }
+  .main-container {
+        width: 90%
+  }
 }
 /* Custom App CSS Below --------------------------------- */
 /* Main Layout ––––––––––––––––––––––––––––––––––––––––––––––––––*/
@@ -503,7 +544,7 @@ a {
 }
 /*Color Header-------------------------------------------------*/
 .header {
-    background-color: #2893ff;
+    background-color: #4fa7ff;
     height: 120px;
     padding: 16px 0 0 100px;
     /* text-shadow: 2px 2px 3px rgba(0,0,0,0.7) ; */
