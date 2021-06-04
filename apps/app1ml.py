@@ -4,6 +4,8 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 import base64
+import dash_table
+from dash_table.Format import Format, Scheme, Trim
 
 import numpy as np
 import pandas as pd
@@ -11,7 +13,6 @@ import joblib
 import plotly.graph_objects as go
 import plotly.express as px
 from joblib import load
-import mord
 
 from app import app
 
@@ -65,13 +66,12 @@ layout = html.Div(
     
     className='container',
     children=[
-
         html.Div(
             className='main-container',
             children=[
                 html.Div(
                     className='sidebar div-for-slider five columns',
-                    children=[
+                    children=[ # SLIDERS AND DROPDOWNS
                         html.Div(
                             children=[
                                 html.H5(children=bff15_labels[0]),
@@ -561,23 +561,61 @@ layout = html.Div(
                     ]
                 ),
 #--------------------------------------------------------
-# PERSONALITY CHART
+# CHART SECTION
                 html.Div(
                     className='chart-container five columns',
                     children=[
                         html.H1('Chart Section'),
-                        html.H3(id='personality-values'),
-                        dcc.Graph(
-                            id='personality-chart',
-                            config={"displayModeBar": False},
-                        ),
                         html.Div(
                             className='row',
                             children=[
                                 html.Div(
                                     className='six columns',
                                     children=[
-                                        dcc.Graph(
+                                        dcc.Graph( # PERSONALITY RADAR CHART
+                                            id='personality-chart',
+                                            config={"displayModeBar": False},
+                                        ),
+                                    ],
+                                ),
+                                html.Div(
+                                    className='five columns',
+                                    children=[
+                                        dash_table.DataTable( # TABLE PERSONALITY VALUES
+                                            id='table',
+                                            columns=[
+                                                dict(id='Trait', name='Trait'),
+                                                dict(
+                                                    id='Score',
+                                                    name='Score',
+                                                    type='numeric',
+                                                    format=Format(
+                                                        precision=2,
+                                                        scheme=Scheme.fixed
+                                                        )
+                                                    )
+                                            ],
+                                            style_as_list_view=True,
+                                            style_cell={
+                                                'padding': '5px',
+                                                # 'fontSize': 18,
+                                                },
+                                            style_header={
+                                                'backgroundColor': 'white',
+                                                'fontWeight': 'bold'
+                                            },
+                                        ),
+                                    ]
+                                )
+                            ]
+                        ),
+                        html.Div(
+                            className='row',
+                            children=[ 
+                                html.Div(
+                                    className='six columns',
+                                    children=[
+                                        dcc.Graph( # STRESS INDICATOR
                                             id='stress',
                                             config={"displayModeBar": False},
                                         )
@@ -586,7 +624,7 @@ layout = html.Div(
                                 html.Div(
                                     className='six columns',
                                     children=[
-                                        dcc.Graph(
+                                        dcc.Graph( # LONELINESS INDICATOR
                                             id='loneliness',
                                             config={"displayModeBar": False},
                                         )
@@ -603,8 +641,10 @@ layout = html.Div(
 
 @app.callback(
         
-        # Output('personality-values', 'children'),
+    [
         Output('personality-chart', 'figure'),
+        Output('table', 'data')
+    ],
     [
         Input('slider0', 'value'),
         Input('slider1', 'value'),
@@ -625,15 +665,11 @@ layout = html.Div(
     ]
 )
 
-# def update_output(
-#     value0, value1, value2, value3, value4, value5,
-#     value6, value7, value8, value9, value10, value11,
-#     value12,value13,value14):
-#     return f'{value0, value1, value2, value3, value4, value5, value6, value7, value8, value9, value10, value11, value12, value13, value14}'
 
-def update_chart(slider0, slider1, slider2, slider3, slider4, slider5,
-       slider6, slider7, value8, slider9, slider10, slider11,
-       slider12, slider13, slider14):
+def update_chart(
+    slider0, slider1, slider2, slider3, slider4, slider5,
+    slider6, slider7, value8, slider9, slider10, slider11,
+    slider12, slider13, slider14):
     
     df_predict = pd.DataFrame(
         columns=[
@@ -657,8 +693,8 @@ def update_chart(slider0, slider1, slider2, slider3, slider4, slider5,
     prediction = pd.DataFrame(y_pred_log)
     prediction.columns = ['neu', 'ext', 'ope', 'agr', 'con']
     
-    categories = ['Neuroticism', 'Openness', 'Extraversion',
-                'Agreeableness', 'Conscientiousness','Neuroticism']
+    categories = ['NEU', 'OPE', 'EXT',
+                'AGR', 'CONS','NEU']
     
     values = prediction.values.tolist()[0]
     values += values[:1]
@@ -688,7 +724,6 @@ def update_chart(slider0, slider1, slider2, slider3, slider4, slider5,
             xanchor="center",
             x=0.5,
             font=dict(
-                # family="Gravitas One",
                 size=18,
                 # color="RebeccaPurple"
             )
@@ -699,8 +734,8 @@ def update_chart(slider0, slider1, slider2, slider3, slider4, slider5,
             # color="RebeccaPurple"
         ),
         margin=dict(    
-                l=20,
-                r=20,
+                l=70,
+                r=80,
                 b=20,
                 t=20,
                 pad=0
@@ -709,7 +744,11 @@ def update_chart(slider0, slider1, slider2, slider3, slider4, slider5,
         plot_bgcolor='rgba(0,0,0,0)'  
     )
     
-    return figure
+    prediction_table = prediction.T.reset_index()
+    prediction_table.columns=['Trait','Score']
+    prediction_table.Trait = ['Neuroticism','Openness', 'Extraversion', 'Agreeableness', 'Conscientiousness']
+    
+    return figure, prediction_table.to_dict('records')
 
 @app.callback(    
     [
