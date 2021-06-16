@@ -31,7 +31,6 @@ layout = html.Div([
                         Interactive Data Analysis of Personality and emotional repercusion 
                         of COVID-19 by countries
                         
-
                         Analisys of demographic background variables, perceived stress 
                         (PSS-10), availability of social provisions (SPS-10), trust in 
                         various authorities, trust in governmental measures to contain the 
@@ -55,17 +54,17 @@ layout = html.Div([
                         ##### Data Source
                         
                         Data Collection Technology: **Survey** [COVIDiSTRESS Global Survey](https://osf.io/z39us/)
+                        
+                        Period of time Data Collection: between 30th March and 30th May 2020
                             
-                        > Period of time Data Collection: between 30th March and 30th May 2020
+                        N = 173,426
                             
-                        > N = 173,426
-                            
-                        > Factor Types: 
+                        **Factor Types:**
                         - geographic location language 
                         - age of participant
                         - gouvernamental responses to the Coronavirus pandemic
-                        
-                        > Measurements: psychological measurement
+
+                        **Measurements:** psychological measurement
                         - anxiety-related behavior trait
                         - Stress
                         - response to Isolation

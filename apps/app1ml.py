@@ -432,7 +432,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
+                                                # display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         )
@@ -455,7 +455,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
+                                                # display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -478,7 +478,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
+                                                # display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -501,7 +501,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
+                                                # display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -524,7 +524,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
+                                                # display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -547,7 +547,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
+                                                # display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -570,7 +570,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
+                                                # display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -593,15 +593,15 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
+                                                # display='inline-block',
                                                 verticalAlign="middle",
                                                 # fontSize=12,
                                                 # # marginLeft= '5px',
                                                 # # paddingLeft= '100px',
                                                 # textAlign= 'center',
-                                                # # width='90%',
+                                                # width='90%',
                                                 # heigh=10,
-                                                # # display='right',
+                                                # display='right',
                                                 # # verticalAlign="right",
                                             )
                                         ),
@@ -624,7 +624,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
+                                                # display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -650,7 +650,7 @@ layout = html.Div(
                                     className='row',
                                     children=[
                                         html.Div(
-                                            className='six columns offset-by-three columns',
+                                            className='six columns offset-by-two columns',
                                             children=[
                                                 dcc.Graph( # PERSONALITY RADAR CHART
                                                     id='personality-chart',
