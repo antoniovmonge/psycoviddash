@@ -33,6 +33,9 @@ fig1.update_traces(
     marker=dict(colors=color_palette_list)
 )
 fig1.update_layout(
+    # autosize=False,
+    # width=300,
+    # height=200,
     showlegend=False,
     margin=dict(
             l=0,
@@ -89,12 +92,24 @@ df_employment.columns = ['Empl. Status', '%']
 # df_employment['%'] = (df_employment['%'] / df_employment['%'].sum() * 100)
 
 # AGE CHART
-# counts, bins = np.histogram(df.Dem_age, bins=range(18, 115))
-# bins = (0.5 * bins[:-1] + bins[1:])
 data_age = df.Dem_age.value_counts()
 fig3 = px.bar(data_age, labels={'index': 'Age', 'value': 'Count'}, template="simple_white")
 fig3.update_traces(marker=dict(color=color_palette_list[1]))
-fig3.update_layout(height=350, showlegend=False)
+fig3.update_layout(
+    # autosize=False,
+    # width=600,
+    height=250,
+    showlegend=False,
+    margin=dict(
+        l=40,
+        r=40,
+        b=0,
+        t=0,
+        pad=0
+    ),
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)' 
+    )
 fig3.update_yaxes(showgrid=True)
 
 # AGE TABLE
@@ -113,17 +128,18 @@ layout = html.Div(
         html.Div(
             children=[
                 html.Div( # TITLE TAB
-                    className='row',
+                    className='twelve comlumns',
                     children=[
                         dcc.Markdown('''
-                        ### SURVEY - Characteristics of the respondants
+                        #### SURVEY - Characteristics of the respondants
                         ''',
                         className='text-center'
                         )
                     ],
                     style=dict(
-                        textAlign='center',
-                        marginTop=25
+                        # textAlign='center',
+                        marginTop=35,
+                        marginBottom=35
                     )
                 ),
                 html.Div( # 1ST ROW
@@ -142,12 +158,17 @@ layout = html.Div(
                                                 [
                                                     dcc.Markdown(
                                                         '''
-                                                        ##### Gender of respondents percentage distribution
+                                                        ###### Gender of respondents percentage distribution
                                                         ''',
                                                         # className='text-center'
+                                                    ),
+                                                    dcc.Markdown(f'''
+                                                    Resopondents were {72.08} % female, 26.89 % Male. The remaining respondents answered 'other' or did not provide an answer.
+                                                    ''',
+                                                    # style={'marginTop': 75}
                                                     )
                                                 ],
-                                                style={'marginTop': 50}
+                                                # style={'marginTop': 30}
                                             ),
                                         ],
                                         width=12
@@ -157,7 +178,7 @@ layout = html.Div(
                                     [
                                         # SECTION 1 CHART
                                         html.Div(
-                                            className='five columns',
+                                            className='six columns',
                                             children=[
                                                 html.Div(
                                                     style= dict(
@@ -202,16 +223,6 @@ layout = html.Div(
                                         ),
                                     ]
                                 ),
-                                html.Div( # TEXT (LEFT COLUMN)
-                                    className='row',
-                                    children=[
-                                            dcc.Markdown(f'''
-                                            Resopondents were {72.08} % female, 26.89 % Male. The remaining respondents answered 'other' or did not provide an answer.
-                                            ''',
-                                            # style={'marginTop': 75}
-                                            )
-                                    ]
-                                ),
                             ]
                         ),
                         html.Div( # RIGHT COLUMN
@@ -221,18 +232,30 @@ layout = html.Div(
                                     [
                                         dcc.Markdown(
                                             '''
-                                            ##### Employment Status of respondents percentage distribution
+                                            ###### Employment Status of respondents percentage distribution
                                             ''',
                                             # className='text-center'
-                                            )
+                                            ),
+                                        dcc.Markdown(
+                                            f'''
+                                            The majority of the respondents ({(float(df_employment.iloc[0]['%']) + float(df_employment.iloc[2]['%']) + 
+                                            float(df_employment.iloc[3]['%'])) }%) 
+                                            were in full-time, part-time or self-employed, ({(float(df_employment.iloc[4]['%']) + float(df_employment.iloc[5]['%']))}%) 
+                                            were either unemployed or retired, {float(df_employment.iloc[1]['%'])}% were students.
+                                            ''',
+                                            # style={'marginTop': 125}
+                                        )
                                     ],
-                                    style={'marginTop': 50, 'marginBottom':50}
+                                    style={
+                                        # 'marginTop': 50,
+                                        'marginBottom':50
+                                        }
                                 ),
                                 html.Div(
                                     className='row',
                                     children=[
                                         html.Div(
-                                            className='four columns',
+                                            className='five columns',
                                             style= dict(
                                                 marginTop=-125,
                                                 marginBottom=-75
@@ -248,7 +271,7 @@ layout = html.Div(
                                             ]
                                         ),
                                         html.Div(
-                                            className='four columns offset-by-one column',
+                                            className='four columns offset-by-two columns',
                                             children=[
                                                 dash_table.DataTable(
                                                     id='table-2',
@@ -270,15 +293,7 @@ layout = html.Div(
                                 ),
                                 
                                 html.Div(
-                                    dcc.Markdown(
-                                        f'''
-                                        The majority of the respondents ({(float(df_employment.iloc[0]['%']) + float(df_employment.iloc[2]['%']) + 
-                                        float(df_employment.iloc[3]['%'])) }%) 
-                                        were in full-time, part-time or self-employed, ({(float(df_employment.iloc[4]['%']) + float(df_employment.iloc[5]['%']))}%) 
-                                        were either unemployed or retired, {float(df_employment.iloc[1]['%'])}% were students.
-                                        ''',
-                                        # style={'marginTop': 125}
-                                    )
+                                    
                                 )
                             ]
                         ),
@@ -292,12 +307,23 @@ layout = html.Div(
                             children=[
                                 dcc.Markdown(
                                         '''
-                                        ##### Age of respondents 
+                                        ###### Age of respondents 
                                         ''',
-                                        className='text-center',
+                                        # className='text-center',
                                         style=dict(
-                                            marginTop=100
+                                            marginTop=40
                                         )
+                                        
+                                ),
+                                dcc.Markdown(
+                                    f'''
+                                    The age of the respondents ranged from {df[['Dem_age']].min()[0]} to {df[['Dem_age']].max()[0]}, with a median age of {int(df[['Dem_age']].median()[0])}.
+                                    The age that appears more offen is {df['Dem_age'].mode()[0]}.
+                                    ''',
+                                    style={
+                                        'marginTop': 0,
+                                        'marginBottom': 30
+                                    }
                                 ),
                                 html.Div(
                                     className='row',
@@ -309,13 +335,14 @@ layout = html.Div(
                                                     id='age-chart',
                                                     figure=fig3,
                                                     config={"displayModeBar": False},
-                                                )
+                                                ),
+                                                
                                             ]
                                         ),
                                         html.Div(
                                             className='two columns',
                                             style=dict(
-                                                marginTop=100
+                                                marginTop=30
                                             ),
                                             children=[
                                                 html.Div(
@@ -342,13 +369,7 @@ layout = html.Div(
                                         html.Div(
                                             className='five columns',
                                             children=[
-                                                dcc.Markdown(
-                                                    f'''
-                                                    The age of the respondents ranged from {df[['Dem_age']].min()[0]} to {df[['Dem_age']].max()[0]}, with a median age of {int(df[['Dem_age']].median()[0])}.
-                                                    The age that appears more offen is {df['Dem_age'].mode()[0]}.
-                                                    ''',
-                                                    style={'marginTop': 150}
-                                                )
+                                                
                                             ]
                                         )
                                         
