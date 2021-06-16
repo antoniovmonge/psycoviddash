@@ -19,6 +19,7 @@ from app import app
 # url='s3://psycovid/cleaned_data_040321.csv'
 # df = pd.read_csv(url ,index_col=0)
 df = pd.read_csv('raw_data/cleaned_data_040321.csv')
+df = df[df['Dem_isolation'] != '1']
 
 def edu_func(X):
         X['Dem_edu'] = X['Dem_edu'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
@@ -65,485 +66,575 @@ bff15_labels = ['... is often concerned',
 layout = html.Div(
     
     style=dict(
-        paddingLeft=50,
-        paddingRight=100,
+        # paddingLeft=50,
+        # paddingRight=100,
+        width='90%',
     ),
     children=[
         html.Div(
             className='main-container',
             children=[
                 html.Div(
-                    className='sidebar div-for-slider',
-                    children=[ # SLIDERS AND DROPDOWNS
+                    className='sidebar',
+                    children=[
                         html.Div(
-                            children=[
-                                html.H6(bff15_labels[0]),
-                                dcc.Slider(
-                                    id='slider0',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
+                            className='div-for-slider',
+                            children=[ # SLIDERS
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(bff15_labels[0]),
+                                        dcc.Slider(
+                                            id='slider0',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
                                 ),
-                            ]
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(bff15_labels[1]),
+                                        dcc.Slider(
+                                            id='slider1',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(children=bff15_labels[2]),
+                                        dcc.Slider(
+                                            id='slider2',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                    html.P(children=bff15_labels[3]),
+                                        dcc.Slider(
+                                            id='slider3',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(children=bff15_labels[4]),
+                                        dcc.Slider(
+                                            id='slider4',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(children=bff15_labels[5]),
+                                        dcc.Slider(
+                                            id='slider5',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(children=bff15_labels[6]),
+                                        dcc.Slider(
+                                            id='slider6',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(children=bff15_labels[7]),
+                                        dcc.Slider(
+                                            id='slider7',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(children=bff15_labels[8]),
+                                        dcc.Slider(
+                                            id='slider8',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(children=bff15_labels[9]),
+                                        dcc.Slider(
+                                            id='slider9',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(children=bff15_labels[10]),
+                                        dcc.Slider(
+                                            id='slider10',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(children=bff15_labels[11]),
+                                        dcc.Slider(
+                                            id='slider11',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(children=bff15_labels[12]),
+                                        dcc.Slider(
+                                            id='slider12',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(children=bff15_labels[13]),
+                                        dcc.Slider(
+                                            id='slider13',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P(children=bff15_labels[14]),
+                                        dcc.Slider(
+                                            id='slider14',
+                                            min=1,
+                                            max=6,
+                                            marks={
+                                                1: '1',
+                                                2: '2',
+                                                3: '3',
+                                                4: '4',
+                                                5: '5',
+                                                6: '6'
+                                            },
+                                            value=1
+                                        ),
+                                    ]
+                                ),
+                        ]
                         ),
                         html.Div(
+                            className='div-for-dropdown',
                             children=[
-                                html.H6(bff15_labels[1]),
-                                dcc.Slider(
-                                    id='slider1',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P('Choose age:'),
+                                        dcc.Dropdown(
+                                            id='Dem_age',
+                                            options=[
+                                                {'label': Dem_age, 'value': Dem_age}
+                                                for Dem_age in range(18,110)
+                                            ],
+                                            clearable=False,
+                                            value=40,
+                                            style=dict(
+                                                # paddingRight= 150,
+                                                # width='75%',
+                                                display='inline-block',
+                                                verticalAlign="middle"
+                                            )
+                                        )
+                                    ]
                                 ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6(children=bff15_labels[2]),
-                                dcc.Slider(
-                                    id='slider2',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P("Pick a gender"),
+                                        dcc.Dropdown(
+                                            id='Dem_gender',
+                                            options=[
+                                                {'label': Dem_gender, 'value': Dem_gender}
+                                                for Dem_gender in np.sort(df.Dem_gender.unique())
+                                            ],
+                                            value='Other/would rather not say',
+                                            clearable=False,
+                                            style=dict(
+                                                # paddingRight= 150,
+                                                # width='75%',
+                                                display='inline-block',
+                                                verticalAlign="middle"
+                                            )
+                                        ),
+                                    ]
                                 ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                            html.H6(children=bff15_labels[3]),
-                                dcc.Slider(
-                                    id='slider3',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P("Pick your education"),
+                                        dcc.Dropdown(
+                                            id='Dem_edu',
+                                            options=[
+                                                {'label': Dem_edu, 'value': Dem_edu}
+                                                for Dem_edu in np.sort(df.Dem_edu.unique())
+                                            ],
+                                            value='None',
+                                            clearable=False,
+                                            style=dict(
+                                                # paddingRight= 150,
+                                                # width='75%',
+                                                display='inline-block',
+                                                verticalAlign="middle"
+                                            )
+                                        ),
+                                    ]
                                 ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6(children=bff15_labels[4]),
-                                dcc.Slider(
-                                    id='slider4',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P("Pick your mother's education"),
+                                        dcc.Dropdown(
+                                            id='Dem_edu_mom',
+                                            options=[
+                                                {'label': Dem_edu_mom, 'value': Dem_edu_mom}
+                                                for Dem_edu_mom in np.sort(df.Dem_edu_mom.unique())
+                                            ],
+                                            value='None',
+                                            clearable=False,
+                                            style=dict(
+                                                # paddingRight= 150,
+                                                # width='75%',
+                                                display='inline-block',
+                                                verticalAlign="middle"
+                                            )
+                                        ),
+                                    ]
                                 ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6(children=bff15_labels[5]),
-                                dcc.Slider(
-                                    id='slider5',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P("Pick your employment status"),
+                                        dcc.Dropdown(
+                                            id='Dem_employment',
+                                            options=[
+                                                {'label': Dem_employment, 'value': Dem_employment}
+                                                for Dem_employment in np.sort(df.Dem_employment.unique())
+                                            ],
+                                            value='Full time employed',
+                                            clearable=False,
+                                            style=dict(
+                                                # paddingRight= 150,
+                                                # width='75%',
+                                                display='inline-block',
+                                                verticalAlign="middle"
+                                            )
+                                        ),
+                                    ]
                                 ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6(children=bff15_labels[6]),
-                                dcc.Slider(
-                                    id='slider6',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P("Are you living abroad?"),
+                                        dcc.Dropdown(
+                                            id='Dem_Expat',
+                                            options=[
+                                                {'label': Dem_Expat, 'value': Dem_Expat}
+                                                for Dem_Expat in np.sort(df.Dem_Expat.unique())
+                                            ],
+                                            value='no',
+                                            clearable=False,
+                                            style=dict(
+                                                # paddingRight= 150,
+                                                # width='75%',
+                                                display='inline-block',
+                                                verticalAlign="middle"
+                                            )
+                                        ),
+                                    ]
                                 ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6(children=bff15_labels[7]),
-                                dcc.Slider(
-                                    id='slider7',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P("Choose your marital status"),
+                                        dcc.Dropdown(
+                                            id='Dem_maritalstatus',
+                                            options=[
+                                                {'label': Dem_maritalstatus, 'value': Dem_maritalstatus}
+                                                for Dem_maritalstatus in np.sort(df.Dem_maritalstatus.unique())
+                                            ],
+                                            value='Single',
+                                            clearable=False,
+                                            style=dict(
+                                                # paddingRight= 150,
+                                                # width='75%',
+                                                display='inline-block',
+                                                verticalAlign="middle"
+                                            )
+                                        ),
+                                    ]
                                 ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6(children=bff15_labels[8]),
-                                dcc.Slider(
-                                    id='slider8',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=20
+                                    ),
+                                    children=[
+                                        html.P("Are you in a risk group?"),
+                                        dcc.Dropdown(
+                                            id='Dem_riskgroup',
+                                            options=[
+                                                {'label': Dem_riskgroup, 'value': Dem_riskgroup}
+                                                for Dem_riskgroup in np.sort(df.Dem_riskgroup.unique())
+                                            ],
+                                            value='No',
+                                            clearable=False,
+                                            style=dict(
+                                                # paddingRight= 150,
+                                                # width='75%',
+                                                display='inline-block',
+                                                verticalAlign="middle",
+                                                # fontSize=12,
+                                                # # marginLeft= '5px',
+                                                # # paddingLeft= '100px',
+                                                # textAlign= 'center',
+                                                # # width='90%',
+                                                # heigh=10,
+                                                # # display='right',
+                                                # # verticalAlign="right",
+                                            )
+                                        ),
+                                    ]
                                 ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6(children=bff15_labels[9]),
-                                dcc.Slider(
-                                    id='slider9',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
-                                ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6(children=bff15_labels[10]),
-                                dcc.Slider(
-                                    id='slider10',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
-                                ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6(children=bff15_labels[11]),
-                                dcc.Slider(
-                                    id='slider11',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
-                                ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6(children=bff15_labels[12]),
-                                dcc.Slider(
-                                    id='slider12',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
-                                ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6(children=bff15_labels[13]),
-                                dcc.Slider(
-                                    id='slider13',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
-                                ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6(children=bff15_labels[14]),
-                                dcc.Slider(
-                                    id='slider14',
-                                    min=1,
-                                    max=6,
-                                    marks={
-                                        1: '1',
-                                        2: '2',
-                                        3: '3',
-                                        4: '4',
-                                        5: '5',
-                                        6: '6'
-                                    },
-                                    value=1
-                                ),
-                            ]
-                        ),
+                                html.Div(
+                                    style=dict(
+                                        paddingBottom=300,
+                                    ),
+                                    children=[
+                                        html.P("Are you currently isolated?"),
+                                        dcc.Dropdown(
+                                            id='Dem_isolation',
+                                            options=[
+                                                {'label': Dem_isolation, 'value': Dem_isolation}
+                                                for Dem_isolation in np.sort(df.Dem_isolation.unique())
+                                            ],
+                                            value='Isolated',
+                                            clearable=False,
+                                            style=dict(
+                                                # paddingRight= 150,
+                                                # width='75%',
+                                                display='inline-block',
+                                                verticalAlign="middle"
+                                            )
+                                        ),
+                                    ],
                         
-                        html.Div(
-                            children=[
-                                html.H6('Choose age:'),
-                                dcc.Dropdown(
-                                    id='Dem_age',
-                                    options=[
-                                        {'label': Dem_age, 'value': Dem_age}
-                                        for Dem_age in range(18,110)
-                                    ],
-                                    clearable=False,
-                                    value=40,
-                                    style=dict(
-                                        # paddingRight= 150,
-                                        # width='75%',
-                                        display='inline-block',
-                                        verticalAlign="middle"
-                                    )
-                                )
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6("Pick a gender"),
-                                dcc.Dropdown(
-                                    id='Dem_gender',
-                                    options=[
-                                        {'label': Dem_gender, 'value': Dem_gender}
-                                        for Dem_gender in np.sort(df.Dem_gender.unique())
-                                    ],
-                                    value='Other/would rather not say',
-                                    clearable=False,
-                                    style=dict(
-                                        # paddingRight= 150,
-                                        # width='75%',
-                                        display='inline-block',
-                                        verticalAlign="middle"
-                                    )
                                 ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6("Pick your education"),
-                                dcc.Dropdown(
-                                    id='Dem_edu',
-                                    options=[
-                                        {'label': Dem_edu, 'value': Dem_edu}
-                                        for Dem_edu in np.sort(df.Dem_edu.unique())
-                                    ],
-                                    value='None',
-                                    clearable=False,
-                                    style=dict(
-                                        # paddingRight= 150,
-                                        # width='75%',
-                                        display='inline-block',
-                                        verticalAlign="middle"
-                                    )
-                                ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6("Pick your mother's education"),
-                                dcc.Dropdown(
-                                    id='Dem_edu_mom',
-                                    options=[
-                                        {'label': Dem_edu_mom, 'value': Dem_edu_mom}
-                                        for Dem_edu_mom in np.sort(df.Dem_edu_mom.unique())
-                                    ],
-                                    value='None',
-                                    clearable=False,
-                                    style=dict(
-                                        # paddingRight= 150,
-                                        # width='75%',
-                                        display='inline-block',
-                                        verticalAlign="middle"
-                                    )
-                                ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6("Pick your employment status"),
-                                dcc.Dropdown(
-                                    id='Dem_employment',
-                                    options=[
-                                        {'label': Dem_employment, 'value': Dem_employment}
-                                        for Dem_employment in np.sort(df.Dem_employment.unique())
-                                    ],
-                                    value='Full time employed',
-                                    clearable=False,
-                                    style=dict(
-                                        # paddingRight= 150,
-                                        # width='75%',
-                                        display='inline-block',
-                                        verticalAlign="middle"
-                                    )
-                                ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6("Are you living abroad?"),
-                                dcc.Dropdown(
-                                    id='Dem_Expat',
-                                    options=[
-                                        {'label': Dem_Expat, 'value': Dem_Expat}
-                                        for Dem_Expat in np.sort(df.Dem_Expat.unique())
-                                    ],
-                                    value='no',
-                                    clearable=False,
-                                    style=dict(
-                                        # paddingRight= 150,
-                                        # width='75%',
-                                        display='inline-block',
-                                        verticalAlign="middle"
-                                    )
-                                ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6("Choose your marital status"),
-                                dcc.Dropdown(
-                                    id='Dem_maritalstatus',
-                                    options=[
-                                        {'label': Dem_maritalstatus, 'value': Dem_maritalstatus}
-                                        for Dem_maritalstatus in np.sort(df.Dem_maritalstatus.unique())
-                                    ],
-                                    value='Single',
-                                    clearable=False,
-                                    style=dict(
-                                        # paddingRight= 150,
-                                        # width='75%',
-                                        display='inline-block',
-                                        verticalAlign="middle"
-                                    )
-                                ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6("Are you in a risk group?"),
-                                dcc.Dropdown(
-                                    id='Dem_riskgroup',
-                                    options=[
-                                        {'label': Dem_riskgroup, 'value': Dem_riskgroup}
-                                        for Dem_riskgroup in np.sort(df.Dem_riskgroup.unique())
-                                    ],
-                                    value='No',
-                                    clearable=False,
-                                    style=dict(
-                                        # paddingRight= 150,
-                                        # width='75%',
-                                        display='inline-block',
-                                        verticalAlign="middle"
-                                    )
-                                ),
-                            ]
-                        ),
-                        html.Div(
-                            children=[
-                                html.H6("Are you currently isolated?"),
-                                dcc.Dropdown(
-                                    id='Dem_isolation',
-                                    options=[
-                                        {'label': Dem_isolation, 'value': Dem_isolation}
-                                        for Dem_isolation in np.sort(df.Dem_isolation.unique())
-                                    ],
-                                    value='1',
-                                    clearable=False,
-                                    style=dict(
-                                        # paddingRight= 150,
-                                        # width='75%',
-                                        display='inline-block',
-                                        verticalAlign="middle"
-                                    )
-                                ),
-                            ],
-                            style=dict(
-                                paddingBottom='300px'
-                            )
-                        ),
+                    ]
+                    
+                ),
+                
                         
                     ]
                 ),
@@ -816,8 +907,15 @@ def update_chart(
         value=stress_y_pred,
         title={'text': "Stress Level"},
         domain={'x': [0, 1], 'y': [0, 1]},
-        gauge={'axis': {'range': [None, 5]},
-            'bar': {'color': "rgba(255, 56, 116, 1)"}}
+        gauge={
+            'axis': {'range': [None, 5]},
+            'bar': {'color': "rgba(255, 56, 116, 1)"},
+            'steps': [
+                {'range': [0,2.4], 'color': 'rgba(142, 219, 157, 0.1)'},
+                {'range': [2.4,3.7], 'color': 'rgba(255, 167, 5, 0.1)'},
+                {'range': [3.7,5], 'color': 'rgba(255, 5, 5, 0.1)'},
+            ]
+            }
     ))
     fig_stress.update_layout(
         margin=dict(
@@ -840,8 +938,15 @@ def update_chart(
         value=loneliness_y_pred,
         title={'text': "Loneliness Level"},
         domain={'x': [0, 1], 'y': [0, 1]},
-        gauge={'axis': {'range': [None, 5]},
-            'bar': {'color': "#97D9F3"}}
+        gauge={
+            'axis': {'range': [None, 5]},
+            'bar': {'color': "#97D9F3"},
+            'steps': [
+                {'range': [0,2.4], 'color': 'rgba(142, 219, 157, 0.1)'},
+                {'range': [2.4,3.7], 'color': 'rgba(255, 167, 5, 0.1)'},
+                {'range': [3.7,5], 'color': 'rgba(255, 5, 5, 0.1)'},
+            ]
+        }
     ))
     fig_loneliness.update_layout(
         margin=dict(
