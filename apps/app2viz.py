@@ -151,30 +151,24 @@ layout = html.Div(
                                 paddingRight=100
                             ),
                             children=[
-                                dbc.Row(
-                                    dbc.Col(
-                                        [
-                                            html.Div(
-                                                [
-                                                    dcc.Markdown(
-                                                        '''
-                                                        ###### Gender of respondents percentage distribution
-                                                        ''',
-                                                        # className='text-center'
-                                                    ),
-                                                    dcc.Markdown(f'''
-                                                    Resopondents were {72.08} % female, 26.89 % Male. The remaining respondents answered 'other' or did not provide an answer.
-                                                    ''',
-                                                    # style={'marginTop': 75}
-                                                    )
-                                                ],
-                                                # style={'marginTop': 30}
-                                            ),
-                                        ],
-                                        width=12
-                                    )
+                                html.Div(
+                                    [
+                                        dcc.Markdown(
+                                            '''
+                                            ###### Gender of respondents percentage distribution
+                                            ''',
+                                            # className='text-center'
+                                        ),
+                                        dcc.Markdown(f'''
+                                        Resopondents were {72.08} % female, 26.89 % Male. The remaining respondents answered 'other' or did not provide an answer.
+                                        ''',
+                                        # style={'marginTop': 75}
+                                        )
+                                    ],
+                                    # style={'marginTop': 30}
                                 ),
-                                dbc.Row(
+                                html.Div(
+                                    
                                     [
                                         # SECTION 1 CHART
                                         html.Div(

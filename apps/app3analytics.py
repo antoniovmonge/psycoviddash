@@ -34,7 +34,7 @@ stress_fig = px.bar(
     x='PSS10_avg',
     text='Country',
     height=400,
-    title='STRESS levels by Country (Top 10)',
+    # title='STRESS levels (Top 10)',
     labels={'PSS10_avg': 'Stress Level'},
     
 )
@@ -42,7 +42,7 @@ stress_fig.update_traces(
     # marker_color='rgb(158,202,225)',
     # marker_color=color_palette_list()[8],
     marker_color='#FF3874',
-    width=0.5,
+    width=0.4,
     # marker_line_color='rgb(255, 0, 116)',
     # marker_line_width=1.5,
     # opacity=0.6,
@@ -56,18 +56,20 @@ stress_fig.update_traces(
 stress_fig.update_layout(
     uniformtext_minsize=1,
     uniformtext_mode='hide',
-    plot_bgcolor='rgba(0, 0, 0, 0.02)',
-    title={
-        # "text": "Title Text",
-        "x": 0.2,
-        "xanchor": "left",
-    }
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0, 0, 0, 0.05)',
+    # title={
+    #     # "text": "Title Text",
+    #     "x": 0.2,
+    #     "xanchor": "left",
+    # }
     # paper_bgcolor='rgb(249, 246, 225)'
 )        
 stress_fig.update_xaxes(
     range=[1, 5],
     showgrid=True,
     gridcolor='rgba(0, 0, 0, 0.1)',
+    
     title_font_family='Helvetica',
     # linecolor= 'black',
     # linewidth= 0.5,
@@ -92,7 +94,7 @@ lonely_fig = px.bar(
     x='SLON3_avg',
     text='Country',
     height=400,
-    title='LONELINESS levels by Country (Top 10)',
+    # title='LONELINESS levels (Top 10)',
     labels={'SLON3_avg': 'Loneliness Level'},
     
 )
@@ -178,14 +180,33 @@ layout = html.Div(
                 html.Div(
                     className='four columns', # Define the right element
                     children=[
-                        dcc.Graph(
-                            id='line-fig',
-                            figure=stress_fig,
-                            config={"displayModeBar": False},
-                            className='card div-for-bar-charts'
+                        html.Div(
+                            children=[
+                                html.H6('STRESS levels (Top 10)'),
+                            ],
+                            style=dict(
+                                textAlign='center'
+                            )
                         ),
-                            
-                    ]
+                        html.Div(
+                            [
+                                dcc.Graph(
+                                    id='line-fig',
+                                    figure=stress_fig,
+                                    config={"displayModeBar": False},
+                                    # style=dict(
+                                    #     paddingLeft=120,
+                                    #     paddingRight=120,
+                                    # ),
+                                ),
+                            ], style=dict(
+                                marginTop=-60,
+                            )
+                        ),
+                    ],
+                    style=dict(
+                        alingnItems='center',
+                    )
                 ),
                 html.Div(
                     className='four columns text-padding-more',

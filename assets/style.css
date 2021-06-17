@@ -58,8 +58,9 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
   flex: 0 0 850px;
   height: 100vh;
   position: sticky !important;
-  top: 0 !important;
+  top: 20% !important;
   background-color: white;
+  /* position: fixed; */
 }
 .column, .columns {
   width: 100%;
@@ -196,7 +197,7 @@ body {
 
 /* Typography –––––––––––––––––––––––––––––––––––––––––––––––––– */
 h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
+  margin-top: 40;
   margin-bottom: 0;
   font-weight: 300;
   font-family: "Lato", sans-serif;  /* "Helvetica" */
@@ -229,23 +230,23 @@ h4 {
   line-height: 1.35;
   letter-spacing: -.08rem;
   margin-bottom: 1.2rem;
-  margin-top: 1.2rem;
+  margin-top: 2rem;
 }
 h5 {
   font-size: 2.2rem;
   line-height: 1.5;
   letter-spacing: -.05rem;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  padding-bottom: 20px;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  /* padding-bottom: 1rem; */
 }
 h6 {
   font-size: 2.0rem;
   line-height: 1.6;
   letter-spacing: 0;
   margin-bottom: 0.75rem;
-  /* margin-top: 40px; */
-  padding-bottom: 20px;
+  margin-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 p {
   margin-top: 0;
@@ -443,7 +444,7 @@ hr {
 }
 /* Clearing –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /* Self Clearing Goodness */
-.container:after, .row:after, .u-cf {
+.container:after, .row:after, .columns:after, .u-cf {
   content: "";
   display: table;
   clear: both;
@@ -541,8 +542,12 @@ a {
 /*Color Header-------------------------------------------------*/
 .header {
     background-color: #4fa7ff;
-    height: 120px;
+    height: 20%;
     padding: 16px 0 0 100px;
+    clear: both;
+    position: fixed;
+    z-index: 9999;
+
     /* text-shadow: 2px 2px 3px rgba(0,0,0,0.7) ; */
 
     
@@ -556,11 +561,11 @@ a {
 
 .header-title {
     color: #ffffff;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     /* text-align: center; */
     margin: 0 auto;
-    padding-top: 10px;
+    padding-top: 4px;
     font-stretch: extra-expanded;
     letter-spacing: 4px;
     border-color: rgba(0, 0, 0, 0.18);
@@ -568,10 +573,11 @@ a {
 
 .header-description {
     color: #ffffff;
-    font-size: 18px;
+    font-size: 15px;
     margin: 4px auto;
     /* text-align: center; */
-    padding-top: 8px;
+    padding-top: 4px;
+    padding-bottom: 10px;
     letter-spacing: 2px;
     /* max-width: 384px; */
 }
@@ -586,14 +592,15 @@ a {
 }
 
 .card {
-    font-size: 25px;
-    color: white;
-    font-weight: bolder;
+    /* font-size: 25px; */
+    /* color: white; */
+    /* font-weight: bolder; */
     text-align: center;
-    text-shadow: 0 0 10px;
-    margin-top: 50px;
+    /* text-shadow: 0 0 10px; */
+    margin-top: 20px;
     margin-bottom: 24px;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
+    align-items: center;
 }
 
 .menu {
@@ -654,7 +661,7 @@ a {
   text-align: center;
 }
 .div-for-slider {
-  width: 97%;
+  width: 80%;
   text-align: center;
 }
 .logo {
@@ -761,7 +768,7 @@ a {
 .custom-tabs {
     border-top-left-radius: 3px;
     background-color: #f9f9f9;
-    padding: 0px 24px;
+    padding: 0px 20px;
     border-bottom: 1px solid #d6d6d6;
 }
 
@@ -774,7 +781,7 @@ a {
     border-right: 0px !important;
     border-bottom: 0px !important;
     background-color: #fafbfc;
-    padding: 12px !important;
+    padding: 8px !important;
     font-family: "system-ui";
     display: flex !important;
     align-items: center;

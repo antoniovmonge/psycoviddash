@@ -23,55 +23,74 @@ layout = html.Div([
                 width=12
                 )
     ]),
-    dbc.Row([
-        dbc.Col([
-            dcc.Markdown('''        
-                        #### Data Analysis
-                        
+    dbc.Row(
+        [
+            dbc.Col(
+                [
+                    dcc.Markdown(
+                        '''        
+                        ##### Data Analysis
+                                
                         Interactive Data Analysis of Personality and emotional repercusion 
-                        of COVID-19 by countries
+                        of COVID-19 by countries. It allowus us to visualize and compare the
+                        "mean personality", Stress and perceived Loneliness levels by countries.
                         
-                        Analisys of demographic background variables, perceived stress 
-                        (PSS-10), availability of social provisions (SPS-10), trust in 
-                        various authorities, trust in governmental measures to contain the 
+                        The Data Frame used in this project allows us the Analisys of demographic background variables,
+                        perceived stress (PSS-10), availability of social provisions (SPS-10),
+                        trust in various authorities, trust in governmental measures to contain the 
                         virus (OECD trust), personality traits (BFF-15), information behaviours, 
                         agreement with the level of government intervention, and compliance with 
                         preventive measures, along with a rich pool of exploratory variables and 
                         written experiences.
                         '''
-            ),
-            dcc.Markdown(
-                '''
-                #### Predictions
-                Interactive **Machine Learning** that quantifies you personality based on the 
-                big 5 personality traits using the bff_personality test and predict *stress* and 
-                *loneliness* levels based on your personaliy and some demographical factors.
-                '''
-            ),
-        ]),
-        dbc.Col([
-            dcc.Markdown('''
-                        ##### Data Source
+                    ),
+                    dcc.Markdown(
+                        '''
+                        ##### Predictions / Simulation
+                        Interactive **Machine Learning** application that quantifies the personality based on the 
+                        big 5 personality traits using the bff_personality test, and predict *stress* and 
+                        *loneliness* levels based on personaliy and some demographical factors.
                         
-                        Data Collection Technology: **Survey** [COVIDiSTRESS Global Survey](https://osf.io/z39us/)
+                        It is possible to see how each imput affects to the "personality score" and Stress and Loneliness indicators.
                         
-                        Period of time Data Collection: between 30th March and 30th May 2020
-                            
-                        N = 173,426
-                            
-                        **Factor Types:**
-                        - geographic location language 
-                        - age of participant
-                        - gouvernamental responses to the Coronavirus pandemic
+                        In order to cuantiffy the personality with the user input data, we used a [k-nearest neighbors regression algorithm](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm).
+                        For the Stress and Loneliness levels the used algorithm is a [Linear Regression](https://en.wikipedia.org/wiki/Linear_regression)
+                        '''
+                    ),
+                ],
+                style=dict(
+                    paddingBottom= 200,
+                    paddingRight= 70,
+                )
+        ),
+        dbc.Col(
+            [
+                dcc.Markdown(
+                    '''
+                    ##### Data Source
+                    
+                    Data Collection Technology: **Survey** [COVIDiSTRESS Global Survey](https://osf.io/z39us/)
+                    
+                    Period of time Data Collection: between 30th March and 30th May 2020
+                        
+                    N = 173,426
+                        
+                    **Factor Types:**
+                    - geographic location language 
+                    - age of participant
+                    - gouvernamental responses to the Coronavirus pandemic
 
-                        **Measurements:** psychological measurement
-                        - anxiety-related behavior trait
-                        - Stress
-                        - response to Isolation
-                        - loneliness measurement
-                        - Emotional Distress
-                        ''')
-        ])
+                    **Measurements:** psychological measurement
+                    - anxiety-related behavior trait
+                    - Stress
+                    - response to Isolation
+                    - loneliness measurement
+                    - Emotional Distress
+                    '''
+                )
+            ],
+            
+        )
     ]),
 ]),
     

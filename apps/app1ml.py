@@ -75,8 +75,31 @@ layout = html.Div(
             className='main-container',
             children=[
                 html.Div(
-                    className='sidebar',
+                    className='sidebar card',
                     children=[
+                        dcc.Markdown(
+                            '''
+                            #### Test for personality traits (BFF-15)
+                            1 = Strongly Disagree  
+                            2 = Disagree  
+                            3 = Slightly disagree  
+                            4 = Slightly agree  
+                            5 = Agree  
+                            6 = Strongly Agree  
+                            ''',
+                            style=dict(
+                                paddingBottom= 40,
+                                textAlign= 'center',
+                                ),
+                        ),
+                        dcc.Markdown(
+                            
+                            '###### I see myself as a person who...',
+                            style=dict(
+                                paddingBottom= 20,
+                                textAlign= 'center',
+                                )
+                        ),
                         html.Div(
                             className='div-for-slider',
                             children=[ # SLIDERS
@@ -412,6 +435,7 @@ layout = html.Div(
                                 ),
                         ]
                         ),
+                        dcc.Markdown('#### Demographic Information'),
                         html.Div(
                             className='div-for-dropdown',
                             children=[
@@ -432,7 +456,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                # display='inline-block',
+                                                display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         )
@@ -455,7 +479,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                # display='inline-block',
+                                                display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -478,7 +502,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                # display='inline-block',
+                                                display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -501,7 +525,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                # display='inline-block',
+                                                display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -524,7 +548,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                # display='inline-block',
+                                                display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -547,7 +571,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                # display='inline-block',
+                                                display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -570,7 +594,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                # display='inline-block',
+                                                display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -593,7 +617,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                # display='inline-block',
+                                                display='inline-block',
                                                 verticalAlign="middle",
                                                 # fontSize=12,
                                                 # # marginLeft= '5px',
@@ -609,7 +633,7 @@ layout = html.Div(
                                 ),
                                 html.Div(
                                     style=dict(
-                                        paddingBottom=300,
+                                        paddingBottom=800,
                                     ),
                                     children=[
                                         html.P("Are you currently isolated?"),
@@ -624,7 +648,7 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                # display='inline-block',
+                                                display='inline-block',
                                                 verticalAlign="middle"
                                             )
                                         ),
@@ -649,8 +673,21 @@ layout = html.Div(
                                 html.Div(
                                     className='row',
                                     children=[
-                                        html.Div(
+                                        # html.Div(
+                                        #     className='ten columns offset-by-two columns',
+                                        #     children=[
+                                        #         html.H6(
+                                        #             'YOUR BIG 5 PERSONALITY SCORES',
+                                        #             style=dict(textAlign='center')
+                                        #         ),
+                                        #     ]
+                                        # ),
+                                        html.Div( # RADAR CHART
                                             className='six columns offset-by-two columns',
+                                            style=dict(
+                                                marginTop=-60,
+                                                marginBottom=-60,
+                                            ),
                                             children=[
                                                 dcc.Graph( # PERSONALITY RADAR CHART
                                                     id='personality-chart',
@@ -687,17 +724,28 @@ layout = html.Div(
                                                 ),
                                             ],
                                             style=dict(
-                                                paddingTop=120
+                                                paddingTop=60
                                             )
                                         )
                                     ],
                                 ),
+                                # html.Div( # TITLE STRESS AND LONELINESS INDICATORS
+                                #     className = 'ten columns offset-by-two columns',
+                                #     style=dict(
+                                #         textAlign='center',
+                                #         marginBottom=-80,
+                                #     ),
+                                #     children=[    
+                                #         html.H6('IN A PANDEMIC OUTBREAK,'),
+                                #         html.P('the prediction about your Stress and Loneliness levels is:')
+                                #     ]
+                                # ),
                                 html.Div(
                                     className='row',
                                     style=dict(
                                         marginTop=-100
                                     ),
-                                    children=[ 
+                                    children=[
                                         html.Div(
                                             className='five columns offset-by-two columns',
                                             children=[
@@ -823,10 +871,10 @@ def update_chart(
             # color="RebeccaPurple"
         ),
         margin=dict(    
-                l=70,
-                r=80,
-                b=20,
-                t=20,
+                l=100,
+                r=100,
+                b=0,
+                t=0,
                 pad=0
             ),
         paper_bgcolor='rgba(0,0,0,0)',
@@ -919,9 +967,9 @@ def update_chart(
     ))
     fig_stress.update_layout(
         margin=dict(
-            l=40,
-            r=40,
-            b=0,
+            l=70,
+            r=70,
+            b=40,
             t=0,
             pad=0
         ),
@@ -950,9 +998,9 @@ def update_chart(
     ))
     fig_loneliness.update_layout(
         margin=dict(
-            l=40,
-            r=40,
-            b=0,
+            l=70,
+            r=70,
+            b=40,
             t=0,
             pad=0
         ),

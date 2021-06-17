@@ -41,6 +41,10 @@ app.layout = html.Div(
                     children='THE PSYCHOLOGICAL INPACT DURING COVID-19 OUTBREAK',
                 ),
             ],
+            style=dict(
+                position= 'sticky',
+                top= 0,
+            )
         ),
         html.Div(
             [
@@ -75,15 +79,20 @@ app.layout = html.Div(
                             selected_className='custom-tab--selected'
                         ),
                         dcc.Tab(
-                            label='Compare Countries',
+                            label='Countries Comparison',
                             value='tab-4',
                             className='custom-tab',
                             selected_className='custom-tab--selected'
                         ),
                     ]
                 ),
-                html.Div(id='tabs-content')
-            ]
+                # html.Div(id='tabs-content')
+            ],
+            style=dict(
+                position= 'sticky',
+                top= 85,
+                zIndex= 9999,
+            )
         ),
         html.Div(id='page-content', children=[])
 
@@ -102,7 +111,8 @@ app.layout = html.Div(
         # ),
         # dcc.Location(id='url', refresh=False),
         
-    ]
+    ],
+    
     
 )
 #callback to control the tab content
@@ -119,7 +129,7 @@ def render_content(tab):
     elif tab == 'tab-4':
         return app4compare.layout
     else:
-        return app2viz.layout # CHANGE WITH app0intro.layout !!
+        return app0intro.layout # CHANGE WITH app0intro.layout !!
 
 ################
 # OLD CALLBACK #
