@@ -41,7 +41,7 @@ count_lines:
         '{printf "%4s %s\n", $$1, $$2}{s+=$$0}END{print s}'
 	@echo ''
 	@find ./scripts -name '*-*' -exec  wc -l {} \; | sort -n| awk \
-		        '{printf "%4s %s\n", $$1, $$2}{s+=$$0}END{print s}'
+		'{printf "%4s %s\n", $$1, $$2}{s+=$$0}END{print s}'
 	@echo ''
 	@find ./tests -name '*.py' -exec  wc -l {} \; | sort -n| awk \
         '{printf "%4s %s\n", $$1, $$2}{s+=$$0}END{print s}'
@@ -59,3 +59,17 @@ pypi_test:
 
 pypi:
 	@twine upload dist/* -u $(PYPI_USERNAME)
+
+# ----------------------------------
+#      HEROKU COMMANDS
+# ----------------------------------
+
+heroku_login:
+	-@heroku login
+
+heroku_create_app:
+	-@heroku create ${APP_NAME}
+
+deploy_heroku:
+	-@git push heroku master
+	-@heroku ps:scale web=1
