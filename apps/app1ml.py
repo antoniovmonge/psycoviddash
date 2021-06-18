@@ -40,7 +40,7 @@ def dem_expat_func(X):
     X['Dem_Expat'] = X['Dem_Expat'].replace({'no': 0, 'yes': 1})
     return X[['Dem_Expat']]
 
-kwargs = {}
+# kwargs = {}
 
 bff15_options = ['Strongly disagree', 'Disagree',
                     'Slightly disagree', 'Slightly agree', 'Agree', 'Strongly agree']
