@@ -2,11 +2,9 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
-
 from app import app
 from app import server
-
-from apps import app0intro, app1ml, app2viz, #app3analytics, #app4compare
+from apps import app0intro, app1ml, app2viz
 
 def edu_func(X):
         X['Dem_edu'] = X['Dem_edu'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
