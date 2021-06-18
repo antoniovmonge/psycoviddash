@@ -15,7 +15,7 @@ app = dash.Dash(
         }
     ],
     # external_stylesheets=external_stylesheets
-    # external_stylesheets=[dbc.themes.MINTY]
+    external_stylesheets=[dbc.themes.MINTY]
 )
 
 
