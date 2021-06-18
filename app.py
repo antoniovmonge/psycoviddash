@@ -1,6 +1,6 @@
 import dash
-import dash_bootstrap_components as dbc
-import pandas as pd
+# import dash_bootstrap_components as dbc
+# import pandas as pd
 # from flask_caching import Cache
 
 # external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
