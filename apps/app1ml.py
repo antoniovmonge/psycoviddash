@@ -456,8 +456,8 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
-                                                verticalAlign="middle"
+                                                # display='inline-block',
+                                                # verticalAlign="middle"
                                             )
                                         )
                                     ]
@@ -479,8 +479,8 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
-                                                verticalAlign="middle"
+                                                # display='inline-block',
+                                                # verticalAlign="middle"
                                             )
                                         ),
                                     ]
@@ -502,8 +502,8 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
-                                                verticalAlign="middle"
+                                                # display='inline-block',
+                                                # verticalAlign="middle"
                                             )
                                         ),
                                     ]
@@ -525,8 +525,8 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
-                                                verticalAlign="middle"
+                                                # display='inline-block',
+                                                # verticalAlign="middle"
                                             )
                                         ),
                                     ]
@@ -548,8 +548,8 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
-                                                verticalAlign="middle"
+                                                # display='inline-block',
+                                                # verticalAlign="middle"
                                             )
                                         ),
                                     ]
@@ -571,8 +571,8 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
-                                                verticalAlign="middle"
+                                                # display='inline-block',
+                                                # verticalAlign="middle"
                                             )
                                         ),
                                     ]
@@ -594,8 +594,8 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
-                                                verticalAlign="middle"
+                                                # display='inline-block',
+                                                # verticalAlign="middle"
                                             )
                                         ),
                                     ]
@@ -617,8 +617,8 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
-                                                verticalAlign="middle",
+                                                # display='inline-block',
+                                                # verticalAlign="middle",
                                                 # fontSize=12,
                                                 # # marginLeft= '5px',
                                                 # # paddingLeft= '100px',
@@ -648,8 +648,8 @@ layout = html.Div(
                                             style=dict(
                                                 # paddingRight= 150,
                                                 # width='75%',
-                                                display='inline-block',
-                                                verticalAlign="middle"
+                                                # display='inline-block',
+                                                # verticalAlign="middle"
                                             )
                                         ),
                                     ],
