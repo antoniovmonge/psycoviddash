@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 # import pandas as pd
 # from flask_caching import Cache
 
-# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(
     __name__,
@@ -14,7 +14,8 @@ app = dash.Dash(
             'content': 'width=device-width, initial-scale=1.0'
         }
     ],
-    external_stylesheets=[dbc.themes.MINTY]
+    external_stylesheets=external_stylesheets
+    # external_stylesheets=[dbc.themes.MINTY]
 )
 
 
