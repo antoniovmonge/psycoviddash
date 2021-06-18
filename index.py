@@ -4,7 +4,7 @@ from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 from app import app
 from app import server
-from apps import app0intro, app1ml, app2viz
+from apps import app0intro, app1ml, app2viz, app3analytics
 
 def edu_func(X):
         X['Dem_edu'] = X['Dem_edu'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
@@ -151,8 +151,8 @@ def render_content(tab):
         return app1ml.layout
     elif tab == 'tab-2':
         return app2viz.layout
-    # elif tab == 'tab-3':
-    #     return app3analytics.layout
+    elif tab == 'tab-3':
+        return app3analytics.layout
     # elif tab == 'tab-4':
     #     return app4compare.layout
     else:
