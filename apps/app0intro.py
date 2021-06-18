@@ -15,12 +15,44 @@ layout = html.Div([
     html.H1('', className='text-padding'),
     dbc.Container([
     dbc.Row([
-        dbc.Col([html.H1('PSYCOVID - Data Science Project', className='text-center'), # bg-dark text-white
+        dbc.Col(
+            [
+                html.H1('PSYCOVID - Data Science Project', className='text-center'), # bg-dark text-white
                 dcc.Markdown(
                     '''
                     ##### Study based on on psychological impact and behavioural consequences of the COVID-19 outbreak
-                    ''')],
-                width=12
+                    '''
+                ),
+                dcc.Markdown(
+                    '''
+                    ##### The Problem
+                    
+                    During the Covid-19 Outbreak, the world faced a new Stress and Loneliness levels. Those feelings affected the people in 
+                    very different ways, depending on personality traces and demographic factors. Mental conditions such as depression, anxiety, paranoia became part
+                    of the equation of the Outbreak.
+                    '''
+                ),
+                dcc.Markdown(
+                    '''
+                    ##### How do we try to help with this problem?
+                    
+                    If we analyse the differnt personality tipes, the demographic factors and how those affect to the Stress and Perceived loneliness levels,
+                    we could spot if a person is more able to suffer one or another mental condition and take action to prevent or reduce it thanks to recomendation systems, 
+                    from what we learned through the collected data.
+                    ''',
+                    style=dict(marginTop=40)
+                ),
+                dcc.Markdown(
+                    '''
+                    ##### Tools
+                    
+                    DATA COLLECTION
+                    The technolgy used for this Study is a SURVEY made between April and May 2021 that collected global data on the psychological and behavioural
+                    impact of the COVID-19/coronavirus crisis.
+                    '''
+                )
+            ],
+            width=12
                 )
     ]),
     dbc.Row(

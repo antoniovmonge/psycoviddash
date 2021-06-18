@@ -541,16 +541,13 @@ a {
 }
 /*Color Header-------------------------------------------------*/
 .header {
-    background-color: #4fa7ff;
+    background-color: #424242;
     height: 20%;
     padding: 16px 0 0 100px;
     clear: both;
     position: fixed;
     z-index: 9999;
-
     /* text-shadow: 2px 2px 3px rgba(0,0,0,0.7) ; */
-
-    
 }
 
 .header-emoji {
@@ -562,13 +559,13 @@ a {
 .header-title {
     color: #ffffff;
     font-size: 20px;
-    font-weight: bold;
+    /* font-weight: bold; */
     /* text-align: center; */
     margin: 0 auto;
     padding-top: 4px;
     font-stretch: extra-expanded;
     letter-spacing: 4px;
-    border-color: rgba(0, 0, 0, 0.18);
+    /* border-color: rgba(0, 0, 0, 0.18); */
 }
 
 .header-description {
@@ -695,7 +692,7 @@ a {
   background: #1E1E1E;
   background-color: #fdfdfd;
   /* font-family:'Courier New', Courier, monospace; */
-  font-size: 18px;
+  font-size: 14px;
 }
 ._dash-app-content {
   overflow-x: hidden;
@@ -705,7 +702,7 @@ a {
 .has-value.Select--single>.Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single>.Select-control .Select-value .Select-value-labeln {
   color: #181818;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .Input.DateInput_1 {
@@ -828,7 +825,7 @@ a {
  .side-by-side-right{
     display: inline-block;
     width: 48%;
-    float:right;
+    float: right;
   }
   .div-for-charts{
     margin: 0px;
@@ -844,14 +841,14 @@ a {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #d2f2ffa8 !important;
+  background: #eeeeee !important;
   border-radius: 10px !important;
   display: block !important;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background:#a0e4ff
+  background:#d1d1d1
 }
 
 /* Handle on hover */

@@ -1,6 +1,7 @@
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+import dash_bootstrap_components as dbc
 
 from app import app
 from app import server
@@ -31,15 +32,43 @@ app.layout = html.Div(
         html.Div(
             className="header",
             children=[
-                # html.P(children="🥑", className="header-emoji"),
-                html.H1(
-                    className="header-title",
-                    children="PsyCovid Analytics",
+                dbc.Row(
+                    [
+                        dbc.Col(
+                            [
+                                html.H1(
+                                    className="header-title",
+                                    children="PsyCovid Analytics",
+                                ),
+                                html.P(
+                                    className="header-description",
+                                    children='THE PSYCHOLOGICAL INPACT DURING COVID-19 OUTBREAK',
+                                ),
+                            ],width=6
+                        ),
+                        dbc.Col(
+                            [
+                                dcc.Markdown(
+                                    '''
+                                    Project created by:    
+                                    [Antonio Vilchez Monge,](https://www.linkedin.com/in/antonio-v-monge/)
+                                    [Verónica Delgado Benito,](https://www.linkedin.com/in/veronica-delgadobenito/)
+                                    [Shruthi L.P,](https://www.linkedin.com/in/shruthilp/)
+                                    [Wojciech Gutkiewicz](https://www.linkedin.com/in/gutkiewicz/)
+                                    ''',
+                                    style=dict(
+                                        textAlign='right',
+                                        paddingRight=80,
+                                        paddingTop=15,
+                                        color='white',
+                                    ),
+                                )
+                            ], width=6
+                        ),
+                    ]
                 ),
-                html.P(
-                    className="header-description",
-                    children='THE PSYCHOLOGICAL INPACT DURING COVID-19 OUTBREAK',
-                ),
+                
+                
             ],
             style=dict(
                 position= 'sticky',

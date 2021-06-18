@@ -57,7 +57,7 @@ stress_fig.update_layout(
     uniformtext_minsize=1,
     uniformtext_mode='hide',
     paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0, 0, 0, 0.05)',
+    plot_bgcolor='rgba(0, 0, 0, 0.03)',
     # title={
     #     # "text": "Title Text",
     #     "x": 0.2,
@@ -100,7 +100,7 @@ lonely_fig = px.bar(
 )
 lonely_fig.update_traces(
     marker_color='#97D9F3',
-    width=0.5,
+    width=0.4,
     # marker_line_color='rgb(255, 0, 116)',
     # marker_line_width=1.5,
     # opacity=0.6,
@@ -114,7 +114,8 @@ lonely_fig.update_traces(
 lonely_fig.update_layout(
     uniformtext_minsize=1,
     uniformtext_mode='hide',
-    plot_bgcolor='rgba(0, 0, 0, 0.02)',
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0, 0, 0, 0.03)',
     # paper_bgcolor='rgb(249, 246, 225)',
     title={
         # "text": "Title Text",
@@ -143,23 +144,25 @@ lonely_fig.update_yaxes(
 )
 
 layout = html.Div(
-    # className='Container',
+    className='container',
     style=dict(
-        paddingLeft= 100,
-        paddingRight= 100,
-        paddingBottom= 150,
+        paddingTop= 50,
+        # paddingLeft= 100,
+        # paddingRight= 100,
+        # paddingBottom= 150,
     ),
     children=[      
         html.Div(
             className='row',
             children=[
                 html.Div(
-                    className='div-user-controls', # Define the right element
+                    # className='div-user-controls', # Define the right element
                     children=[
                         dcc.Markdown('### Stress during the COVID-19 Pandemic by Countries'),
                         dcc.Markdown(
                             f'{paragraph1()}',
-                        ) 
+                        ),
+                        
                     ]
                 ),
             ]
@@ -168,17 +171,7 @@ layout = html.Div(
             className='row',
             children=[
                 html.Div(
-                    className='three columns div-user-controls', # Define the left element
-                    children=[
-                        dcc.Markdown('##### Analysis by Countries'),
-                        dcc.Markdown('''Visualising countries ranked
-                        with stress levels using the PSS-10 scale.
-                        '''),
-                        # html.P('''* B&H - Bosnia & Herzegovina''')
-                    ],
-                ),
-                html.Div(
-                    className='four columns', # Define the right element
+                    className='six columns', # Define the left element
                     children=[
                         html.Div(
                             children=[
@@ -199,27 +192,29 @@ layout = html.Div(
                                     #     paddingRight=120,
                                     # ),
                                 ),
-                            ], style=dict(
+                            ],
+                            style=dict(
                                 marginTop=-60,
                             )
                         ),
+                        
                     ],
-                    style=dict(
-                        alingnItems='center',
-                    )
                 ),
                 html.Div(
-                    className='four columns text-padding-more',
+                    className='six columns', # Define the right element
                     children=[
-                        html.Div(
-                            # className='text-padding-more', # Define the left element
-                                
-                                dcc.Markdown(
-                                    f'{paragraph2()}',
-                                    className='text-padding-more',
-                                )      
-                        )       
-                    ]
+                        dcc.Markdown('###### STRESS by Countries'),
+                        dcc.Markdown('''Visualising countries ranked
+                        with stress levels using the PSS-10 scale.
+                        '''),
+                        dcc.Markdown(
+                            f'{paragraph2()}',
+                        )      
+                        # html.P('''* B&H - Bosnia & Herzegovina''')
+                    ],
+                    style=dict(
+                        marginTop=30
+                    )
                 ),
             ]
         ),
@@ -227,13 +222,16 @@ layout = html.Div(
             className='row',
             children=[
                 html.Div(
-                    className='div-user-controls', # Define the right element
                     children=[
                         dcc.Markdown('### Loneliness during the COVID-19 Pandemic by Countries'),
                         dcc.Markdown(
                             f'{paragraph3()}',
                         ) 
-                    ]
+                    ],
+                    style=dict(
+                        paddingBottom=20,
+                        paddingTop=20,
+                    )
                 ),
             ]
         ),
@@ -242,35 +240,45 @@ layout = html.Div(
             className='row',
             children=[
                 html.Div(
-                    className='three columns div-user-controls', # Define the left element
+                    className='six columns',
+                    children=[
+                        html.Div(
+                            children=[
+                                html.H6('Percived LONELINESS levels (Top 10)'),
+                            ],
+                            style=dict(
+                                textAlign='center'
+                            ),
+                        ),
+                        html.Div(
+                            children=[
+                        
+                                dcc.Graph(
+                                    id='line-fig',
+                                    figure=lonely_fig,
+                                    config={"displayModeBar": False},
+                                    # className='card div-for-bar-charts'
+                                ),
+                            ],
+                            style=dict(
+                                marginTop=-60,
+                            )
+                        ),
+                    ]
+                ),
+                html.Div(
+                    className='six columns', # Define the right element
                     children=[
                         dcc.Markdown('##### Analysis by Countries'),
                         html.P('''Visualising countries Loneliness ranked with the results of
                         UCLA short loneliness scale'''),
-                        html.P('''*B&H - Bosnia & Herzegovina''')
-                    ],
-                ),
-                html.Div(
-                    className='four columns', # Define the right element
-                    children=[
-                        dcc.Graph(
-                            id='line-fig',
-                            figure=lonely_fig,
-                            config={"displayModeBar": False},
-                            className='card div-for-bar-charts'
-                            ),
-                    ]    
-                ),
-                html.Div(
-                    className='four columns text-padding-more',
-                    children=[
+                        html.P('''*B&H - Bosnia & Herzegovina'''),
                         html.Div(
                             dcc.Markdown(
                                 f'{paragraph4()}',
-                                className='text-padding-more',
                             )       
-                        )   
-                    ]
+                        )
+                    ]    
                 ),
             ]
         ),
