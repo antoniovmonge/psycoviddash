@@ -6,7 +6,7 @@ wheel>=0.29
 
 # data science
 numpy
-pandas
+pandas==1.2.4
 scikit-learn==0.24.1
 
 # tests/linter
@@ -28,6 +28,5 @@ joblib
 memoized-property
 termcolor
 
-dash
+dash==1.16.0
 gunicorn==20.1.0
-plotly
