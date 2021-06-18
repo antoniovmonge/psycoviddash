@@ -6,26 +6,26 @@ import dash_bootstrap_components as dbc
 from app import app
 from app import server
 
-from apps import app0intro, app1ml, app2viz, app3analytics, #app4compare
+from apps import app0intro, app1ml, app2viz, #app3analytics, #app4compare
 
-# def edu_func(X):
-#         X['Dem_edu'] = X['Dem_edu'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
-#                                             'Up to 12 years of school': 4, 'Some College, short continuing education or equivalent': 5, 'College degree, bachelor, master': 6, 'PhD/Doctorate': 7})
-#         return X[['Dem_edu']]
+def edu_func(X):
+        X['Dem_edu'] = X['Dem_edu'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
+                                            'Up to 12 years of school': 4, 'Some College, short continuing education or equivalent': 5, 'College degree, bachelor, master': 6, 'PhD/Doctorate': 7})
+        return X[['Dem_edu']]
 
-# def edu_mom_func(X):
-#     X['Dem_edu_mom'] = X['Dem_edu_mom'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
-#                                                 'Up to 12 years of school': 4, 'Some College or equivalent': 5, 'College degree': 6, 'PhD/Doctorate': 7})
-#     return X[['Dem_edu_mom']]
+def edu_mom_func(X):
+    X['Dem_edu_mom'] = X['Dem_edu_mom'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
+                                                'Up to 12 years of school': 4, 'Some College or equivalent': 5, 'College degree': 6, 'PhD/Doctorate': 7})
+    return X[['Dem_edu_mom']]
 
-# def edu_risk_group(X):
-#     X['Dem_riskgroup'] = X['Dem_riskgroup'].replace(
-#         {'No': 1, 'Not sure': 2, 'Yes': 3})
-#     return X[['Dem_riskgroup']]
+def edu_risk_group(X):
+    X['Dem_riskgroup'] = X['Dem_riskgroup'].replace(
+        {'No': 1, 'Not sure': 2, 'Yes': 3})
+    return X[['Dem_riskgroup']]
 
-# def dem_expat_func(X):
-#     X['Dem_Expat'] = X['Dem_Expat'].replace({'no': 0, 'yes': 1})
-#     return X[['Dem_Expat']]
+def dem_expat_func(X):
+    X['Dem_Expat'] = X['Dem_Expat'].replace({'no': 0, 'yes': 1})
+    return X[['Dem_Expat']]
 
 app.layout = html.Div(
     children=[
@@ -153,8 +153,8 @@ def render_content(tab):
         return app1ml.layout
     elif tab == 'tab-2':
         return app2viz.layout
-    elif tab == 'tab-3':
-        return app3analytics.layout
+    # elif tab == 'tab-3':
+    #     return app3analytics.layout
     # elif tab == 'tab-4':
     #     return app4compare.layout
     else:
