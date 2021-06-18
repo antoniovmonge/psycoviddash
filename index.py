@@ -105,12 +105,12 @@ app.layout = html.Div(
                             className='custom-tab',
                             selected_className='custom-tab--selected'
                         ),
-                        # dcc.Tab(
-                        #     label='Countries Comparison',
-                        #     value='tab-4',
-                        #     className='custom-tab',
-                        #     selected_className='custom-tab--selected'
-                        # ),
+                        dcc.Tab(
+                            label='Countries Comparison',
+                            value='tab-4',
+                            className='custom-tab',
+                            selected_className='custom-tab--selected'
+                        ),
                     ]
                 ),
                 # html.Div(id='tabs-content')
@@ -153,8 +153,8 @@ def render_content(tab):
         return app2viz.layout
     elif tab == 'tab-3':
         return app3analytics.layout
-    # elif tab == 'tab-4':
-    #     return app4compare.layout
+    elif tab == 'tab-4':
+        return app4compare.layout
     else:
         return app0intro.layout # CHANGE WITH app0intro.layout !!
 
