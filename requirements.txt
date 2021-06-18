@@ -29,3 +29,5 @@ memoized-property
 termcolor
 
 dash
+gunicorn==20.1.0
+plotly
