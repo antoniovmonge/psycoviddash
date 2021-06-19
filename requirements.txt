@@ -114,6 +114,7 @@ prometheus-client==0.10.1
 prometheus-flask-exporter==0.18.2
 prompt-toolkit==3.0.18
 protobuf==3.17.3
+-e git+git@github.com:antoniovmonge/psycoviddash.git@db3bb06f6d9d39e8f4bfadc240e5de71a417c1dc#egg=psycoviddash
 ptyprocess==0.7.0
 py==1.10.0
 pyasn1==0.4.8
