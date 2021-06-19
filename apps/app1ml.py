@@ -15,30 +15,14 @@ import plotly.express as px
 from joblib import load
 
 from app import app
+from functions import *
 
 # url='s3://psycovid/cleaned_data_040321.csv'
 # df = pd.read_csv(url ,index_col=0)
-df = pd.read_csv('raw_data/cleaned_data_040321.csv')
-df = df[df['Dem_isolation'] != '1']
 
-def edu_func(X):
-        X['Dem_edu'] = X['Dem_edu'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
-                                            'Up to 12 years of school': 4, 'Some College, short continuing education or equivalent': 5, 'College degree, bachelor, master': 6, 'PhD/Doctorate': 7})
-        return X[['Dem_edu']]
+# df = pd.read_csv('raw_data/cleaned_data_040321.csv')
+# df = df[df['Dem_isolation'] != '1']
 
-def edu_mom_func(X):
-    X['Dem_edu_mom'] = X['Dem_edu_mom'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
-                                                'Up to 12 years of school': 4, 'Some College or equivalent': 5, 'College degree': 6, 'PhD/Doctorate': 7})
-    return X[['Dem_edu_mom']]
-
-def edu_risk_group(X):
-    X['Dem_riskgroup'] = X['Dem_riskgroup'].replace(
-        {'No': 1, 'Not sure': 2, 'Yes': 3})
-    return X[['Dem_riskgroup']]
-
-def dem_expat_func(X):
-    X['Dem_Expat'] = X['Dem_Expat'].replace({'no': 0, 'yes': 1})
-    return X[['Dem_Expat']]
 
 # kwargs = {}
 
@@ -471,9 +455,14 @@ layout = html.Div(
                                         dcc.Dropdown(
                                             id='Dem_gender',
                                             options=[
-                                                {'label': Dem_gender, 'value': Dem_gender}
-                                                for Dem_gender in np.sort(df.Dem_gender.unique())
-                                            ],
+                                                {'label': 'Female', 'value': 'Female'},
+                                                {'label': 'Male', 'value': 'Male'},
+                                                {'label': 'Other/would rather not say',
+                                                'value': 'Other/would rather not say'}],
+                                            # options=[
+                                            #     {'label': Dem_gender, 'value': Dem_gender}
+                                            #     for Dem_gender in np.sort(df.Dem_gender.unique())
+                                            # ],
                                             value='Other/would rather not say',
                                             clearable=False,
                                             style=dict(
@@ -494,9 +483,21 @@ layout = html.Div(
                                         dcc.Dropdown(
                                             id='Dem_edu',
                                             options=[
-                                                {'label': Dem_edu, 'value': Dem_edu}
-                                                for Dem_edu in np.sort(df.Dem_edu.unique())
+                                                {'label': 'College degree, bachelor, master',
+                                                'value': 'College degree, bachelor, master'},
+                                                {'label': 'None', 'value': 'None'},
+                                                {'label': 'PhD/Doctorate', 'value': 'PhD/Doctorate'},
+                                                {'label': 'Some College, short continuing education or equivalent',
+                                                'value': 'Some College, short continuing education or equivalent'},
+                                                {'label': 'Uninformative response', 'value': 'Uninformative response'},
+                                                {'label': 'Up to 12 years of school', 'value': 'Up to 12 years of school'},
+                                                {'label': 'Up to 6 years of school', 'value': 'Up to 6 years of school'},
+                                                {'label': 'Up to 9 years of school', 'value': 'Up to 9 years of school'}
                                             ],
+                                            # options=[
+                                            #     {'label': Dem_edu, 'value': Dem_edu}
+                                            #     for Dem_edu in np.sort(df.Dem_edu.unique())
+                                            # ],
                                             value='None',
                                             clearable=False,
                                             style=dict(
@@ -517,9 +518,19 @@ layout = html.Div(
                                         dcc.Dropdown(
                                             id='Dem_edu_mom',
                                             options=[
-                                                {'label': Dem_edu_mom, 'value': Dem_edu_mom}
-                                                for Dem_edu_mom in np.sort(df.Dem_edu_mom.unique())
+                                                {'label': 'None', 'value': 'None'},
+                                                {'label': 'College degree', 'value': 'College degree'},
+                                                {'label': 'Some College or equivalent', 'value': 'Some College or equivalent'},
+                                                {'label': 'Up to 12 years of school', 'value': 'Up to 12 years of school'},
+                                                {'label': 'Up to 9 years of school', 'value': 'Up to 9 years of school'},
+                                                {'label': 'Up to 6 years of school', 'value': 'Up to 6 years of school'},
+                                                {'label': 'PhD/Doctorate', 'value': 'PhD/Doctorate'},
+                                                {'label': 'Uninformative response', 'value': 'Uninformative response'}
                                             ],
+                                            # options=[
+                                            #     {'label': Dem_edu_mom, 'value': Dem_edu_mom}
+                                            #     for Dem_edu_mom in np.sort(df.Dem_edu_mom.unique())
+                                            # ],
                                             value='None',
                                             clearable=False,
                                             style=dict(
@@ -540,9 +551,17 @@ layout = html.Div(
                                         dcc.Dropdown(
                                             id='Dem_employment',
                                             options=[
-                                                {'label': Dem_employment, 'value': Dem_employment}
-                                                for Dem_employment in np.sort(df.Dem_employment.unique())
+                                                {'label': 'Student', 'value': 'Student'},
+                                                {'label': 'Retired', 'value': 'Retired'},
+                                                {'label': 'Part time employed', 'value': 'Part time employed'},
+                                                {'label': 'Not employed', 'value': 'Not employed'},
+                                                {'label': 'Full time employed', 'value': 'Full time employed'},
+                                                {'label': 'Self-employed', 'value': 'Self-employed'}
                                             ],
+                                            # options=[
+                                            #     {'label': Dem_employment, 'value': Dem_employment}
+                                            #     for Dem_employment in np.sort(df.Dem_employment.unique())
+                                            # ],
                                             value='Full time employed',
                                             clearable=False,
                                             style=dict(
@@ -563,9 +582,13 @@ layout = html.Div(
                                         dcc.Dropdown(
                                             id='Dem_Expat',
                                             options=[
-                                                {'label': Dem_Expat, 'value': Dem_Expat}
-                                                for Dem_Expat in np.sort(df.Dem_Expat.unique())
+                                                {'label': 'yes', 'value': 'yes'},
+                                                {'label': 'no', 'value': 'no'}
                                             ],
+                                            # options=[
+                                            #     {'label': Dem_Expat, 'value': Dem_Expat}
+                                            #     for Dem_Expat in np.sort(df.Dem_Expat.unique())
+                                            # ],
                                             value='no',
                                             clearable=False,
                                             style=dict(
@@ -586,9 +609,16 @@ layout = html.Div(
                                         dcc.Dropdown(
                                             id='Dem_maritalstatus',
                                             options=[
-                                                {'label': Dem_maritalstatus, 'value': Dem_maritalstatus}
-                                                for Dem_maritalstatus in np.sort(df.Dem_maritalstatus.unique())
+                                                {'label': 'Single', 'value': 'Single'},
+                                                {'label': 'Married/cohabiting', 'value': 'Married/cohabiting'},
+                                                {'label': 'Other or would rather not say', 'value': 'Other or would rather not say'},
+                                                {'label': 'Divorced/widowed', 'value': 'Divorced/widowed'},
+                                                {'label': 'Uninformative response', 'value': 'Uninformative response'}
                                             ],
+                                            # options=[
+                                            #     {'label': Dem_maritalstatus, 'value': Dem_maritalstatus}
+                                            #     for Dem_maritalstatus in np.sort(df.Dem_maritalstatus.unique())
+                                            # ],
                                             value='Single',
                                             clearable=False,
                                             style=dict(
@@ -609,9 +639,14 @@ layout = html.Div(
                                         dcc.Dropdown(
                                             id='Dem_riskgroup',
                                             options=[
-                                                {'label': Dem_riskgroup, 'value': Dem_riskgroup}
-                                                for Dem_riskgroup in np.sort(df.Dem_riskgroup.unique())
+                                                {'label': 'Yes','value': 'Yes'},
+                                                {'label': 'No','value': 'No'},
+                                                {'label': 'Not sure','value': 'Not sure'}
                                             ],
+                                            # options=[
+                                            #     {'label': Dem_riskgroup, 'value': Dem_riskgroup}
+                                            #     for Dem_riskgroup in np.sort(df.Dem_riskgroup.unique())
+                                            # ],
                                             value='No',
                                             clearable=False,
                                             style=dict(
@@ -640,9 +675,15 @@ layout = html.Div(
                                         dcc.Dropdown(
                                             id='Dem_isolation',
                                             options=[
-                                                {'label': Dem_isolation, 'value': Dem_isolation}
-                                                for Dem_isolation in np.sort(df.Dem_isolation.unique())
+                                                {'label': 'Isolated', 'value': 'Isolated'},
+                                                {'label': 'Life carries on with minor changes', 'value': 'Life carries on with minor changes'},
+                                                {'label': 'Life carries on as usual', 'value': 'Life carries on as usual'},
+                                                {'label': 'Isolated in medical facility of similar location', 'value':'Isolated in medical facility of similar location'}
                                             ],
+                                            # options=[
+                                            #     {'label': Dem_isolation, 'value': Dem_isolation}
+                                            #     for Dem_isolation in np.sort(df.Dem_isolation.unique())
+                                            # ],
                                             value='Isolated',
                                             clearable=False,
                                             style=dict(

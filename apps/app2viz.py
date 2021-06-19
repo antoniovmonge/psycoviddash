@@ -9,32 +9,15 @@ import dash_table
 from dash_table.Format import Format, Scheme, Trim
 import numpy as np
 
-
+from functions import *
 from app import app
 
 # url='s3://psycovid/cleaned_data_040321.csv'
 # df = pd.read_csv(url ,index_col=0)
-df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)
-df = df.replace({'Dem_gender':'Other/would rather not say'}, 'Other')
+# df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)
+# df = df.replace({'Dem_gender':'Other/would rather not say'}, 'Other')
 
-def edu_func(X):
-        X['Dem_edu'] = X['Dem_edu'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
-                                            'Up to 12 years of school': 4, 'Some College, short continuing education or equivalent': 5, 'College degree, bachelor, master': 6, 'PhD/Doctorate': 7})
-        return X[['Dem_edu']]
-
-def edu_mom_func(X):
-    X['Dem_edu_mom'] = X['Dem_edu_mom'].replace({'Uninformative response': 0, 'None': 1, 'Up to 6 years of school': 2, 'Up to 9 years of school': 3,
-                                                'Up to 12 years of school': 4, 'Some College or equivalent': 5, 'College degree': 6, 'PhD/Doctorate': 7})
-    return X[['Dem_edu_mom']]
-
-def edu_risk_group(X):
-    X['Dem_riskgroup'] = X['Dem_riskgroup'].replace(
-        {'No': 1, 'Not sure': 2, 'Yes': 3})
-    return X[['Dem_riskgroup']]
-
-def dem_expat_func(X):
-    X['Dem_Expat'] = X['Dem_Expat'].replace({'no': 0, 'yes': 1})
-    return X[['Dem_Expat']]
+df = pd.read_csv('raw_data/cleaned_data_040321.csv', index_col=0)[['Dem_age','Dem_gender','Dem_employment']].replace({'Dem_gender':'Other/would rather not say'}, 'Other')
 
 # GENDER PIE CHART FIG 1
 color_palette_list = ['#CDF1AE', '#90DACC', '#F7E9D1', '#F4D2B5',
