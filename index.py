@@ -72,7 +72,7 @@ app.layout = html.Div(
                             selected_className='custom-tab--selected'
                         ),
                         dcc.Tab(
-                            label='Preidctions / Simulation',
+                            label='Predictions / Simulation',
                             value='tab-1',
                             className='custom-tab',
                             selected_className='custom-tab--selected'

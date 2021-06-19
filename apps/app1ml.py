@@ -844,7 +844,7 @@ layout = html.Div(
 )
 
 
-def update_chart(
+def update_chart_1(
     slider0, slider1, slider2, slider3, slider4, slider5,
     slider6, slider7, value8, slider9, slider10, slider11,
     slider12, slider13, slider14):
@@ -961,7 +961,7 @@ def update_chart(
     ]
 )
 
-def update_chart(
+def update_chart_2(
     slider0, slider1, slider2, slider3, slider4, slider5,
     slider6, slider7, value8, slider9, slider10, slider11,
     slider12, slider13, slider14, Dem_age, Dem_gender, Dem_edu, Dem_edu_mom,
