@@ -6,6 +6,7 @@ import dash_bootstrap_components as dbc
 import dash_table
 from dash_table.Format import Format, Scheme, Trim
 
+import pickle
 import numpy as np
 import pandas as pd
 import joblib
@@ -982,7 +983,8 @@ def update_chart_2(
         ]
     )
 
-    model_stress = joblib.load('models/model_linear_stress_3.joblib')
+    # model_stress = joblib.load('models/model_linear_stress_3.joblib')
+    model_stress = pickle.load(open('models/stress_pipeline.pkl','rb'))
     stress_y_pred_log = model_stress.predict(df_predict)
     stress_y_pred = stress_y_pred_log[0]
 
@@ -1013,7 +1015,8 @@ def update_chart_2(
         plot_bgcolor='rgba(0,0,0,0)'
     )
 
-    model_loneliness = joblib.load('models/model_linear_loneliness_3.joblib')
+    # model_loneliness = joblib.load('models/model_linear_loneliness_3.joblib')
+    model_loneliness = pickle.load(open('models/loneliness_pipeline.pkl', 'rb'))
     loneliness_y_pred_log = model_loneliness.predict(df_predict)
     loneliness_y_pred = loneliness_y_pred_log[0]
 
