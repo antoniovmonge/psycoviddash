@@ -3,7 +3,6 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
-import base64
 import dash_table
 from dash_table.Format import Format, Scheme, Trim
 
@@ -14,7 +13,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 
 from app import app
-from functions import *
+# from functions import *
 
 # url='s3://psycovid/cleaned_data_040321.csv'
 # df = pd.read_csv(url ,index_col=0)
@@ -47,7 +46,7 @@ bff15_labels = ['... is often concerned',
 
 
 layout = html.Div(
-
+    
     style=dict(
         # paddingLeft=50,
         # paddingRight=100,
@@ -76,7 +75,7 @@ layout = html.Div(
                                 ),
                         ),
                         dcc.Markdown(
-
+                            
                             '###### I see myself as a person who...',
                             style=dict(
                                 paddingBottom= 20,
@@ -693,13 +692,13 @@ layout = html.Div(
                                             )
                                         ),
                                     ],
-
+                        
                                 ),
                     ]
-
+                    
                 ),
-
-
+                
+                        
                     ]
                 ),
 #--------------------------------------------------------
@@ -775,7 +774,7 @@ layout = html.Div(
                                 #         textAlign='center',
                                 #         marginBottom=-80,
                                 #     ),
-                                #     children=[
+                                #     children=[    
                                 #         html.H6('IN A PANDEMIC OUTBREAK,'),
                                 #         html.P('the prediction about your Stress and Loneliness levels is:')
                                 #     ]
@@ -808,7 +807,7 @@ layout = html.Div(
                                 )
                             ]
                         ),
-
+                        
                     ]
                 )
             ]
@@ -817,7 +816,7 @@ layout = html.Div(
 )
 
 @app.callback(
-
+        
     [
         Output('personality-chart', 'figure'),
         Output('table', 'data')
@@ -838,7 +837,7 @@ layout = html.Div(
         Input('slider12', 'value'),
         Input('slider13', 'value'),
         Input('slider14', 'value'),
-
+    
     ]
 )
 
@@ -847,7 +846,7 @@ def update_chart_1(
     slider0, slider1, slider2, slider3, slider4, slider5,
     slider6, slider7, value8, slider9, slider10, slider11,
     slider12, slider13, slider14):
-
+    
     df_predict = pd.DataFrame(
         columns=[
             'BFF_15_1','BFF_15_2', 'BFF_15_3', 'BFF_15_4', 'BFF_15_5', 'BFF_15_6',
@@ -860,7 +859,7 @@ def update_chart_1(
             slider12, slider13, slider14
         ]]
     )
-
+    
     knn = joblib.load('models/knn.joblib')
     y_pred_log = knn.predict(
         df_predict
@@ -869,13 +868,13 @@ def update_chart_1(
     # y_pred = y_pred_log[0]
     prediction = pd.DataFrame(y_pred_log)
     prediction.columns = ['neu', 'ext', 'ope', 'agr', 'con']
-
+    
     categories = ['NEU', 'OPE', 'EXT',
                 'AGR', 'CONS','NEU']
-
+    
     values = prediction.values.tolist()[0]
     values += values[:1]
-
+    
     figure = go.Figure(
         data=go.Scatterpolar(
             r=values,
@@ -910,7 +909,7 @@ def update_chart_1(
             # size=18,
             # color="RebeccaPurple"
         ),
-        margin=dict(
+        margin=dict(    
                 l=100,
                 r=100,
                 b=0,
@@ -918,20 +917,20 @@ def update_chart_1(
                 pad=0
             ),
         paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)'
+        plot_bgcolor='rgba(0,0,0,0)'  
     )
-
+    
     prediction_table = prediction.T.reset_index()
     prediction_table.columns=['Trait','Score']
     prediction_table.Trait = ['Neuroticism','Openness', 'Extraversion', 'Agreeableness', 'Conscientiousness']
-
+    
     return figure, prediction_table.to_dict('records')
 
-@app.callback(
-    # [
+@app.callback(    
+    [
         Output('stress', 'figure'),
-        # Output('loneliness', 'figure')
-    # ],
+        Output('loneliness', 'figure')
+    ],
     [
         Input('slider0', 'value'),
         Input('slider1', 'value'),
@@ -966,7 +965,7 @@ def update_chart_2(
     slider12, slider13, slider14, Dem_age, Dem_gender, Dem_edu, Dem_edu_mom,
     Dem_employment, Dem_Expat, Dem_maritalstatus, Dem_riskgroup, Dem_isolation
     ):
-
+    
     df_predict = pd.DataFrame(
         columns=[
             'BFF_15_1', 'BFF_15_2', 'BFF_15_3', 'BFF_15_4', 'BFF_15_5', 'BFF_15_6',
@@ -985,11 +984,11 @@ def update_chart_2(
             ]
         ]
     )
-
-    model_stress = joblib.load('models/model_linear_stress.joblib')
+    
+    model_stress = joblib.load('models/model_linear_stress_2.joblib')
     stress_y_pred_log = model_stress.predict(df_predict)
     stress_y_pred = stress_y_pred_log[0]
-
+    
     fig_stress = go.Figure(go.Indicator(
         mode="gauge+number",
         value=stress_y_pred,
@@ -1014,73 +1013,13 @@ def update_chart_2(
             pad=0
         ),
         paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)'
+        plot_bgcolor='rgba(0,0,0,0)' 
     )
-
-    return fig_stress
-
-
-@app.callback(
-    # [
-        # Output('stress', 'figure'),
-        Output('loneliness', 'figure'),
-    # ], 
-    [
-        Input('slider0', 'value'),
-        Input('slider1', 'value'),
-        Input('slider2', 'value'),
-        Input('slider3', 'value'),
-        Input('slider4', 'value'),
-        Input('slider5', 'value'),
-        Input('slider6', 'value'),
-        Input('slider7', 'value'),
-        Input('slider8', 'value'),
-        Input('slider9', 'value'),
-        Input('slider10', 'value'),
-        Input('slider11', 'value'),
-        Input('slider12', 'value'),
-        Input('slider13', 'value'),
-        Input('slider14', 'value'),
-        Input('Dem_age', 'value'),
-        Input('Dem_gender', 'value'),
-        Input('Dem_edu', 'value'),
-        Input('Dem_edu_mom', 'value'),
-        Input('Dem_employment', 'value'),
-        Input('Dem_Expat', 'value'),
-        Input('Dem_maritalstatus', 'value'),
-        Input('Dem_riskgroup', 'value'),
-        Input('Dem_isolation', 'value'),
-    ]
-)
-
-def update_chart_3(
-    slider0, slider1, slider2, slider3, slider4, slider5,
-    slider6, slider7, value8, slider9, slider10, slider11,
-    slider12, slider13, slider14, Dem_age, Dem_gender, Dem_edu, Dem_edu_mom,
-    Dem_employment, Dem_Expat, Dem_maritalstatus, Dem_riskgroup, Dem_isolation
-    ):
-
-    df_predict = pd.DataFrame(columns=[
-        'BFF_15_1', 'BFF_15_2', 'BFF_15_3', 'BFF_15_4', 'BFF_15_5', 'BFF_15_6',
-        'BFF_15_7', 'BFF_15_8', 'BFF_15_9', 'BFF_15_10', 'BFF_15_11',
-        'BFF_15_12', 'BFF_15_13', 'BFF_15_14', 'BFF_15_15', 'Dem_age',
-        'Dem_gender', 'Dem_edu', 'Dem_edu_mom', 'Dem_employment', 'Dem_Expat',
-        'Dem_maritalstatus', 'Dem_riskgroup', 'Dem_isolation'
-    ],
-    data=[[
-        slider0, slider1, slider2, slider3, slider4,
-        slider5, slider6, slider7, value8, slider9,
-        slider10, slider11, slider12, slider13,
-        slider14, Dem_age, Dem_gender, Dem_edu,
-        Dem_edu_mom, Dem_employment, Dem_Expat,
-        Dem_maritalstatus, Dem_riskgroup,
-        Dem_isolation
-    ]])
-
-    model_loneliness = joblib.load('models/model_linear_loneliness.joblib')
+    
+    model_loneliness = joblib.load('models/model_linear_loneliness_2.joblib')
     loneliness_y_pred_log = model_loneliness.predict(df_predict)
     loneliness_y_pred = loneliness_y_pred_log[0]
-
+    
     fig_loneliness = go.Figure(go.Indicator(
         mode="gauge+number",
         value=loneliness_y_pred,
@@ -1105,7 +1044,7 @@ def update_chart_3(
             pad=0
         ),
         paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)'
+        plot_bgcolor='rgba(0,0,0,0)' 
     )
-
-    return fig_loneliness
+    
+    return fig_stress, fig_loneliness
