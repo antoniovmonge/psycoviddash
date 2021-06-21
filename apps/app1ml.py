@@ -17,7 +17,7 @@ from app import app
 from psycoviddash.functions import *
 
 import __main__
-
+# THIS THING MAKES THE JOBLIB WORK WITH FLASK APPS DEPLOYMENT
 __main__.edu_func = edu_func
 __main__.edu_mom_func = edu_mom_func
 __main__.risk_group_func = risk_group_func
