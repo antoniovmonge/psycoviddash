@@ -982,7 +982,7 @@ def update_chart_2(
         ]
     )
 
-    model_stress = joblib.load('models/model_linear_stress_2.joblib')
+    model_stress = joblib.load('models/model_linear_stress_3.joblib')
     stress_y_pred_log = model_stress.predict(df_predict)
     stress_y_pred = stress_y_pred_log[0]
 
@@ -1013,7 +1013,7 @@ def update_chart_2(
         plot_bgcolor='rgba(0,0,0,0)'
     )
 
-    model_loneliness = joblib.load('models/model_linear_loneliness_2.joblib')
+    model_loneliness = joblib.load('models/model_linear_loneliness_3.joblib')
     loneliness_y_pred_log = model_loneliness.predict(df_predict)
     loneliness_y_pred = loneliness_y_pred_log[0]
 
