@@ -13,7 +13,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 
 from app import app
-# from functions import *
+from psycoviddash.functions import *
 
 # url='s3://psycovid/cleaned_data_040321.csv'
 # df = pd.read_csv(url ,index_col=0)
@@ -21,8 +21,6 @@ from app import app
 # df = pd.read_csv('raw_data/cleaned_data_040321.csv')
 # df = df[df['Dem_isolation'] != '1']
 
-
-# kwargs = {}
 
 bff15_options = ['Strongly disagree', 'Disagree',
                     'Slightly disagree', 'Slightly agree', 'Agree', 'Strongly agree']
@@ -46,7 +44,7 @@ bff15_labels = ['... is often concerned',
 
 
 layout = html.Div(
-    
+
     style=dict(
         # paddingLeft=50,
         # paddingRight=100,
@@ -75,7 +73,7 @@ layout = html.Div(
                                 ),
                         ),
                         dcc.Markdown(
-                            
+
                             '###### I see myself as a person who...',
                             style=dict(
                                 paddingBottom= 20,
@@ -485,8 +483,7 @@ layout = html.Div(
                                                 'value': 'College degree, bachelor, master'},
                                                 {'label': 'None', 'value': 'None'},
                                                 {'label': 'PhD/Doctorate', 'value': 'PhD/Doctorate'},
-                                                {'label': 'Some College, short continuing education or equivalent',
-                                                'value': 'Some College, short continuing education or equivalent'},
+                                                {'label': 'Some College, short continuing education or equivalent', 'value': 'Some College, short continuing education or equivalent'},
                                                 {'label': 'Uninformative response', 'value': 'Uninformative response'},
                                                 {'label': 'Up to 12 years of school', 'value': 'Up to 12 years of school'},
                                                 {'label': 'Up to 6 years of school', 'value': 'Up to 6 years of school'},
@@ -692,17 +689,17 @@ layout = html.Div(
                                             )
                                         ),
                                     ],
-                        
+
                                 ),
                     ]
-                    
+
                 ),
-                
-                        
+
+
                     ]
                 ),
-#--------------------------------------------------------
-# CHART SECTION
+                #--------------------------------------------------------
+                # CHART SECTION
                 html.Div(
                     className='chart-container',
                     children=[ # CHART SECTION
@@ -774,7 +771,7 @@ layout = html.Div(
                                 #         textAlign='center',
                                 #         marginBottom=-80,
                                 #     ),
-                                #     children=[    
+                                #     children=[
                                 #         html.H6('IN A PANDEMIC OUTBREAK,'),
                                 #         html.P('the prediction about your Stress and Loneliness levels is:')
                                 #     ]
@@ -807,7 +804,7 @@ layout = html.Div(
                                 )
                             ]
                         ),
-                        
+
                     ]
                 )
             ]
@@ -816,7 +813,7 @@ layout = html.Div(
 )
 
 @app.callback(
-        
+
     [
         Output('personality-chart', 'figure'),
         Output('table', 'data')
@@ -837,7 +834,7 @@ layout = html.Div(
         Input('slider12', 'value'),
         Input('slider13', 'value'),
         Input('slider14', 'value'),
-    
+
     ]
 )
 
@@ -846,7 +843,7 @@ def update_chart_1(
     slider0, slider1, slider2, slider3, slider4, slider5,
     slider6, slider7, value8, slider9, slider10, slider11,
     slider12, slider13, slider14):
-    
+
     df_predict = pd.DataFrame(
         columns=[
             'BFF_15_1','BFF_15_2', 'BFF_15_3', 'BFF_15_4', 'BFF_15_5', 'BFF_15_6',
@@ -859,7 +856,7 @@ def update_chart_1(
             slider12, slider13, slider14
         ]]
     )
-    
+
     knn = joblib.load('models/knn.joblib')
     y_pred_log = knn.predict(
         df_predict
@@ -868,13 +865,13 @@ def update_chart_1(
     # y_pred = y_pred_log[0]
     prediction = pd.DataFrame(y_pred_log)
     prediction.columns = ['neu', 'ext', 'ope', 'agr', 'con']
-    
+
     categories = ['NEU', 'OPE', 'EXT',
                 'AGR', 'CONS','NEU']
-    
+
     values = prediction.values.tolist()[0]
     values += values[:1]
-    
+
     figure = go.Figure(
         data=go.Scatterpolar(
             r=values,
@@ -909,7 +906,7 @@ def update_chart_1(
             # size=18,
             # color="RebeccaPurple"
         ),
-        margin=dict(    
+        margin=dict(
                 l=100,
                 r=100,
                 b=0,
@@ -917,16 +914,16 @@ def update_chart_1(
                 pad=0
             ),
         paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)'  
+        plot_bgcolor='rgba(0,0,0,0)'
     )
-    
+
     prediction_table = prediction.T.reset_index()
     prediction_table.columns=['Trait','Score']
     prediction_table.Trait = ['Neuroticism','Openness', 'Extraversion', 'Agreeableness', 'Conscientiousness']
-    
+
     return figure, prediction_table.to_dict('records')
 
-@app.callback(    
+@app.callback(
     [
         Output('stress', 'figure'),
         Output('loneliness', 'figure')
@@ -965,7 +962,7 @@ def update_chart_2(
     slider12, slider13, slider14, Dem_age, Dem_gender, Dem_edu, Dem_edu_mom,
     Dem_employment, Dem_Expat, Dem_maritalstatus, Dem_riskgroup, Dem_isolation
     ):
-    
+
     df_predict = pd.DataFrame(
         columns=[
             'BFF_15_1', 'BFF_15_2', 'BFF_15_3', 'BFF_15_4', 'BFF_15_5', 'BFF_15_6',
@@ -984,11 +981,11 @@ def update_chart_2(
             ]
         ]
     )
-    
+
     model_stress = joblib.load('models/model_linear_stress_2.joblib')
     stress_y_pred_log = model_stress.predict(df_predict)
     stress_y_pred = stress_y_pred_log[0]
-    
+
     fig_stress = go.Figure(go.Indicator(
         mode="gauge+number",
         value=stress_y_pred,
@@ -1013,13 +1010,13 @@ def update_chart_2(
             pad=0
         ),
         paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)' 
+        plot_bgcolor='rgba(0,0,0,0)'
     )
-    
+
     model_loneliness = joblib.load('models/model_linear_loneliness_2.joblib')
     loneliness_y_pred_log = model_loneliness.predict(df_predict)
     loneliness_y_pred = loneliness_y_pred_log[0]
-    
+
     fig_loneliness = go.Figure(go.Indicator(
         mode="gauge+number",
         value=loneliness_y_pred,
@@ -1044,7 +1041,7 @@ def update_chart_2(
             pad=0
         ),
         paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)' 
+        plot_bgcolor='rgba(0,0,0,0)'
     )
-    
+
     return fig_stress, fig_loneliness

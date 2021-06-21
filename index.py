@@ -6,7 +6,7 @@ import dash_bootstrap_components as dbc
 from app import app
 from app import server
 from apps import app0intro, app1ml, app2viz, app3analytics, app4compare
-from functions import *
+from psycoviddash.functions import *
 
 
 app.layout = html.Div(
