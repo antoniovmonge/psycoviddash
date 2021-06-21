@@ -16,6 +16,13 @@ import plotly.express as px
 from app import app
 from psycoviddash.functions import *
 
+import __main__
+
+__main__.edu_func = edu_func
+__main__.edu_mom_func = edu_mom_func
+__main__.risk_group_func = risk_group_func
+__main__.expat_func = expat_func
+
 # url='s3://psycovid/cleaned_data_040321.csv'
 # df = pd.read_csv(url ,index_col=0)
 

@@ -8,6 +8,12 @@ from app import server
 from apps import app0intro, app1ml, app2viz, app3analytics, app4compare
 from psycoviddash.functions import *
 
+import __main__
+
+__main__.edu_func = edu_func
+__main__.edu_mom_func = edu_mom_func
+__main__.risk_group_func = risk_group_func
+__main__.expat_func = expat_func
 
 app.layout = html.Div(
     children=[
@@ -49,8 +55,8 @@ app.layout = html.Div(
                         ),
                     ]
                 ),
-                
-                
+
+
             ],
             style=dict(
                 position= 'sticky',
@@ -121,10 +127,10 @@ app.layout = html.Div(
         #     ],
         # ),
         # dcc.Location(id='url', refresh=False),
-        
+
     ],
-    
-    
+
+
 )
 #callback to control the tab content
 @app.callback(Output('page-content', 'children'),[Input('tabs', 'value')])
@@ -162,4 +168,3 @@ def render_content(tab):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
-    
