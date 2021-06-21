@@ -1,7 +1,7 @@
 import dash
 import dash_bootstrap_components as dbc
 
-from functions import *
+# from functions import *
 # import pandas as pd
 # from flask_caching import Cache
 

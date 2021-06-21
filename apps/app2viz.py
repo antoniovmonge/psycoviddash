@@ -9,7 +9,7 @@ import dash_table
 from dash_table.Format import Format, Scheme, Trim
 import numpy as np
 
-from functions import *
+# from functions import *
 from app import app
 
 # url='s3://psycovid/cleaned_data_040321.csv'

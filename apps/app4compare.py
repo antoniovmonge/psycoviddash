@@ -12,7 +12,7 @@ import dash_table
 from dash_table.Format import Format, Scheme, Trim
 
 from app import app
-from functions import *
+# from functions import *
 
 df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)[['Country','PSS10_avg','SLON3_avg','neu','ext','ope','agr','con']]
 

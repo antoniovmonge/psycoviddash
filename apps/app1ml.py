@@ -15,7 +15,7 @@ import plotly.express as px
 from joblib import load
 
 from app import app
-from functions import *
+# from functions import *
 
 # url='s3://psycovid/cleaned_data_040321.csv'
 # df = pd.read_csv(url ,index_col=0)
