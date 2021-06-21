@@ -12,7 +12,7 @@ import dash_table
 from dash_table.Format import Format, Scheme, Trim
 
 from app import app
-# from functions import *
+from psycoviddash.functions import *
 
 df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)[['Country','PSS10_avg','SLON3_avg','neu','ext','ope','agr','con']]
 
@@ -111,7 +111,7 @@ layout = html.Div(
                                 paddingTop='50px'
                             )
                         )
-                        
+
                     ],
                 ),
                 # RADAR CHART --------------------------------
@@ -128,7 +128,7 @@ layout = html.Div(
                         )
                     ]
                 ),
-                
+
                 html.Div(
                     className='four columns div-for-user-controls', # Define the left element
                     style=dict(
@@ -171,7 +171,7 @@ layout = html.Div(
                                 dash_table.DataTable(
                                     id='table-2',
                                     columns=[
-                                    
+
                                         dict(id='Score', name='Score', type='numeric', format=Format(precision=2, scheme=Scheme.fixed)),
                                         dict(id='Trait', name='Trait')
                                     ],
@@ -191,9 +191,9 @@ layout = html.Div(
                                 paddingTop='50px'
                             )
                         )
-                        
+
                     ]
-                ),  
+                ),
             ]
         ),
         # INDICATORS
@@ -207,7 +207,7 @@ layout = html.Div(
                         html.Div(
                             className='column',
                             children=[
-                                
+
                                 dcc.Graph(
                                     id='stress-1',
                                     config={"displayModeBar": False},
@@ -226,7 +226,7 @@ layout = html.Div(
                         html.Div(
                             className='column',
                             children=[
-                                
+
                                 dcc.Graph(
                                     id='loneliness-1',
                                     config={"displayModeBar": False},
@@ -245,7 +245,7 @@ layout = html.Div(
                     children=[
                         html.Div(' ')
                     ]
-            
+
                 ),
                 # COLUMN 2
                 html.Div(
@@ -254,7 +254,7 @@ layout = html.Div(
                         html.Div(
                             className='column',
                             children=[
-                                
+
                                 dcc.Graph(
                                     id='stress-2',
                                     config={"displayModeBar": False},
@@ -263,7 +263,7 @@ layout = html.Div(
                             style=dict(
                                 marginTop= 10,
                                 # marginLeft= 120,
-                            ),     
+                            ),
                         ),
                     ]
                 ),
@@ -272,7 +272,7 @@ layout = html.Div(
                     children=[
                         html.Div(
                             className='column',
-                            children=[           
+                            children=[
                                 dcc.Graph(
                                     id='loneliness-2',
                                     config={"displayModeBar": False},
@@ -281,7 +281,7 @@ layout = html.Div(
                             style=dict(
                                 marginTop= 10,
                                 # marginLeft= 120,
-                            ),     
+                            ),
                         ),
                     ]
                 ),
@@ -292,13 +292,13 @@ layout = html.Div(
                 paddingRight='100px',
             )
         ),
-        
-        
+
+
     ],
 )
 
 @app.callback(
-    
+
         Output('radar-chart', 'figure'),
     [
         Input('country-filter-1', 'value'),
@@ -409,7 +409,7 @@ def update_chart(Country1):
         )
     ))
     figure_stress_1.update_layout(
-        margin=dict(    
+        margin=dict(
             l=20,
             r=20,
             b=0,
@@ -417,7 +417,7 @@ def update_chart(Country1):
             pad=0
         ),
         paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)'  
+        plot_bgcolor='rgba(0,0,0,0)'
     )
     return figure_stress_1
 
@@ -443,7 +443,7 @@ def update_chart(Country1):
         )
     ))
     figure_loneliness_1.update_layout(
-        margin=dict(    
+        margin=dict(
             l=20,
             r=20,
             b=0,
@@ -482,7 +482,7 @@ def update_chart(Country2):
         )
     ))
     figure_stress_2.update_layout(
-        margin=dict(    
+        margin=dict(
             l=20,
             r=20,
             b=0,
@@ -516,7 +516,7 @@ def update_chart(Country2):
         )
     ))
     figure_loneliness_2.update_layout(
-        margin=dict(    
+        margin=dict(
             l=20,
             r=20,
             b=0,

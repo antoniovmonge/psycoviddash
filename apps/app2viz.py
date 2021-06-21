@@ -9,7 +9,7 @@ import dash_table
 from dash_table.Format import Format, Scheme, Trim
 import numpy as np
 
-# from functions import *
+from psycoviddash.functions import *
 from app import app
 
 # url='s3://psycovid/cleaned_data_040321.csv'
@@ -47,7 +47,7 @@ fig1.update_layout(
             pad=0
         ),
     paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)' 
+    plot_bgcolor='rgba(0,0,0,0)'
 )
 
 # EMPLOYMENT PIE CHART
@@ -70,7 +70,7 @@ fig2.update_layout(
             pad=4
         ),
     paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)' 
+    plot_bgcolor='rgba(0,0,0,0)'
 )
 
 # TABLE GENDER
@@ -110,7 +110,7 @@ fig3.update_layout(
         pad=0
     ),
     paper_bgcolor='rgba(0,0,0,0)',
-    plot_bgcolor='rgba(0,0,0,0)' 
+    plot_bgcolor='rgba(0,0,0,0)'
     )
 fig3.update_yaxes(showgrid=True)
 
@@ -170,7 +170,7 @@ layout = html.Div(
                                     # style={'marginTop': 30}
                                 ),
                                 html.Div(
-                                    
+
                                     [
                                         # SECTION 1 CHART
                                         html.Div(
@@ -287,9 +287,9 @@ layout = html.Div(
                                         ),
                                     ]
                                 ),
-                                
+
                                 html.Div(
-                                    
+
                                 )
                             ]
                         ),
@@ -309,7 +309,7 @@ layout = html.Div(
                                         style=dict(
                                             marginTop=40
                                         )
-                                        
+
                                 ),
                                 dcc.Markdown(
                                     f'''
@@ -332,7 +332,7 @@ layout = html.Div(
                                                     figure=fig3,
                                                     config={"displayModeBar": False},
                                                 ),
-                                                
+
                                             ]
                                         ),
                                         html.Div(
@@ -359,16 +359,16 @@ layout = html.Div(
                                                         )
                                                     ],
                                                     # style={'marginTop': 75, 'marginBottom': 200}
-                                                )    
+                                                )
                                             ]
                                         ),
                                         html.Div(
                                             className='five columns',
                                             children=[
-                                                
+
                                             ]
                                         )
-                                        
+
                                     ]
                                 ),
                             ]
@@ -379,8 +379,3 @@ layout = html.Div(
         )
     ]
 )
-
-    
-
-    
-

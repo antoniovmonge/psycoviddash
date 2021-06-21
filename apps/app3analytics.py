@@ -12,7 +12,7 @@ import dash_table
 from dash_table.Format import Format, Scheme, Trim
 
 from app import app
-# from functions import *
+from psycoviddash.functions import *
 
 # url='s3://psycovid/cleaned_data_040321.csv'
 # df = pd.read_csv(url ,index_col=0)
@@ -40,7 +40,7 @@ stress_fig = px.bar(
     height=400,
     # title='STRESS levels (Top 10)',
     labels={'PSS10_avg': 'Stress Level'},
-    
+
 )
 stress_fig.update_traces(
     # marker_color='rgb(158,202,225)',
@@ -68,12 +68,12 @@ stress_fig.update_layout(
     #     "xanchor": "left",
     # }
     # paper_bgcolor='rgb(249, 246, 225)'
-)        
+)
 stress_fig.update_xaxes(
     range=[1, 5],
     showgrid=True,
     gridcolor='rgba(0, 0, 0, 0.1)',
-    
+
     title_font_family='Helvetica',
     # linecolor= 'black',
     # linewidth= 0.5,
@@ -100,7 +100,7 @@ lonely_fig = px.bar(
     height=400,
     # title='LONELINESS levels (Top 10)',
     labels={'SLON3_avg': 'Loneliness Level'},
-    
+
 )
 lonely_fig.update_traces(
     marker_color='#97D9F3',
@@ -126,7 +126,7 @@ lonely_fig.update_layout(
         "x": 0.15,
         "xanchor": "left"
     }
-)        
+)
 lonely_fig.update_xaxes(
     range=[1, 5],
     showgrid=True,
@@ -155,7 +155,7 @@ layout = html.Div(
         # paddingRight= 100,
         # paddingBottom= 150,
     ),
-    children=[      
+    children=[
         html.Div(
             className='row',
             children=[
@@ -166,7 +166,7 @@ layout = html.Div(
                         dcc.Markdown(
                             f'{paragraph1()}',
                         ),
-                        
+
                     ]
                 ),
             ]
@@ -201,7 +201,7 @@ layout = html.Div(
                                 marginTop=-60,
                             )
                         ),
-                        
+
                     ],
                 ),
                 html.Div(
@@ -213,7 +213,7 @@ layout = html.Div(
                         '''),
                         dcc.Markdown(
                             f'{paragraph2()}',
-                        )      
+                        )
                         # html.P('''* B&H - Bosnia & Herzegovina''')
                     ],
                     style=dict(
@@ -230,7 +230,7 @@ layout = html.Div(
                         dcc.Markdown('### Loneliness during the COVID-19 Pandemic by Countries'),
                         dcc.Markdown(
                             f'{paragraph3()}',
-                        ) 
+                        )
                     ],
                     style=dict(
                         paddingBottom=20,
@@ -256,7 +256,7 @@ layout = html.Div(
                         ),
                         html.Div(
                             children=[
-                        
+
                                 dcc.Graph(
                                     id='line-fig',
                                     figure=lonely_fig,
@@ -280,12 +280,11 @@ layout = html.Div(
                         html.Div(
                             dcc.Markdown(
                                 f'{paragraph4()}',
-                            )       
+                            )
                         )
-                    ]    
+                    ]
                 ),
             ]
         ),
     ],
 )
-

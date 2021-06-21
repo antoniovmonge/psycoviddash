@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 
 from app import app
-
+from psycoviddash.functions import *
 # url='s3://psycovid/cleaned_data_040321.csv'
 # df = pd.read_csv(url ,index_col=0)
 df = pd.read_csv('raw_data/cleaned_data_040321.csv')
@@ -121,11 +121,11 @@ layout = html.Div([
                     '''
                 )
             ],
-            
+
         )
     ]),
 ]),
-    
+
     ],)
 
 
@@ -134,4 +134,3 @@ layout = html.Div([
     Input('app-intro-dropdown', 'value'))
 def display_value(value):
     return 'You have selected "{}"'.format(value)
-
