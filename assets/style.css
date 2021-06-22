@@ -17,24 +17,24 @@ Taken from https://codepen.io/chriddyp/pen/bWLwgP.css
 
 
 /* Grid –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.navbar-minimal {
+/* .navbar-minimal {
   height: 70px;
   background: #b6eaff;
   box-shadow: 0px -2px 10px rgba(0,0,0,0.3);
   display: flex;
   justify-content: space-around;
   align-items: center;
-}
-.navbar-minimal img {
+} */
+/* .navbar-minimal img {
   width: 50px;
   height: 50px;
-}
-.banner {
+} */
+/* .banner {
   background-size: cover;
   background-position: center;
   padding: 70px 0px;
   
-}
+} */
 .main-container {
   display: flex;
   /* max-width: 1080px; */
@@ -256,13 +256,13 @@ p {
   /* padding-left: 12px; */
 }
 /* Blockquotes –––––––––––––––––––––––––––––––––––––––––––––––––– */
-blockquote {
+/* blockquote {
   border-left: 4px lightgrey solid;
   padding-left: 1rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
   margin-left: 0rem;
-}
+} */
 /* Links –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
   color: #1EAEDB;
@@ -286,16 +286,16 @@ a:hover {
   font-family: "Lato", sans-serif
 }
 
-.gtitle{
+.g-title{
   font-family: "Lato", sans-serif !important
 }
 
-.g-title{
+/* .g-title{
   font-family: "Lato", sans-serif
-}
+} */
 
 
-.button, button, input[type="submit"], input[type="reset"], input[type="button"] {
+/* .button, button, input[type="submit"], input[type="reset"], input[type="button"] {
   display: inline-block;
   height: 38px;
   padding: 0 30px;
@@ -312,14 +312,14 @@ a:hover {
   border-radius: 4px;
   border: 1px solid #bbb;
   cursor: pointer;
-  box-sizing: border-box;
-}
-.button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, .button:focus, button:focus, input[type="submit"]:focus, input[type="reset"]:focus, input[type="button"]:focus {
+  box-sizing: content-box;
+} */
+/* .button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, .button:focus, button:focus, input[type="submit"]:focus, input[type="reset"]:focus, input[type="button"]:focus {
   color: #333;
   border-color: #888;
   outline: 0;
-}
-.button.button-primary, button.button-primary, input[type="submit"].button-primary, input[type="reset"].button-primary, input[type="button"].button-primary {
+} */
+/* .button.button-primary, button.button-primary, input[type="submit"].button-primary, input[type="reset"].button-primary, input[type="button"].button-primary {
   color: #FFF;
   background-color: #33C3F0;
   border-color: #33C3F0;
@@ -328,28 +328,29 @@ a:hover {
   color: #FFF;
   background-color: #1EAEDB;
   border-color: #1EAEDB;
-}
+} */
 /* Forms –––––––––––––––––––––––––––––––––––––––––––––––––– */
-input[type="email"], input[type="number"], input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea, select {
+/* input[type="email"], input[type="number"], input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea, select {
   height: 38px;
   padding: 6px 10px;
  /* The 6px vertically centers text on FF, ignored by Webkit */
-  background-color: #fff;
+  /* background-color: #fff;
   border: 1px solid #D1D1D1;
   border-radius: 4px;
   box-shadow: none;
   box-sizing: border-box;
   font-family: inherit;
   font-size: inherit;
- /*https://stackoverflow.com/questions/6080413/why-doesnt-input-inherit-the-font-from-body*/
-}
+   */
+/*https://stackoverflow.com/questions/6080413/why-doesnt-input-inherit-the-font-from-body*/
+/* }  */
 /* Removes awkward default styles on some inputs for iOS */
-input[type="email"], input[type="number"], input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea {
+/* input[type="email"], input[type="number"], input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-}
-textarea {
+} */
+/* textarea {
   min-height: 65px;
   padding-top: 6px;
   padding-bottom: 6px;
@@ -373,9 +374,9 @@ label > .label-body {
   display: inline-block;
   margin-left: .5rem;
   font-weight: normal;
-}
+} */
 /* Lists –––––––––––––––––––––––––––––––––––––––––––––––––– */
-ul {
+/* ul {
   list-style: circle inside;
 }
 ol {
@@ -391,9 +392,9 @@ ul ul, ul ol, ol ol, ol ul {
 }
 li {
   margin-bottom: 1rem;
-}
+} */
 /* Tables –––––––––––––––––––––––––––––––––––––––––––––––––– */
-table {
+/* table {
   border-collapse: collapse;
 }
 th, td {
@@ -406,9 +407,9 @@ th:first-child, td:first-child {
 }
 th:last-child, td:last-child {
   padding-right: 0;
-}
+} */
 /* Spacing –––––––––––––––––––––––––––––––––––––––––––––––––– */
-button, .button {
+/* button, .button {
   margin-bottom: 0rem;
 }
 input, textarea, select, fieldset {
@@ -419,9 +420,9 @@ pre, dl, figure, table, form {
 }
 p, ul, ol {
   margin-bottom: 0.75rem;
-}
+} */
 /* Utilities –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.u-full-width {
+/* .u-full-width {
   width: 100%;
   box-sizing: border-box;
 }
@@ -434,25 +435,25 @@ p, ul, ol {
 }
 .u-pull-left {
   float: left;
-}
+} */
 /* Misc –––––––––––––––––––––––––––––––––––––––––––––––––– */
-hr {
+/* hr {
   margin-top: 3rem;
   margin-bottom: 3.5rem;
   border-width: 0;
   border-top: 1px solid #E1E1E1;
-}
+} */
 /* Clearing –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /* Self Clearing Goodness */
-.container:after, .row:after, .columns:after, .u-cf {
+/* .container:after, .row:after, .columns:after, .u-cf {
   content: "";
   display: table;
   clear: both;
-}
+} */
 /* Media Queries –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /* Note: The best way to structure the use of media queries is to create the queries near the relevant code. For example, if you wanted to change the styles for buttons on small devices, paste the mobile query code up in the buttons section and style it there. */
 /* Larger than mobile */
-@media (min-width: 400px) {
+/* @media (min-width: 400px) {
   .container {
       width: 90%;
       padding: 0;
@@ -462,7 +463,7 @@ hr {
   }
 }
 /* Larger than phablet (also point when grid becomes active) */
-@media (min-width: 550px) {
+/* @media (min-width: 550px) {
   .container {
       width: 90%;
       padding: 0;
@@ -472,7 +473,7 @@ hr {
   }
 }
 /* Larger than tablet */
-@media (min-width: 750px) {
+/* @media (min-width: 750px) {
   .container {
       width: 90%;
       padding: 0;
@@ -482,7 +483,7 @@ hr {
   }
 }
 /* Larger than desktop */
-@media (min-width: 1000px) {
+/* @media (min-width: 1000px) {
   .container {
       width: 90%;
       padding: 0;
@@ -490,7 +491,7 @@ hr {
   .main-container {
         width: 90%
   }
-}
+} */
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {
   .container {
@@ -503,32 +504,32 @@ hr {
 }
 /* Custom App CSS Below --------------------------------- */
 /* Main Layout ––––––––––––––––––––––––––––––––––––––––––––––––––*/
-html, body{
+/* html, body{
   height: 100%;
-}
+} */
 
-body {
+/* body {
   background-color: #ffffff;
   color: #3b3b3b;
   height: 100%;
   margin: 0;
   padding: 0;
-}
+} */
 
-.react-entry-point{
+/* .react-entry-point{
   height: 100%;
-}
+} */
 
-a {
+/* a {
   text-decoration: none;
-}
-.bg-grey{
+} */
+/* .bg-grey{
   background-color: #31302F;
-}
-.text-padding{
+} */
+/* .text-padding{
   padding: 5px;
-}
-.text-padding-more{
+} */
+/* .text-padding-more{
   padding-top: 40px;
   padding-left: 20px;
   padding-right: 20px;
@@ -538,7 +539,7 @@ a {
 }
 .padding-top{
   padding-top: 40px;
-}
+} */
 /*Color Header-------------------------------------------------*/
 .header {
     background-color: #424242;
@@ -550,11 +551,11 @@ a {
     /* text-shadow: 2px 2px 3px rgba(0,0,0,0.7) ; */
 }
 
-.header-emoji {
+/* .header-emoji {
     font-size: 48px;
     margin: 0 auto;
     text-align: center;
-}
+} */
 
 .header-title {
     color: #ffffff;
@@ -579,14 +580,14 @@ a {
     /* max-width: 384px; */
 }
 
-.wrapper {
+/* .wrapper {
     margin-right: auto;
     margin-left: auto;
     max-width: 1024px;
     padding-right: 10px;
     padding-left: 10px;
     margin-top: 32px;
-}
+} */
 
 .card {
     /* font-size: 25px; */
@@ -600,39 +601,27 @@ a {
     align-items: center;
 }
 
-.menu {
+/* .menu {
     height: 132px;
     width: 340px;
     display: flex;
     /* justify-content: space-evenly; */
-    padding-top: 24px;
+    /* padding-top: 24px;
     margin: -10px auto 0 auto;
     background-color: #c5d9df;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
-}
+}  */
 
-.Select-control {
-    width: 256px;
-    height: 48px;
-}
-
-.Select--single > .Select-control .Select-value, .Select-placeholder {
-    line-height: 48px;
-}
-
-.Select--multi .Select-value-label {
-    line-height: 32px;
-}
 
 /* Graph Layout ––––––––––––––––––––––––––––––––––––––––––––––––––*/
-.div-for-charts{
+/* .div-for-charts{
   display: flex;
   flex-grow: 1;
   flex-direction: column;
   height: 100vh;
   width: 100%;
-}
-#histogram {
+} */
+/* #histogram {
   flex-grow: 1
 }
 #map-graph {
@@ -646,9 +635,9 @@ a {
   padding-top: 0px;
   padding-bottom: 0px;
   padding-right: 0px;
-}
+} */
 /* Graph Control Objects ––––––––––––––––––––––––––––––––––––––––––––––––––*/
-.div-user-controls {
+/* .div-user-controls {
   padding-left: 90px;
   padding-top: 64px;
 }
@@ -671,16 +660,32 @@ a {
 
 }
 .menu-title {
+    margin-top: 6px;
     margin-bottom: 6px;
     font-weight: bold;
     color: #4e4e4e;
     text-align: justify;
 }
+/* */
+.Select-control {
+    min-width: 256px;
+    height: 48px;
+}
+
+.Select--single > .Select-control .Select-value, .Select-placeholder {
+    line-height: 48px;
+}
+
+.Select--multi .Select-value-label {
+    line-height: 200px;
+    padding: 10px;
+}
 #modelselector .Select-control{
-  max-height: 82px;
+  /* max-height: 300px; */
   overflow-y: auto;
-  margin: 0px 0px -3px 0px;
+  margin: 10px 10px 10px 10px;
   border: 0.5px solid #dbdbdb44;
+  
 }
 
 .Select-control{
@@ -691,15 +696,16 @@ a {
   color: #181818;
   background: #1E1E1E;
   background-color: #fdfdfd;
-  /* font-family:'Courier New', Courier, monospace; */
-  font-size: 14px;
 }
-._dash-app-content {
+  /* font-family:'Courier New', Courier, monospace; */
+  /* font-size: 14px; */
+/* } */
+/* ._dash-app-content {
   overflow-x: hidden;
   overflow-y: hidden;
   position: relative;
 }
-.has-value.Select--single>.Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single>.Select-control .Select-value .Select-value-labeln {
+.has-value.Select--single>.Select-control .Select-value .Select-value-label, .has-value.is-pseudo-focused.Select--single>.Select-control .Select-value .Select-value-label {
   color: #181818;
   font-weight: 400;
   font-size: 14px;
@@ -757,11 +763,11 @@ a {
 .SingleDatePicker_picker, .SingleDatePicker_picker_1, .SingleDatePicker_picker__directionLeft,
 .SingleDatePicker_picker__directionLeft_2{
   filter:invert(100%);
-}
+} */
 /* Tabs */
-.custom-tabs-container {
+/* .custom-tabs-container {
     width: 85%;
-}
+} */
 .custom-tabs {
     border-top-left-radius: 3px;
     background-color: #f9f9f9;
@@ -794,7 +800,7 @@ a {
     border-top: 3px solid #6e6e6e !important;
 }
 /* For Mobile Phones and small screens ––––––––––––––––––––––––––––––––––––––––––––––––––*/
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
   .four, .eight {
       min-width: 100%;
  }

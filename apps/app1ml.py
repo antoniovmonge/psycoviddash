@@ -67,7 +67,7 @@ layout = html.Div(
                     children=[
                         dcc.Markdown(
                             '''
-                            #### Test for personality traits (BFF-15)
+                            #### Test for personality traits
                             1 = Strongly Disagree  
                             2 = Disagree  
                             3 = Slightly disagree  
@@ -82,7 +82,7 @@ layout = html.Div(
                         ),
                         dcc.Markdown(
 
-                            '###### I see myself as a person who...',
+                            '##### I see myself as a person who...',
                             style=dict(
                                 paddingBottom= 20,
                                 textAlign= 'center',
@@ -425,7 +425,7 @@ layout = html.Div(
                         ),
                         dcc.Markdown('#### Demographic Information'),
                         html.Div(
-                            className='div-for-dropdown',
+                            # className='div-for-dropdown',
                             children=[
                                 html.Div(
                                     style=dict(
@@ -487,15 +487,15 @@ layout = html.Div(
                                         dcc.Dropdown(
                                             id='Dem_edu',
                                             options=[
+                                                {'label': 'None', 'value': 'None'},
+                                                {'label': 'Up to 6 years of school', 'value': 'Up to 6 years of school'},
+                                                {'label': 'Up to 9 years of school', 'value': 'Up to 9 years of school'},
+                                                {'label': 'Up to 12 years of school', 'value': 'Up to 12 years of school'},
+                                                {'label': 'Some College, short continuing education or equivalent', 'value': 'Some College, short continuing education or equivalent'},
                                                 {'label': 'College degree, bachelor, master',
                                                 'value': 'College degree, bachelor, master'},
-                                                {'label': 'None', 'value': 'None'},
                                                 {'label': 'PhD/Doctorate', 'value': 'PhD/Doctorate'},
-                                                {'label': 'Some College, short continuing education or equivalent', 'value': 'Some College, short continuing education or equivalent'},
                                                 {'label': 'Uninformative response', 'value': 'Uninformative response'},
-                                                {'label': 'Up to 12 years of school', 'value': 'Up to 12 years of school'},
-                                                {'label': 'Up to 6 years of school', 'value': 'Up to 6 years of school'},
-                                                {'label': 'Up to 9 years of school', 'value': 'Up to 9 years of school'}
                                             ],
                                             # options=[
                                             #     {'label': Dem_edu, 'value': Dem_edu}
@@ -522,11 +522,11 @@ layout = html.Div(
                                             id='Dem_edu_mom',
                                             options=[
                                                 {'label': 'None', 'value': 'None'},
-                                                {'label': 'College degree', 'value': 'College degree'},
-                                                {'label': 'Some College or equivalent', 'value': 'Some College or equivalent'},
-                                                {'label': 'Up to 12 years of school', 'value': 'Up to 12 years of school'},
-                                                {'label': 'Up to 9 years of school', 'value': 'Up to 9 years of school'},
                                                 {'label': 'Up to 6 years of school', 'value': 'Up to 6 years of school'},
+                                                {'label': 'Up to 9 years of school', 'value': 'Up to 9 years of school'},
+                                                {'label': 'Up to 12 years of school', 'value': 'Up to 12 years of school'},
+                                                {'label': 'Some College or equivalent', 'value': 'Some College or equivalent'},
+                                                {'label': 'College degree', 'value': 'College degree'},
                                                 {'label': 'PhD/Doctorate', 'value': 'PhD/Doctorate'},
                                                 {'label': 'Uninformative response', 'value': 'Uninformative response'}
                                             ],
@@ -691,9 +691,29 @@ layout = html.Div(
                                             clearable=False,
                                             style=dict(
                                                 # paddingRight= 150,
-                                                # width='75%',
-                                                # display='inline-block',
-                                                # verticalAlign="middle"
+                                                # width='150%',
+                                                # display= 'inline-block',
+                                                # verticalAlign="middle",
+                                                # display= 'flex',
+                                                # flexFlow= 'nowrap',
+                                                # alignContent= 'space-around',
+                                                # position= 'relative',
+                                                # left= 0,
+                                                # display= 'none',
+                                                # whiteSpace= 'nowrap',
+
+                                                # display= 'block',
+                                                # position= 'relative',
+                                                # dropdownContent= dict(
+                                                #     position= 'absolute',
+                                                #     left= 0,
+                                                #     # display= 'none',
+                                                #     whiteSpace= 'nowrap',
+                                                #     display= 'block',
+                                                #     width= 'auto',
+                                                #     height= 'auto',
+                                                #     padding= 16,
+                                                # ),
                                             )
                                         ),
                                     ],

@@ -30,7 +30,7 @@ app.layout = html.Div(
                                 ),
                                 html.P(
                                     className="header-description",
-                                    children='THE PSYCHOLOGICAL INPACT DURING COVID-19 OUTBREAK',
+                                    children='THE PSYCHOLOGICAL IMPACT DURING COVID-19 OUTBREAK',
                                 ),
                             ],width=6
                         ),
@@ -90,7 +90,7 @@ app.layout = html.Div(
                             selected_className='custom-tab--selected'
                         ),
                         dcc.Tab(
-                            label='Analytics',
+                            label='Data Analysis',
                             value='tab-3',
                             className='custom-tab',
                             selected_className='custom-tab--selected'
