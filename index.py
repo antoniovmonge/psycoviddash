@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 
 from app import app
 from app import server
-from apps import app0intro, app1ml, app2viz, app3analytics, app4compare
+from apps import app0intro, app1analytics, app2ml, app3compare
 from psycoviddash.functions import *
 
 import __main__
@@ -78,26 +78,20 @@ app.layout = html.Div(
                             selected_className='custom-tab--selected'
                         ),
                         dcc.Tab(
-                            label='Predictions / Simulation',
+                            label='Data Analysis',
                             value='tab-1',
                             className='custom-tab',
                             selected_className='custom-tab--selected'
                         ),
                         dcc.Tab(
-                            label='Survey Analysis',
+                            label='Predictions / Simulations',
                             value='tab-2',
                             className='custom-tab',
                             selected_className='custom-tab--selected'
                         ),
                         dcc.Tab(
-                            label='Data Analysis',
-                            value='tab-3',
-                            className='custom-tab',
-                            selected_className='custom-tab--selected'
-                        ),
-                        dcc.Tab(
                             label='Countries Comparison',
-                            value='tab-4',
+                            value='tab-3',
                             className='custom-tab',
                             selected_className='custom-tab--selected'
                         ),
@@ -138,13 +132,11 @@ def render_content(tab):
     if tab == 'tab-0':
         return app0intro.layout
     elif tab == 'tab-1':
-        return app1ml.layout
+        return app1analytics.layout
     elif tab == 'tab-2':
-        return app2viz.layout
+        return app2ml.layout
     elif tab == 'tab-3':
-        return app3analytics.layout
-    elif tab == 'tab-4':
-        return app4compare.layout
+        return app3compare.layout
     else:
         return app0intro.layout # CHANGE WITH app0intro.layout !!
 

@@ -585,8 +585,8 @@ layout = html.Div(
                                         dcc.Dropdown(
                                             id='Dem_Expat',
                                             options=[
-                                                {'label': 'yes', 'value': 'yes'},
-                                                {'label': 'no', 'value': 'no'}
+                                                {'label': 'Yes', 'value': 'yes'},
+                                                {'label': 'No', 'value': 'no'}
                                             ],
                                             # options=[
                                             #     {'label': Dem_Expat, 'value': Dem_Expat}
@@ -689,32 +689,6 @@ layout = html.Div(
                                             # ],
                                             value='Isolated',
                                             clearable=False,
-                                            style=dict(
-                                                # paddingRight= 150,
-                                                # width='150%',
-                                                # display= 'inline-block',
-                                                # verticalAlign="middle",
-                                                # display= 'flex',
-                                                # flexFlow= 'nowrap',
-                                                # alignContent= 'space-around',
-                                                # position= 'relative',
-                                                # left= 0,
-                                                # display= 'none',
-                                                # whiteSpace= 'nowrap',
-
-                                                # display= 'block',
-                                                # position= 'relative',
-                                                # dropdownContent= dict(
-                                                #     position= 'absolute',
-                                                #     left= 0,
-                                                #     # display= 'none',
-                                                #     whiteSpace= 'nowrap',
-                                                #     display= 'block',
-                                                #     width= 'auto',
-                                                #     height= 'auto',
-                                                #     padding= 16,
-                                                # ),
-                                            )
                                         ),
                                     ],
 
@@ -737,15 +711,19 @@ layout = html.Div(
                                 html.Div(
                                     className='row',
                                     children=[
-                                        # html.Div(
-                                        #     className='ten columns offset-by-two columns',
-                                        #     children=[
-                                        #         html.H6(
-                                        #             'YOUR BIG 5 PERSONALITY SCORES',
-                                        #             style=dict(textAlign='center')
-                                        #         ),
-                                        #     ]
-                                        # ),
+                                        html.Div(
+                                            className='ten columns offset-by-two columns',
+                                            style=dict(
+                                                marginTop=20,
+                                                marginBottom=-20,
+                                            ),
+                                            children=[
+                                                html.P(
+                                                    'BIG 5 PERSONALITY SCORES',
+                                                    style=dict(textAlign='center')
+                                                ),
+                                            ]
+                                        ),
                                         html.Div( # RADAR CHART
                                             className='six columns offset-by-two columns',
                                             style=dict(
@@ -753,6 +731,7 @@ layout = html.Div(
                                                 marginBottom=-60,
                                             ),
                                             children=[
+                                                
                                                 dcc.Graph( # PERSONALITY RADAR CHART
                                                     id='personality-chart',
                                                     config={"displayModeBar": False},
