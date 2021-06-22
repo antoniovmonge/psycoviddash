@@ -17,259 +17,221 @@ from psycoviddash.functions import *
 df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)[['Country','PSS10_avg','SLON3_avg','neu','ext','ope','agr','con']]
 
 layout = html.Div(
-    # className='Container',
-    style=dict(
-        paddingLeft= 100,
-        paddingRight= 100,
-        marginBottom= 150,
-    ),
-    children=[
-        html.Div(
-            className='row',
-            style=dict(
-                marginTop=30
-            ),
-            children=[
-                html.Div(
-                    className='col',
-                    children=[
-                        html.H3(
-                            'Country Mean Personality Traits', className='text-center'),
-                    ]
-                )
-            ]
-        ),
+    dbc.Container([
+        dbc.Row([
+            dbc.Col(
+                [
+                    html.H3('Country Mean Personality Traits',
+                            className='text-center'),
+                ],
+                width=11,
+            )
+        ]),
         # COLUMNS WITH CONTENT
-        html.Div(
-            className='row',
-            children=[
-                # DROPDOWN COUNTRY 1
-                html.Div(
-                    className='four columns',
-                    style=dict(
-                        textAlign='right',
-                        # paddingTop='50px',
-                        paddingLeft='200px',
-                    ),
-                    children=[
-                        html.Div(
-                            children='SELECT COUNTRY 1',
-                            className='menu-title padding-top',
-                            style={
-                                # 'paddingLeft': '5px',
-                                # 'fontSize': 18,
-                                'textAlign': 'center',
-                                'paddingBottom': '10px'
-                            }
-                        ),
-                        dcc.Dropdown(
-                            id='country-filter-1',
-                            options=[
-                                {'label': Country, 'value': Country}
-                                for Country in np.sort(df.Country.unique())
-                            ],
-                            value='Germany',
-                            clearable=False,
-                            # className='text-padding-left',
-                            # style={
-                            #     'paddingLeft': '150px',
-                            #     # 'fontSize': 18,
-                            #     'textAlign': 'right'
-                            # },
-                            style=dict(
-                                # marginLeft= '5px',
-                                # paddingLeft= '100px',
-                                textAlign= 'center',
-                                # width='90%',
-                                # display='right',
-                                # verticalAlign="right",
-                                # display='inline-block',
-                                verticalAlign="middle"
-                            )
-                        ),
-                        html.Div(
-                            className='div-for-table',
-                            children=[
-                                dash_table.DataTable(
-                                    id='table-1',
-                                    columns=[
-                                        dict(id='Trait', name='Trait'),
-                                        dict(id='Score', name='Score', type='numeric', format=Format(precision=2, scheme=Scheme.fixed))
-                                    ],
-                                    style_as_list_view=True,
-                                    style_cell={
-                                        'padding': '5px',
-                                        # 'fontSize': 18,
-                                        },
-                                    style_header={
-                                        'backgroundColor': 'white',
-                                        'fontWeight': 'bold'
-                                    },
-                                ),
-                            ],
-                            style=dict(
-                                paddingTop='50px'
-                            )
+        dbc.Row([
+            # DROPDOWN COUNTRY 1
+            html.Div(  # COLUMN LEFT
+                className='three columns',
+                style=dict(textAlign='right',
+                           # paddingTop='50px',
+                           # paddingLeft='200px',
+                           ),
+                children=[
+                    html.Div(
+                        children='SELECT COUNTRY 1',
+                        className='menu-title padding-top',
+                        style={
+                            # 'paddingLeft': '5px',
+                            # 'fontSize': 18,
+                            'textAlign': 'center',
+                            'paddingBottom': '10px'
+                        }),
+                    dcc.Dropdown(
+                        id='country-filter-1',
+                        options=[{
+                            'label': Country,
+                            'value': Country
+                        } for Country in np.sort(df.Country.unique())],
+                        value='Germany',
+                        clearable=False,
+                        # className='text-padding-left',
+                        # style={
+                        #     'paddingLeft': '150px',
+                        #     # 'fontSize': 18,
+                        #     'textAlign': 'right'
+                        # },
+                        style=dict(
+                            # marginLeft= '5px',
+                            # paddingLeft= '100px',
+                            textAlign='center',
+                            # width='90%',
+                            # display='right',
+                            # verticalAlign="right",
+                            # display='inline-block',
+                            verticalAlign="middle")),
+                    html.Div(
+                        # className='div-for-table',
+                        children=[
+                            dash_table.DataTable(
+                                id='table-1',
+                                columns=[
+                                    dict(id='Trait', name='Trait'),
+                                    dict(id='Score',
+                                         name='Score',
+                                         type='numeric',
+                                         format=Format(precision=2,
+                                                       scheme=Scheme.fixed))
+                                ],
+                                style_as_list_view=True,
+                                style_cell={
+                                    'padding': '5px',
+                                    # 'fontSize': 18,
+                                },
+                                style_header={
+                                    'backgroundColor': 'white',
+                                    'fontWeight': 'bold'
+                                },
+                            ),
+                        ],
+                        style=dict(paddingTop='50px'))
+                ],
+            ),
+            # RADAR CHART --------------------------------
+            html.Div(  # CENTER COLUMN
+                className='offset-by-one column four columns',
+                style=dict(marginTop=-20,
+                           # paddingRight=50
+                           ),
+                children=[
+                    dcc.Graph(
+                        id='radar-chart',
+                        config={"displayModeBar": False},
+                        #  className='div-for-bar-charts',
+                    )
+                ]),
+            html.Div(
+                className='offset-by-one column three columns',
+                style=dict(textAlign='left',
+                           # paddingRight='200px',
+                           # paddingTop='50px'
+                           ),
+                children=[
+                    html.Div(
+                        children='SELECT COUNTRY 2',
+                        className='menu-title padding-top',
+                        style={
+                            # 'paddingLeft': '5px',
+                            # 'fontSize': 18,
+                            'textAlign': 'center',
+                            'paddingBottom': '10px'
+                        }),
+                    # DROPDOWN COUNTRY 2 -------------------------
+                    dcc.Dropdown(
+                        id='country-filter-2',
+                        options=[{
+                            'label': Country,
+                            'value': Country
+                        } for Country in np.sort(df.Country.unique())],
+                        value='Taiwan',
+                        clearable=False,
+                        style=dict(
+                            # paddingRight= 150,
+                            textAlign='center',
+                            # width='75%',
+                            # display='inline-block',
+                            verticalAlign="middle",
                         )
-
-                    ],
-                ),
-                # RADAR CHART --------------------------------
-                html.Div(
-                    className='four columns',
-                    style=dict(
-                        marginTop=0
+                        # className='text-padding-left',
                     ),
-                    children=[
-                        dcc.Graph(
-                            id='radar-chart',
-                            config={"displayModeBar": False},
-                            className='div-for-bar-charts',
-                        )
-                    ]
-                ),
-
-                html.Div(
-                    className='four columns div-for-user-controls', # Define the left element
-                    style=dict(
-                        textAlign='left',
-                        paddingRight='200px',
-                        # paddingTop='50px'
-                    ),
-                    children=[
-                        html.Div(
-                            children='SELECT COUNTRY 2',
-                            className='menu-title padding-top',
-                            style={
-                                # 'paddingLeft': '5px',
-                                # 'fontSize': 18,
-                                'textAlign': 'center',
-                                'paddingBottom': '10px'
-                            }
-                        ),
-                        # DROPDOWN COUNTRY 2 -------------------------
-                        dcc.Dropdown(
-                            id='country-filter-2',
-                            options=[
-                                {'label': Country, 'value': Country}
-                                for Country in np.sort(df.Country.unique())
-                            ],
-                            value='Taiwan',
-                            clearable=False,
-                            style=dict(
-                                # paddingRight= 150,
-                                textAlign= 'center',
-                                # width='75%',
-                                # display='inline-block',
-                                verticalAlign="middle",
-                            )
-                            # className='text-padding-left',
-                        ),
-                        html.Div(
-                            className='div-for-table',
-                            children=[
-                                dash_table.DataTable(
-                                    id='table-2',
-                                    columns=[
-
-                                        dict(id='Score', name='Score', type='numeric', format=Format(precision=2, scheme=Scheme.fixed)),
-                                        dict(id='Trait', name='Trait')
-                                    ],
-                                    style_as_list_view=True,
-                                    style_cell={
-                                        'padding': '5px',
-                                        # 'fontSize': 18,
-                                        'textAlign': 'left'
-                                        },
-                                    style_header={
-                                        'backgroundColor': 'white',
-                                        'fontWeight': 'bold'
-                                    },
-                                ),
-                            ],
-                            style=dict(
-                                paddingTop='50px'
-                            )
-                        )
-
-                    ]
-                ),
-            ]
-        ),
+                    html.Div(
+                        # className='div-for-table',
+                        children=[
+                            dash_table.DataTable(
+                                id='table-2',
+                                columns=[
+                                    dict(id='Score',
+                                         name='Score',
+                                         type='numeric',
+                                         format=Format(precision=2,
+                                                       scheme=Scheme.fixed)),
+                                    dict(id='Trait', name='Trait')
+                                ],
+                                style_as_list_view=True,
+                                style_cell={
+                                    'padding': '5px',
+                                    # 'fontSize': 18,
+                                    'textAlign': 'left',
+                                    'backgroundColor': 'rgb(50, 50, 50, 0)'
+                                },
+                                style_header={
+                                    'backgroundColor': 'white',
+                                    'fontWeight': 'bold',
+                                    'backgroundColor': 'rgb(50, 50, 50, 0)'
+                                },
+                                style_data={
+                                    'backgroundColor': 'rgb(50, 50, 50, 0)'
+                                }),
+                        ],
+                        style=dict(paddingTop='50px'))
+                ]),
+        ]),
         # INDICATORS
-        html.Div(
-            className='row',
-            children=[
+        dbc.Row(
+            [
                 # COLUMN 1
-                html.Div(
-                    className='two columns offset-by-one column',
-                    children=[
+                dbc.Col(
+                    [
                         html.Div(
                             className='column',
                             children=[
-
                                 dcc.Graph(
                                     id='stress-1',
                                     config={"displayModeBar": False},
                                 )
                             ],
-                            style=dict(
-                                marginTop= 10,
-                                # marginLeft= 200,
-                            ),
+                            # style=dict(marginTop=10,
+                            #            # marginLeft= 200,
+                            #            ),
                         ),
                     ],
-                ),
-                html.Div(
-                    className='two columns',
-                    children=[
+                    width=2),
+                dbc.Col(
+                    [
                         html.Div(
                             className='column',
                             children=[
-
                                 dcc.Graph(
                                     id='loneliness-1',
                                     config={"displayModeBar": False},
                                 )
                             ],
-                            style=dict(
-                                marginTop= 10,
-                                # marginLeft= 200,
-                            ),
+                            # style=dict(marginTop=10,
+                            #            # marginLeft= 200,
+                            #            ),
                         ),
                     ],
-                ),
+                    width=2),
                 # SEPARATOR
-                html.Div(
-                    className='two columns',
-                    children=[
-                        html.Div(' ')
-                    ]
-
-                ),
+                html.Div(className='three columns', children=[html.Div(' ')]),
                 # COLUMN 2
-                html.Div(
-                    className='two columns',
-                    children=[
+                dbc.Col(
+                    [
                         html.Div(
                             className='column',
                             children=[
-
                                 dcc.Graph(
                                     id='stress-2',
                                     config={"displayModeBar": False},
                                 )
                             ],
-                            style=dict(
-                                marginTop= 10,
-                                # marginLeft= 120,
-                            ),
+                            # style=dict(marginTop=10,
+                            #            # marginLeft= 120,
+                            #            ),
                         ),
-                    ]
+                    ], width=2
                 ),
-                html.Div(
-                    className='two columns',
-                    children=[
+                dbc.Col(
+                    [
                         html.Div(
                             className='column',
                             children=[
@@ -278,23 +240,26 @@ layout = html.Div(
                                     config={"displayModeBar": False},
                                 )
                             ],
-                            style=dict(
-                                marginTop= 10,
-                                # marginLeft= 120,
-                            ),
+                            # style=dict(marginTop=10,
+                            #            # marginLeft= 120,
+                            #            ),
                         ),
-                    ]
+                    ], width=2
                 ),
             ],
             style=dict(
-                marginTop='-150px',
-                paddingLeft='100px',
-                paddingRight='100px',
+                marginTop='-200px',
+                # paddingLeft='100px',
+                # paddingRight='100px',
             )
         ),
-
-
-    ],
+    ])
+    # className='container',
+    # style=dict(
+    #     paddingLeft=100,
+    #     paddingRight=100,
+    #     marginBottom=150,
+    # ),
 )
 
 @app.callback(
@@ -306,8 +271,8 @@ layout = html.Div(
     ]
 )
 def update_chart(Country1, Country2):
-    categories = ['Neuroticism', 'Openness', 'Extraversion',
-                'Agreeableness', 'Conscientiousness', 'Neuroticism']
+    categories = ['NEU', 'OPE', 'EXT',
+                'AGR', 'CONS', 'NEU']
 
     radar_chart_figure = go.Figure()
 
@@ -359,7 +324,7 @@ def update_chart(Country1, Country2):
         showlegend=True,
         legend=dict(
             yanchor="top",
-            y=1.3,
+            y=1,
             xanchor="center",
             x=0.5,
             font=dict(
@@ -372,7 +337,9 @@ def update_chart(Country1, Country2):
             # family="Gravitas One",
             # size=18,
             # color="RebeccaPurple"
-        )
+        ),
+        margin=dict(l=50, r=50, b=0, t=40, pad=0),
+        paper_bgcolor='rgba(0,0,0,0)',
     )
     return radar_chart_figure
 

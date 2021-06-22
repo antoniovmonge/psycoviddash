@@ -13,7 +13,7 @@ df = pd.read_csv('raw_data/cleaned_data_040321.csv')
 layout = html.Div(
     [
         # html.H3('Intro', className='text-center'),
-        html.H1('', className='text-padding'),
+        html.Br(),
         dbc.Container([
             dbc.Row([
                 dbc.Col(
@@ -21,7 +21,7 @@ layout = html.Div(
                         html.H1('PSYCOVID - Data Science Project',
                                 className='text-center'),  # bg-dark text-white
                         dcc.Markdown('''
-                            ##### Study based on psychological impact and behavioral consequences of the COVID-19 outbreak.
+                            ##### Study based on psychological impact and behavioral consequences of the COVID-19 outbreak
                             '''),
                         dcc.Markdown('''
                             ##### The Problem
@@ -37,7 +37,7 @@ layout = html.Div(
                             we could spot if a person is more able to suffer one or another mental condition and take action to prevent or reduce it thanks
                             to recommendation systems, from what we learned through the collected data.
                             ''',
-                            style=dict(marginTop=40)),
+                                     style=dict(marginTop=40)),
                         dcc.Markdown('''
                             ##### Tools
                             
@@ -79,8 +79,7 @@ layout = html.Div(
                             paddingRight=70,
                         )),
                 dbc.Col([
-                    dcc.Markdown(
-                        '''
+                    dcc.Markdown('''
                         ##### Data Source
                         
                         Data Collection Technology: **Survey** [COVIDiSTRESS Global Survey](https://osf.io/z39us/)
@@ -100,8 +99,7 @@ layout = html.Div(
                         - response to Isolation
                         - loneliness measurement
                         - Emotional Distress
-                        '''
-                    )
+                        ''')
                 ])
             ]),
         ]),

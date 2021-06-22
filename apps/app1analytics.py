@@ -259,7 +259,8 @@ layout = html.Div(
                     className='twelve columns',
                     children=[
                         dcc.Markdown('''
-                        ## SURVEY - Characteristics of the respondants
+                        ## SURVEY ANALYSIS  
+                        #### Characteristics of the respondants
                         ''',
                                      className='text-center')
                     ],
@@ -526,10 +527,12 @@ layout = html.Div(
                 html.Div(
                     className='six columns',  # Define the left element
                     children=[
-                        html.Div(children=[
-                            html.H6('STRESS levels (Top 10)'),
-                        ],
-                                 style=dict(textAlign='center')),
+                        html.Div(
+                            children=[
+                                html.H6('STRESS levels (Top 10)'),
+                            ],
+                            style=dict(textAlign='center')
+                        ),
                         html.Div(
                             [
                                 dcc.Graph(
