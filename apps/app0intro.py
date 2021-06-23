@@ -8,7 +8,7 @@ from app import app
 from psycoviddash.functions import *
 # url='s3://psycovid/cleaned_data_040321.csv'
 # df = pd.read_csv(url ,index_col=0)
-df = pd.read_csv('raw_data/cleaned_data_040321.csv')
+# df = pd.read_csv('raw_data/cleaned_data_040321.csv')
 
 layout = html.Div(
     [

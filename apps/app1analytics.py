@@ -14,13 +14,18 @@ from dash_table.Format import Format, Scheme, Trim
 from app import app
 from psycoviddash.functions import *
 
-# url='s3://psycovid/cleaned_data_040321.csv'
-# df = pd.read_csv(url ,index_col=0)
-# df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)
-df = pd.read_csv('raw_data/cleaned_data_040321.csv', index_col=0)[[
+# LOAD DATA FRAME FROM AWS S3
+url='s3://psycovid/cleaned_data_040321.csv'
+df = pd.read_csv(url, index_col=0)[[
     'Country', 'PSS10_avg', 'SLON3_avg', 'Dem_age', 'Dem_gender',
     'Dem_employment'
 ]].replace({'Dem_gender': 'Other/would rather not say'}, 'Other')
+# df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)
+
+# df = pd.read_csv('raw_data/cleaned_data_040321.csv', index_col=0)[[
+#     'Country', 'PSS10_avg', 'SLON3_avg', 'Dem_age', 'Dem_gender',
+#     'Dem_employment'
+# ]].replace({'Dem_gender': 'Other/would rather not say'}, 'Other')
 
 # SURVEY PART #######################################################
 # GENDER PIE CHART FIG 1
