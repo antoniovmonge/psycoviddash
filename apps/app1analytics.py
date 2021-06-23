@@ -15,17 +15,20 @@ from app import app
 from psycoviddash.functions import *
 
 # LOAD DATA FRAME FROM AWS S3
-url='s3://psycovid/cleaned_data_040321.csv'
-df = pd.read_csv(url, index_col=0)[[
-    'Country', 'PSS10_avg', 'SLON3_avg', 'Dem_age', 'Dem_gender',
-    'Dem_employment'
-]].replace({'Dem_gender': 'Other/would rather not say'}, 'Other')
-# df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)
-
-# df = pd.read_csv('raw_data/cleaned_data_040321.csv', index_col=0)[[
+# url='s3://psycovid/cleaned_data_040321.csv'
+# df = pd.read_csv(url, index_col=0)[[
 #     'Country', 'PSS10_avg', 'SLON3_avg', 'Dem_age', 'Dem_gender',
 #     'Dem_employment'
 # ]].replace({'Dem_gender': 'Other/would rather not say'}, 'Other')
+
+# LOAD DATA LOCALLY
+
+# TOO BIG df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)
+
+df = pd.read_csv('raw_data/cleaned_data_040321.csv', index_col=0)[[
+    'Country', 'PSS10_avg', 'SLON3_avg', 'Dem_age', 'Dem_gender',
+    'Dem_employment'
+]].replace({'Dem_gender': 'Other/would rather not say'}, 'Other')
 
 # SURVEY PART #######################################################
 # GENDER PIE CHART FIG 1
@@ -251,243 +254,219 @@ lonely_fig.update_yaxes(
 )
 
 layout = html.Div(
-    className='container',
-    style=dict(
-        # paddingTop= 50,
-        # paddingLeft= 100,
-        # paddingRight= 100,
-        paddingBottom=200, ),
-    children=[
-        html.Div(  # SURVEY ANALYSIS
-            children=[
-                html.Div(  # TITLE TAB
-                    className='twelve columns',
-                    children=[
+    dbc.Container(
+        [
+            dbc.Row(
+                [
+                    dbc.Col(
+                        [
                         dcc.Markdown('''
-                        ## SURVEY ANALYSIS  
-                        #### Characteristics of the respondants
-                        ''',
-                                     className='text-center')
-                    ],
-                    style=dict(
-                        # textAlign='center',
-                        marginTop=35,
-                        marginBottom=35)),
-                html.Div(  # 1ST ROW
-                    className='row',
-                    children=[
-                        html.Div(  # LEFT COLUMN
-                            className='six columns',
-                            style=dict(paddingRight=100),
-                            children=[
-                                html.Div(
-                                    [
-                                        dcc.Markdown('''
+                                ## SURVEY ANALYSIS  
+                                #### Characteristics of the respondants
+                                ''',
+                                    className='text-center')
+                        ],width=12
+                    ),
+                ]
+            ),
+            html.Br(),
+            dbc.Row(
+                [
+                    dbc.Col(
+                        [  # LEFT COLUMN
+                            html.Div(  # Title + Text
+                                [
+                                    dcc.Markdown(
+                                        '''
                                         ###### Gender of respondents percentage distribution
                                         ''',
-                                                     # className='text-center'
-                                                     ),
-                                        dcc.Markdown(f'''
+                                        # className='text-center'
+                                    ),
+                                    dcc.Markdown(f'''
                                         Respondents were {72.08} % female, 26.89 % Male. The remaining respondents answered 'other' or did not provide an answer.
                                         ''',
-                                                     # style={'marginTop': 75}
-                                                     )
+                                                # style={'marginTop': 75}
+                                    )
+                                ],
+                            # style={'marginTop': 30}
+                        ),
+                        dbc.Row( # Pie Chart + table
+                            [
+                                dbc.Col(  # SECTION 1 CHART
+                                    [
+                                        html.Div(
+                                            style=dict(
+                                                marginTop=-100,
+                                                marginBottom=-75,
+                                                # marginLeft=20,
+                                            ),
+                                            children=[
+                                                dcc.Graph(
+                                                    id='pie-chart',
+                                                    figure=fig1,
+                                                    config={"displayModeBar": False},
+                                                )
+                                            ]),
                                     ],
-                                    # style={'marginTop': 30}
+                                    width=6
                                 ),
-                                html.Div([
-                                    # SECTION 1 CHART
-                                    html.Div(
-                                        className='six columns',
-                                        children=[
-                                            html.Div(
-                                                style=dict(
-                                                    marginTop=-100,
-                                                    marginBottom=-75,
-                                                    marginLeft=20,
-                                                ),
-                                                children=[
-                                                    dcc.Graph(
-                                                        id='pie-chart',
-                                                        figure=fig1,
-                                                        config={
-                                                            "displayModeBar":
-                                                            False
-                                                        },
-                                                    )
-                                                ]),
-                                        ],
-                                    ),
-                                    # TABLE (LEFT COLUMN)
-                                    html.Div(
-                                        className=
-                                        'four columns offset-by-one column',
-                                        children=[
-                                            html.Div(children=[
+                                # TABLE GENDER
+                                dbc.Col(
+                                    [
+                                        html.Div(
+                                            children=[
                                                 dash_table.DataTable(
                                                     id='table',
                                                     columns=[
-                                                        dict(id='Gender',
-                                                             name='Gender'),
+                                                        dict(id='Gender', name='Gender'),
                                                         dict(id='%',
-                                                             name='%',
-                                                             type='numeric',
-                                                             format=Format(
-                                                                 precision=2,
-                                                                 scheme=Scheme.
-                                                                 fixed))
+                                                            name='%',
+                                                            type='numeric',
+                                                            format=Format(precision=2,
+                                                                        scheme=Scheme.fixed))
                                                     ],
-                                                    data=df_gender.to_dict(
-                                                        'records'),
+                                                    data=df_gender.to_dict('records'),
                                                     style_as_list_view=True,
-                                                    style_cell={
-                                                        'padding': '5px'
-                                                    },
+                                                    style_cell={'padding': '5px'},
                                                     style_header={
-                                                        'backgroundColor':
-                                                        'white',
+                                                        'backgroundColor': 'white',
                                                         'fontWeight': 'bold'
                                                     },
                                                 ),
                                             ],
-                                                     style={'marginTop': 50}),
-                                        ],
-                                    ),
-                                ]),
-                            ]),
-                        html.Div(  # RIGHT COLUMN
-                            className='six columns',
-                            children=[
-                                html.Div(  # Section Title
-                                    [
-                                        dcc.Markdown('''
-                                        ###### Employment Status of respondents percentage distribution
-                                        ''',
-                                                     # className='text-center'
-                                                     ),
-                                        dcc.Markdown(
-                                            f'''
-                                        The majority of the respondents ({(float(df_employment.iloc[0]['%']) + float(df_employment.iloc[2]['%']) + 
-                                        float(df_employment.iloc[3]['%'])) }%) 
-                                        were in full-time, part-time or self-employed, ({(float(df_employment.iloc[4]['%']) + float(df_employment.iloc[5]['%']))}%) 
-                                        were either unemployed or retired, {float(df_employment.iloc[1]['%'])}% were students.
-                                        ''',  # style={'marginTop': 125}
-                                        )
+                                            style={'marginTop': 50}
+                                        ),
                                     ],
-                                    style={
-                                        # 'marginTop': 50,
-                                        'marginBottom': 50
-                                    }),
-                                html.Div(
-                                    className='row',
-                                    children=[
-                                        html.Div(
-                                            className='five columns',
-                                            style=dict(marginTop=-125,
-                                                       marginBottom=-75),
-                                            children=[
-                                                html.Div(
-                                                    dcc.Graph(
-                                                        id='pie-chart-2',
-                                                        figure=fig2,
-                                                        config={
-                                                            "displayModeBar":
-                                                            False
-                                                        },
-                                                    )),
-                                            ]),
-                                        html.Div(
-                                            className=
-                                            'four columns offset-by-two columns',
-                                            children=[
-                                                dash_table.DataTable(
-                                                    id='table-2',
-                                                    columns=[
-                                                        dict(
-                                                            id='Empl. Status',
-                                                            name=
-                                                            'Employment Status'
-                                                        ),
-                                                        dict(id='%',
-                                                             name='%',
-                                                             type='numeric',
-                                                             format=Format(
-                                                                 precision=2,
-                                                                 scheme=Scheme.
-                                                                 fixed))
-                                                    ],
-                                                    data=df_employment.to_dict(
-                                                        'records'),
-                                                    style_as_list_view=True,
-                                                    style_cell={
-                                                        'padding': '5px'
-                                                    },
-                                                    style_header={
-                                                        'backgroundColor':
-                                                        'white',
-                                                        'fontWeight': 'bold'
-                                                    },
-                                                ),
-                                            ]),
-                                    ]),
-                                html.Div()
-                            ]),
+                                        width={
+                                            'size': 5,
+                                            'offset': 0.5
+                                        }
+                                ),
+                            ]
+                        ),
+                    ], width=5
+                ),
+            # EMPLOYMENT
+            dbc.Col( 
+                [
+                    html.Div(  # Section Title
+                        [
+                            dcc.Markdown('''
+                            ###### Employment Status of respondents percentage distribution
+                            ''',
+                                         # className='text-center'
+                                         ),
+                            dcc.Markdown(
+                                f'''
+                            The majority of the respondents ({(float(df_employment.iloc[0]['%']) + float(df_employment.iloc[2]['%']) + 
+                            float(df_employment.iloc[3]['%'])) }%) 
+                            were in full-time, part-time or self-employed, ({(float(df_employment.iloc[4]['%']) + float(df_employment.iloc[5]['%']))}%) 
+                            were either unemployed or retired, {float(df_employment.iloc[1]['%'])}% were students.
+                            ''',  # style={'marginTop': 125}
+                            )
+                        ],
+                        style={
+                            # 'marginTop': 50,
+                            'marginBottom': 50
+                        }
+                    ),
+                    dbc.Row([
+                        dbc.Col([
+                            html.Div(
+                                [
+                                    dcc.Graph(
+                                        id='pie-chart-2',
+                                        figure=fig2,
+                                        config={"displayModeBar": False},
+                                    )
+                                ],
+                                style=dict(marginTop=-125, marginBottom=-75),
+                            ),
+                        ],
+                                width=6
+                        ),
+                        dbc.Col([
+                            dash_table.DataTable(
+                                id='table-2',
+                                columns=[
+                                    dict(id='Empl. Status',
+                                         name='Employment Status'),
+                                    dict(id='%',
+                                         name='%',
+                                         type='numeric',
+                                         format=Format(precision=2,
+                                                       scheme=Scheme.fixed))
+                                ],
+                                data=df_employment.to_dict('records'),
+                                style_as_list_view=True,
+                                style_cell={'padding': '5px'},
+                                style_header={
+                                    'backgroundColor': 'white',
+                                    'fontWeight': 'bold'
+                                },
+                            ),
+                        ],
+                                width={
+                                    'size': 4,
+                                    'offset': 1
+                                }),
                     ]),
-                html.Div(
-                    className='row',
-                    children=[
-                        html.Div(
-                            className='twelve columns',
-                            children=[
-                                dcc.Markdown(
-                                    '''
+                ],
+                width={
+                    'size': 6,
+                    'offset': 1
+                }
+            ),
+            dbc.Row(
+                [
+                    dbc.Col(
+                        [
+                            dcc.Markdown(
+                                '''
                                         ###### Age of respondents 
                                         ''',
-                                    # className='text-center',
-                                    style=dict(marginTop=40)),
-                                dcc.Markdown(f'''
+                                # className='text-center',
+                                style=dict(marginTop=20)
+                            ),
+                            dcc.Markdown(f'''
                                 The age of the respondents ranged from {df[['Dem_age']].min()[0]} to {df[['Dem_age']].max()[0]}, with a median age of {int(df[['Dem_age']].median()[0])}.
                                 The age that appears more offen is {df['Dem_age'].mode()[0]}.
                                 ''',
-                                             style={
-                                                 'marginTop': 0,
-                                                 'marginBottom': 30
-                                             }),
-                                html.Div(
-                                    className='row',
-                                    children=[
-                                        html.Div(
-                                            className='five columns',
-                                            children=[
-                                                dcc.Graph(
-                                                    id='age-chart',
-                                                    figure=fig3,
-                                                    config={
-                                                        "displayModeBar": False
-                                                    },
-                                                ),
-                                            ]),
-                                        html.Div(
-                                            className='two columns',
-                                            style=dict(marginTop=30),
-                                            children=[
-                                                html.Div([
+                                         style={
+                                             'marginTop': 0,
+                                             'marginBottom': 30
+                                         }),
+                            dbc.Row(
+                                [
+                                    dbc.Col(
+                                        [
+                                            dcc.Graph(
+                                                id='age-chart',
+                                                figure=fig3,
+                                                config={
+                                                    "displayModeBar": False
+                                                },
+                                            ),
+                                        ],width=9
+                                    ),
+                                    dbc.Col(
+                                        [
+                                            html.Div(
+                                                [
                                                     dash_table.DataTable(
                                                         id='table-3',
                                                         columns=[
                                                             dict(id='Summary',
-                                                                 name='Summary'
-                                                                 ),
+                                                                name='Summary'),
                                                             dict(
                                                                 id='Value',
                                                                 name='Value',
                                                                 type='numeric',
                                                                 format=Format(
                                                                     precision=2,
-                                                                    scheme=Scheme
-                                                                    .fixed,
-                                                                    trim=Trim.
-                                                                    yes))
+                                                                    scheme=Scheme.
+                                                                    fixed,
+                                                                    trim=Trim.yes))
                                                         ],
                                                         data=df_age_summary.
                                                         to_dict('records'),
@@ -498,20 +477,22 @@ layout = html.Div(
                                                         style_header={
                                                             'backgroundColor':
                                                             'white',
-                                                            'fontWeight':
-                                                            'bold'
-                                                        })
+                                                            'fontWeight': 'bold'
+                                                        }
+                                                    )
                                                 ],
-                                                         style=dict(
-                                                             marginBottom=150))
-                                            ]),
-                                    ])
-                            ])
-                    ]),
-            ]),
-        html.Div(  # Stress during the COVID-19
-            className='row',
-            children=[
+                                            )
+                                        ], width={'size':2, 'offset':2}
+                                    ),
+                                ]
+                            )
+                        ], width = 12
+                        )
+                ]),
+        ]),
+        # Stress during the COVID-19
+        dbc.Row(  
+            [
                 html.Div(
                     className='twelve columns',  # Define the right element
                     children=[
@@ -526,18 +507,15 @@ layout = html.Div(
                 ),
                 html.Div(dcc.Markdown(f'{paragraph1()}')),
             ]),
-        html.Div(
-            className='row',
-            children=[
+        dbc.Row(
+            [
                 html.Div(
                     className='six columns',  # Define the left element
                     children=[
-                        html.Div(
-                            children=[
-                                html.H6('STRESS levels (Top 10)'),
-                            ],
-                            style=dict(textAlign='center')
-                        ),
+                        html.Div(children=[
+                            html.H6('STRESS levels (Top 10)'),
+                        ],
+                                 style=dict(textAlign='center')),
                         html.Div(
                             [
                                 dcc.Graph(
@@ -565,9 +543,8 @@ layout = html.Div(
                     ],
                     style=dict(marginTop=30)),
             ]),
-        html.Div(
-            className='row',
-            children=[
+        dbc.Row(
+            [
                 html.Div(
                     className='twelve columns',
                     children=[
@@ -582,9 +559,8 @@ layout = html.Div(
                 html.Div(dcc.Markdown(f'{paragraph3()}'))
             ]),
         # STATIC ANALYSIS LONELINESS
-        html.Div(
-            className='row',
-            children=[
+        dbc.Row(
+            [
                 html.Div(
                     className='six columns',
                     children=[
@@ -610,11 +586,10 @@ layout = html.Div(
                     className='six columns',  # Define the right element
                     children=[
                         dcc.Markdown('##### Analysis by Countries'),
-                        html.
-                        P('''Visualizing countries Loneliness ranked with the results of
+                        html.P('''Visualizing countries Loneliness ranked with the results of
                         UCLA short loneliness scale'''),
                         html.P('''*B&H - Bosnia & Herzegovina'''),
                         html.Div(dcc.Markdown(f'{paragraph4()}', ))
                     ]),
             ]),
-    ])
+    ]))

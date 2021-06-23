@@ -15,9 +15,11 @@ from app import app
 from psycoviddash.functions import *
 
 # LOAD DATA FRAME FROM AWS S3
-url = 's3://psycovid/cleaned_data_040321.csv'
-df = pd.read_csv(url, index_col=0)[['Country', 'PSS10_avg', 'SLON3_avg', 'neu', 'ext', 'ope', 'agr', 'con']]
-# df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)[['Country','PSS10_avg','SLON3_avg','neu','ext','ope','agr','con']]
+# url = 's3://psycovid/cleaned_data_040321.csv'
+# df = pd.read_csv(url, index_col=0)[['Country', 'PSS10_avg', 'SLON3_avg', 'neu', 'ext', 'ope', 'agr', 'con']]
+
+# LOAD DATA LOCALLY
+df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)[['Country','PSS10_avg','SLON3_avg','neu','ext','ope','agr','con']]
 
 layout = html.Div(
     dbc.Container([
@@ -27,7 +29,7 @@ layout = html.Div(
                     html.H3('Country Mean Personality Traits',
                             className='text-center'),
                 ],
-                width=11,
+                width={'size':11},
             )
         ]),
         # COLUMNS WITH CONTENT
