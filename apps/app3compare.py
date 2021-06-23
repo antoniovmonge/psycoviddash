@@ -16,10 +16,8 @@ from psycoviddash.functions import *
 
 # LOAD DATA FRAME FROM AWS S3
 url = 's3://psycovid/cleaned_data_040321.csv'
-df = pd.read_csv(url, index_col=0)[[
-    'Country', 'PSS10_avg', 'SLON3_avg', 'neu', 'ext', 'ope', 'agr', 'con'
-]]
-df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)[['Country','PSS10_avg','SLON3_avg','neu','ext','ope','agr','con']]
+df = pd.read_csv(url, index_col=0)[['Country', 'PSS10_avg', 'SLON3_avg', 'neu', 'ext', 'ope', 'agr', 'con']]
+# df = pd.read_csv('raw_data/cleaned_data_040321.csv',index_col=0)[['Country','PSS10_avg','SLON3_avg','neu','ext','ope','agr','con']]
 
 layout = html.Div(
     dbc.Container([
