@@ -417,6 +417,7 @@ layout = html.Div(
                     'offset': 1
                 }
             ),
+            # AGE SECTION
             dbc.Row(
                 [
                     dbc.Col(
@@ -447,7 +448,7 @@ layout = html.Div(
                                                     "displayModeBar": False
                                                 },
                                             ),
-                                        ],width=9
+                                        ],width=8
                                     ),
                                     dbc.Col(
                                         [
@@ -482,7 +483,7 @@ layout = html.Div(
                                                     )
                                                 ],
                                             )
-                                        ], width={'size':2, 'offset':2}
+                                        ], width={'size':2, 'offset':1}
                                     ),
                                 ]
                             )
