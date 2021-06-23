@@ -785,7 +785,7 @@ p, ul, ol {
     border-bottom: 0px !important;
     background-color: #fafbfc;
     padding: 8px !important;
-    font-family: "system-ui";
+    font-family: "Lato", sans-serif;
     display: flex !important;
     align-items: center;
     justify-content: center;
