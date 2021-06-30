@@ -28,5 +28,6 @@ app = dash.Dash(
     external_stylesheets=[dbc.themes.MINTY]
 )
 
+app.title = "PsyCovid Project"
 
 server = app.server

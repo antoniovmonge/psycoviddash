@@ -266,7 +266,7 @@ p {
 /* Links –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
   color: #1EAEDB;
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
 }
 a:hover {
