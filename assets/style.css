@@ -650,10 +650,12 @@ p, ul, ol {
   width: 80%;
   text-align: center;
 }
+*/
 .logo {
-  height: 50px;
+  height: 70rem;
   padding-bottom: 12px;
 }
+/*
 .Select-control, .Select-menu-outer, .Select-multi-value-wrapper, .select-up, .is-open .Select-control {
   background-color: #fdfdfd;
   color: rgb(44, 44, 44);

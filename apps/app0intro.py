@@ -19,6 +19,18 @@ layout = html.Div([
                 [
                     html.H1('PSYCOVID - Data Science Project',
                             className='text-center'),  # bg-dark text-white
+                    dbc.Row(
+                        dbc.Col(
+                            [
+                                dcc.Markdown(
+                                    '**GitHub Repo:** https://github.com/antoniovmonge/psycoviddash',
+                                    className='text-center'),    
+                            ],
+                            # style=dict(
+                            #         paddingBottom=150
+                            # )
+                        )
+                    ),
                     dcc.Markdown('''
                             ##### Study based on psychological impact and behavioral consequences of the COVID-19 outbreak
                             '''),
@@ -109,13 +121,10 @@ layout = html.Div([
             ],
                     style=dict(
                         paddingBottom=150
-                    )))
+                    ))
+        )
     ]),
 ])
 
 
-@app.callback(
-    Output('intro', 'children'),
-    Input('app-intro-dropdown', 'value'))
-def display_value(value):
-    return 'You have selected "{}"'.format(value)
+

@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 
 from app import app
 from app import server
-from apps import app0intro, app1analytics, app2ml, app3compare
+from apps import app0intro, app1analytics, app2ml, app3compare, app4schema
 from psycoviddash.functions import *
 
 import __main__
@@ -37,10 +37,10 @@ app.layout = html.Div(
                         dcc.Markdown(
                             '''
                                     Project created by:    
-                                    [Antonio Vilchez Monge | ](https://www.linkedin.com/in/antonio-v-monge/)
-                                    [Verónica Delgado Benito | ](https://www.linkedin.com/in/veronica-delgadobenito/)
-                                    [Shruthi L.P | ](https://www.linkedin.com/in/shruthilp/)
-                                    [Wojciech Gutkiewicz](https://www.linkedin.com/in/gutkiewicz/)
+                                    [Antonio Vilchez Monge | ](https://github.com/antoniovmonge)
+                                    [Verónica Delgado Benito | ](https://github.com/vdelgadobenito)
+                                    [Shruthi L.P | ](https://github.com/lpshruthi)
+                                    [Wojciech Gutkiewicz](https://github.com/izprettewis)
                                     ''',
                             style=dict(
                                 textAlign='right',
@@ -66,22 +66,36 @@ app.layout = html.Div(
                     parent_className='custom-tabs',
                     className='custom-tabs-container',
                     children=[
-                        dcc.Tab(label='Home',
-                                value='tab-0',
-                                className='custom-tab',
-                                selected_className='custom-tab--selected'),
-                        dcc.Tab(label='Data Analysis',
-                                value='tab-1',
-                                className='custom-tab',
-                                selected_className='custom-tab--selected'),
-                        dcc.Tab(label='Predictions / Simulations',
-                                value='tab-2',
-                                className='custom-tab',
-                                selected_className='custom-tab--selected'),
-                        dcc.Tab(label='Countries Comparison',
-                                value='tab-3',
-                                className='custom-tab',
-                                selected_className='custom-tab--selected'),
+                        dcc.Tab(
+                            label='Home',
+                            value='tab-0',
+                            className='custom-tab',
+                            selected_className='custom-tab--selected'
+                        ),
+                        dcc.Tab(
+                            label='Data Analysis',
+                            value='tab-1',
+                            className='custom-tab',
+                            selected_className='custom-tab--selected'
+                        ),
+                        dcc.Tab(
+                            label='Predictions / Simulations',
+                            value='tab-2',
+                            className='custom-tab',
+                            selected_className='custom-tab--selected'
+                        ),
+                        dcc.Tab(
+                            label='Countries Comparison',
+                            value='tab-3',
+                            className='custom-tab',
+                            selected_className='custom-tab--selected'
+                        ),
+                        dcc.Tab(
+                            label='Project Schema',
+                            value='tab-4',
+                            className='custom-tab',
+                            selected_className='custom-tab--selected'
+                        )
                     ]),
                 # html.Div(id='tabs-content')
             ],
@@ -118,6 +132,8 @@ def render_content(tab):
         return app2ml.layout
     elif tab == 'tab-3':
         return app3compare.layout
+    elif tab == 'tab-4':
+        return app4schema.layout
     else:
         return app0intro.layout # CHANGE WITH app0intro.layout !!
 
